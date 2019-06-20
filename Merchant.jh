@@ -1,0 +1,97 @@
+entity Merchant {// 商户表
+    userid String,// 用户id
+    merchantphoto String,// 商户头像
+    name String,// 商户名称
+    businessid String,// 经营类型id
+    state String,// 商户状态
+    address String,// 商户详细地址
+    province String,// 所在省
+    city String,// 所在市
+    county String,// 所在县
+    concession Integer,// 让利比例5%，10%，15%
+    rebate Integer,// 返积分比例15%，30%，50%
+    weight String,// 商户权重
+    creator String,// 创建者
+    createdate String,// 创建日期
+    modifier String,// 修改者
+    modifierdate String,// 修改日期
+    modifiernum Long,// 修改次数
+    logicdelete Boolean,// 删除
+    other String// 备注
+}
+
+entity Business {// 经营类型表
+    name String,// 类型名称
+    state String,// 类型状态
+    creator String,// 创建者
+    createdate String,// 创建日期
+    modifier String,// 修改者
+    modifierdate String,// 修改日期
+    modifiernum Long,// 修改次数
+    logicdelete Boolean,// 删除
+    other String// 备注
+}
+
+entity Dishes {// 菜品表
+    merchantid String,// 商户id
+    name String,// 菜名
+    image String,// 图片
+    dishestypeid String,// 菜品类型id
+    price String,// 价格
+    num String,// 库存数量
+    creator String,// 创建者
+    createdate String,// 创建日期
+    modifier String,// 修改者
+    modifierdate String,// 修改日期
+    modifiernum Long,// 修改次数
+    logicdelete Boolean,// 删除
+    other String// 备注
+}
+
+entity Dishestype {// 菜品类型表
+    name String,// 类型名称
+    state String,// 类型状态
+    creator String,// 创建者
+    createdate String,// 创建日期
+    modifier String,// 修改者
+    modifierdate String,// 修改日期
+    modifiernum Long,// 修改次数
+    logicdelete Boolean,// 删除
+    other String// 备注
+}
+
+entity Shoplocation {// 店内位置表
+    merchantid String,// 商户id
+    location String,// 位置
+    num String,// 座位数
+    creator String,// 创建者
+    createdate String,// 创建日期
+    modifier String,// 修改者
+    modifierdate String,// 修改日期
+    modifiernum Long,// 修改次数
+    logicdelete Boolean,// 删除
+    other String// 备注
+}
+
+entity Dishesorder {// 菜品订单表
+    merchantid String,// 商户id
+    location String,// 位置
+    name String,// 菜名
+    state String,// 状态
+    creator String,// 创建者
+    createdate String,// 创建日期
+    modifier String,// 修改者
+    modifierdate String,// 修改日期
+    modifiernum Long,// 修改次数
+    logicdelete Boolean,// 删除
+    other String// 备注
+}
+
+// Set pagination options
+paginate all with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+dto all with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

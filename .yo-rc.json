@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.weisen.www.code.yjf.merchant",
+      "nativeLanguage": "zh-cn"
+    },
+    "jhipsterVersion": "6.0.1",
+    "applicationType": "microservice",
+    "baseName": "merchant",
+    "packageName": "com.weisen.www.code.yjf.merchant",
+    "packageFolder": "com/weisen/www/code/yjf/merchant",
+    "serverPort": "8083",
+    "authenticationType": "uaa",
+    "uaaBaseName": "login",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NWVkOTkwYjM4MWI3YzJiMWQ1MDVkNzc3NjNhYzg0YTE3NGE0MjYzNjk4MmMzNWY1MzU4N2QwYTFmNTcwNzcwYjJiMWE5NzAzYzJjMGQxNjI1MmU5MDEyOWUyYTZkZmEzOWI3MGUxZjliOWZmYWFmYjI5ZGI5MTcwNjkzOGM4MDU=",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "clientPackageManager": "npm",
+    "nativeLanguage": "zh-cn",
+    "languages": [
+      "zh-cn"
+    ],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
