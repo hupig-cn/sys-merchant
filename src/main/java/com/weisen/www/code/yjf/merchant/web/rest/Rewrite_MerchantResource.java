@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api/public")
-@Api(tags = "000-商户操作888")
+@Api(tags = "000-商户操作")
 public class Rewrite_MerchantResource {
 
     private final Logger log = LoggerFactory.getLogger(Rewrite_MerchantResource.class);
