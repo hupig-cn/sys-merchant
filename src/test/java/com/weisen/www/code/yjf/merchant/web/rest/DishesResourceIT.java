@@ -73,6 +73,9 @@ public class DishesResourceIT {
     private static final Boolean DEFAULT_LOGICDELETE = false;
     private static final Boolean UPDATED_LOGICDELETE = true;
 
+    private static final String DEFAULT_STATE = "AAAAAAAAAA";
+    private static final String UPDATED_STATE = "BBBBBBBBBB";
+
     private static final String DEFAULT_OTHER = "AAAAAAAAAA";
     private static final String UPDATED_OTHER = "BBBBBBBBBB";
 
@@ -136,6 +139,7 @@ public class DishesResourceIT {
             .modifierdate(DEFAULT_MODIFIERDATE)
             .modifiernum(DEFAULT_MODIFIERNUM)
             .logicdelete(DEFAULT_LOGICDELETE)
+            .state(DEFAULT_STATE)
             .other(DEFAULT_OTHER);
         return dishes;
     }
@@ -159,6 +163,7 @@ public class DishesResourceIT {
             .modifierdate(UPDATED_MODIFIERDATE)
             .modifiernum(UPDATED_MODIFIERNUM)
             .logicdelete(UPDATED_LOGICDELETE)
+            .state(UPDATED_STATE)
             .other(UPDATED_OTHER);
         return dishes;
     }
@@ -196,6 +201,7 @@ public class DishesResourceIT {
         assertThat(testDishes.getModifierdate()).isEqualTo(DEFAULT_MODIFIERDATE);
         assertThat(testDishes.getModifiernum()).isEqualTo(DEFAULT_MODIFIERNUM);
         assertThat(testDishes.isLogicdelete()).isEqualTo(DEFAULT_LOGICDELETE);
+        assertThat(testDishes.getState()).isEqualTo(DEFAULT_STATE);
         assertThat(testDishes.getOther()).isEqualTo(DEFAULT_OTHER);
     }
 
@@ -243,6 +249,7 @@ public class DishesResourceIT {
             .andExpect(jsonPath("$.[*].modifierdate").value(hasItem(DEFAULT_MODIFIERDATE.toString())))
             .andExpect(jsonPath("$.[*].modifiernum").value(hasItem(DEFAULT_MODIFIERNUM.intValue())))
             .andExpect(jsonPath("$.[*].logicdelete").value(hasItem(DEFAULT_LOGICDELETE.booleanValue())))
+            .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].other").value(hasItem(DEFAULT_OTHER.toString())));
     }
     
@@ -269,6 +276,7 @@ public class DishesResourceIT {
             .andExpect(jsonPath("$.modifierdate").value(DEFAULT_MODIFIERDATE.toString()))
             .andExpect(jsonPath("$.modifiernum").value(DEFAULT_MODIFIERNUM.intValue()))
             .andExpect(jsonPath("$.logicdelete").value(DEFAULT_LOGICDELETE.booleanValue()))
+            .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
             .andExpect(jsonPath("$.other").value(DEFAULT_OTHER.toString()));
     }
 
@@ -305,6 +313,7 @@ public class DishesResourceIT {
             .modifierdate(UPDATED_MODIFIERDATE)
             .modifiernum(UPDATED_MODIFIERNUM)
             .logicdelete(UPDATED_LOGICDELETE)
+            .state(UPDATED_STATE)
             .other(UPDATED_OTHER);
         DishesDTO dishesDTO = dishesMapper.toDto(updatedDishes);
 
@@ -329,6 +338,7 @@ public class DishesResourceIT {
         assertThat(testDishes.getModifierdate()).isEqualTo(UPDATED_MODIFIERDATE);
         assertThat(testDishes.getModifiernum()).isEqualTo(UPDATED_MODIFIERNUM);
         assertThat(testDishes.isLogicdelete()).isEqualTo(UPDATED_LOGICDELETE);
+        assertThat(testDishes.getState()).isEqualTo(UPDATED_STATE);
         assertThat(testDishes.getOther()).isEqualTo(UPDATED_OTHER);
     }
 

@@ -8,5 +8,35 @@ import java.util.Map;
 
 public interface Rewrite_DishesService {
 
+    //获取商家全部的商品列表
     public ResponseEntity<Map<String, List<DishesDTO>>> getDishes (Long merchantId);
+
+    //查询商家上架的商品列表
+    List<DishesDTO> findAllUpDishes(Long merchantId);
+
+    //查询下架的商品列表
+    List<DishesDTO> findAllDownDishes(Long merchantId);
+
+    //添加商品
+    void createDishes(DishesDTO dishesDTO);
+
+    //查询商品详情
+    DishesDTO findDishesInfo(Long dishesId);
+
+    //修改商品信息
+    void updateDishes(DishesDTO dishesDTO);
+
+    //上架
+    void upDishes(DishesDTO dishesDTO);
+
+    //下架
+    void downDishes(DishesDTO dishesDTO);
+
+    //删除商品
+    void deleteDishes(Long dishesId);
+
+    //批量删除
+    void deleteListDishes(List<Long> dishesId);
+
+
 }

@@ -38,6 +38,14 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "longitude",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "concession",
             "fieldType": "Integer"
         },

@@ -33,6 +33,8 @@ public class DishesDTO implements Serializable {
 
     private Boolean logicdelete;
 
+    private String state;
+
     private String other;
 
 
@@ -140,6 +142,14 @@ public class DishesDTO implements Serializable {
         this.logicdelete = logicdelete;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getOther() {
         return other;
     }
@@ -185,6 +195,7 @@ public class DishesDTO implements Serializable {
             ", modifierdate='" + getModifierdate() + "'" +
             ", modifiernum=" + getModifiernum() +
             ", logicdelete='" + isLogicdelete() + "'" +
+            ", state='" + getState() + "'" +
             ", other='" + getOther() + "'" +
             "}";
     }

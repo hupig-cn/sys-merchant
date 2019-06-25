@@ -52,6 +52,14 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="longitude" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="latitude" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="concession" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -121,6 +129,8 @@
             <column name="province" type="string"/>
             <column name="city" type="string"/>
             <column name="county" type="string"/>
+            <column name="longitude" type="string"/>
+            <column name="latitude" type="string"/>
             <column name="concession" type="numeric"/>
             <column name="rebate" type="numeric"/>
             <column name="weight" type="string"/>

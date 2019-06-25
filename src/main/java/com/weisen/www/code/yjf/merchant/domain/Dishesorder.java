@@ -23,6 +23,12 @@ public class Dishesorder implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "bigorder")
+    private String bigorder;
+
+    @Column(name = "littleorder")
+    private String littleorder;
+
     @Column(name = "merchantid")
     private String merchantid;
 
@@ -63,6 +69,32 @@ public class Dishesorder implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getBigorder() {
+        return bigorder;
+    }
+
+    public Dishesorder bigorder(String bigorder) {
+        this.bigorder = bigorder;
+        return this;
+    }
+
+    public void setBigorder(String bigorder) {
+        this.bigorder = bigorder;
+    }
+
+    public String getLittleorder() {
+        return littleorder;
+    }
+
+    public Dishesorder littleorder(String littleorder) {
+        this.littleorder = littleorder;
+        return this;
+    }
+
+    public void setLittleorder(String littleorder) {
+        this.littleorder = littleorder;
     }
 
     public String getMerchantid() {
@@ -229,6 +261,8 @@ public class Dishesorder implements Serializable {
     public String toString() {
         return "Dishesorder{" +
             "id=" + getId() +
+            ", bigorder='" + getBigorder() + "'" +
+            ", littleorder='" + getLittleorder() + "'" +
             ", merchantid='" + getMerchantid() + "'" +
             ", location='" + getLocation() + "'" +
             ", name='" + getName() + "'" +

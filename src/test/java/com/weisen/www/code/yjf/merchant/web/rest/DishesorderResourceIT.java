@@ -37,6 +37,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = {SecurityBeanOverrideConfiguration.class, MerchantApp.class})
 public class DishesorderResourceIT {
 
+    private static final String DEFAULT_BIGORDER = "AAAAAAAAAA";
+    private static final String UPDATED_BIGORDER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_LITTLEORDER = "AAAAAAAAAA";
+    private static final String UPDATED_LITTLEORDER = "BBBBBBBBBB";
+
     private static final String DEFAULT_MERCHANTID = "AAAAAAAAAA";
     private static final String UPDATED_MERCHANTID = "BBBBBBBBBB";
 
@@ -118,6 +124,8 @@ public class DishesorderResourceIT {
      */
     public static Dishesorder createEntity(EntityManager em) {
         Dishesorder dishesorder = new Dishesorder()
+            .bigorder(DEFAULT_BIGORDER)
+            .littleorder(DEFAULT_LITTLEORDER)
             .merchantid(DEFAULT_MERCHANTID)
             .location(DEFAULT_LOCATION)
             .name(DEFAULT_NAME)
@@ -139,6 +147,8 @@ public class DishesorderResourceIT {
      */
     public static Dishesorder createUpdatedEntity(EntityManager em) {
         Dishesorder dishesorder = new Dishesorder()
+            .bigorder(UPDATED_BIGORDER)
+            .littleorder(UPDATED_LITTLEORDER)
             .merchantid(UPDATED_MERCHANTID)
             .location(UPDATED_LOCATION)
             .name(UPDATED_NAME)
@@ -174,6 +184,8 @@ public class DishesorderResourceIT {
         List<Dishesorder> dishesorderList = dishesorderRepository.findAll();
         assertThat(dishesorderList).hasSize(databaseSizeBeforeCreate + 1);
         Dishesorder testDishesorder = dishesorderList.get(dishesorderList.size() - 1);
+        assertThat(testDishesorder.getBigorder()).isEqualTo(DEFAULT_BIGORDER);
+        assertThat(testDishesorder.getLittleorder()).isEqualTo(DEFAULT_LITTLEORDER);
         assertThat(testDishesorder.getMerchantid()).isEqualTo(DEFAULT_MERCHANTID);
         assertThat(testDishesorder.getLocation()).isEqualTo(DEFAULT_LOCATION);
         assertThat(testDishesorder.getName()).isEqualTo(DEFAULT_NAME);
@@ -219,6 +231,8 @@ public class DishesorderResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(dishesorder.getId().intValue())))
+            .andExpect(jsonPath("$.[*].bigorder").value(hasItem(DEFAULT_BIGORDER.toString())))
+            .andExpect(jsonPath("$.[*].littleorder").value(hasItem(DEFAULT_LITTLEORDER.toString())))
             .andExpect(jsonPath("$.[*].merchantid").value(hasItem(DEFAULT_MERCHANTID.toString())))
             .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
@@ -243,6 +257,8 @@ public class DishesorderResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(dishesorder.getId().intValue()))
+            .andExpect(jsonPath("$.bigorder").value(DEFAULT_BIGORDER.toString()))
+            .andExpect(jsonPath("$.littleorder").value(DEFAULT_LITTLEORDER.toString()))
             .andExpect(jsonPath("$.merchantid").value(DEFAULT_MERCHANTID.toString()))
             .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
@@ -277,6 +293,8 @@ public class DishesorderResourceIT {
         // Disconnect from session so that the updates on updatedDishesorder are not directly saved in db
         em.detach(updatedDishesorder);
         updatedDishesorder
+            .bigorder(UPDATED_BIGORDER)
+            .littleorder(UPDATED_LITTLEORDER)
             .merchantid(UPDATED_MERCHANTID)
             .location(UPDATED_LOCATION)
             .name(UPDATED_NAME)
@@ -299,6 +317,8 @@ public class DishesorderResourceIT {
         List<Dishesorder> dishesorderList = dishesorderRepository.findAll();
         assertThat(dishesorderList).hasSize(databaseSizeBeforeUpdate);
         Dishesorder testDishesorder = dishesorderList.get(dishesorderList.size() - 1);
+        assertThat(testDishesorder.getBigorder()).isEqualTo(UPDATED_BIGORDER);
+        assertThat(testDishesorder.getLittleorder()).isEqualTo(UPDATED_LITTLEORDER);
         assertThat(testDishesorder.getMerchantid()).isEqualTo(UPDATED_MERCHANTID);
         assertThat(testDishesorder.getLocation()).isEqualTo(UPDATED_LOCATION);
         assertThat(testDishesorder.getName()).isEqualTo(UPDATED_NAME);

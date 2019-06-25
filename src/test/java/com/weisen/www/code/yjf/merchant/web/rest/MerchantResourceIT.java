@@ -64,6 +64,12 @@ public class MerchantResourceIT {
     private static final String DEFAULT_COUNTY = "AAAAAAAAAA";
     private static final String UPDATED_COUNTY = "BBBBBBBBBB";
 
+    private static final String DEFAULT_LONGITUDE = "AAAAAAAAAA";
+    private static final String UPDATED_LONGITUDE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_LATITUDE = "AAAAAAAAAA";
+    private static final String UPDATED_LATITUDE = "BBBBBBBBBB";
+
     private static final Integer DEFAULT_CONCESSION = 1;
     private static final Integer UPDATED_CONCESSION = 2;
 
@@ -151,6 +157,8 @@ public class MerchantResourceIT {
             .province(DEFAULT_PROVINCE)
             .city(DEFAULT_CITY)
             .county(DEFAULT_COUNTY)
+            .longitude(DEFAULT_LONGITUDE)
+            .latitude(DEFAULT_LATITUDE)
             .concession(DEFAULT_CONCESSION)
             .rebate(DEFAULT_REBATE)
             .weight(DEFAULT_WEIGHT)
@@ -180,6 +188,8 @@ public class MerchantResourceIT {
             .province(UPDATED_PROVINCE)
             .city(UPDATED_CITY)
             .county(UPDATED_COUNTY)
+            .longitude(UPDATED_LONGITUDE)
+            .latitude(UPDATED_LATITUDE)
             .concession(UPDATED_CONCESSION)
             .rebate(UPDATED_REBATE)
             .weight(UPDATED_WEIGHT)
@@ -223,6 +233,8 @@ public class MerchantResourceIT {
         assertThat(testMerchant.getProvince()).isEqualTo(DEFAULT_PROVINCE);
         assertThat(testMerchant.getCity()).isEqualTo(DEFAULT_CITY);
         assertThat(testMerchant.getCounty()).isEqualTo(DEFAULT_COUNTY);
+        assertThat(testMerchant.getLongitude()).isEqualTo(DEFAULT_LONGITUDE);
+        assertThat(testMerchant.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
         assertThat(testMerchant.getConcession()).isEqualTo(DEFAULT_CONCESSION);
         assertThat(testMerchant.getRebate()).isEqualTo(DEFAULT_REBATE);
         assertThat(testMerchant.getWeight()).isEqualTo(DEFAULT_WEIGHT);
@@ -276,6 +288,8 @@ public class MerchantResourceIT {
             .andExpect(jsonPath("$.[*].province").value(hasItem(DEFAULT_PROVINCE.toString())))
             .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
             .andExpect(jsonPath("$.[*].county").value(hasItem(DEFAULT_COUNTY.toString())))
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.toString())))
+            .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.toString())))
             .andExpect(jsonPath("$.[*].concession").value(hasItem(DEFAULT_CONCESSION)))
             .andExpect(jsonPath("$.[*].rebate").value(hasItem(DEFAULT_REBATE)))
             .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.toString())))
@@ -308,6 +322,8 @@ public class MerchantResourceIT {
             .andExpect(jsonPath("$.province").value(DEFAULT_PROVINCE.toString()))
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
             .andExpect(jsonPath("$.county").value(DEFAULT_COUNTY.toString()))
+            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.toString()))
+            .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.toString()))
             .andExpect(jsonPath("$.concession").value(DEFAULT_CONCESSION))
             .andExpect(jsonPath("$.rebate").value(DEFAULT_REBATE))
             .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT.toString()))
@@ -350,6 +366,8 @@ public class MerchantResourceIT {
             .province(UPDATED_PROVINCE)
             .city(UPDATED_CITY)
             .county(UPDATED_COUNTY)
+            .longitude(UPDATED_LONGITUDE)
+            .latitude(UPDATED_LATITUDE)
             .concession(UPDATED_CONCESSION)
             .rebate(UPDATED_REBATE)
             .weight(UPDATED_WEIGHT)
@@ -380,6 +398,8 @@ public class MerchantResourceIT {
         assertThat(testMerchant.getProvince()).isEqualTo(UPDATED_PROVINCE);
         assertThat(testMerchant.getCity()).isEqualTo(UPDATED_CITY);
         assertThat(testMerchant.getCounty()).isEqualTo(UPDATED_COUNTY);
+        assertThat(testMerchant.getLongitude()).isEqualTo(UPDATED_LONGITUDE);
+        assertThat(testMerchant.getLatitude()).isEqualTo(UPDATED_LATITUDE);
         assertThat(testMerchant.getConcession()).isEqualTo(UPDATED_CONCESSION);
         assertThat(testMerchant.getRebate()).isEqualTo(UPDATED_REBATE);
         assertThat(testMerchant.getWeight()).isEqualTo(UPDATED_WEIGHT);

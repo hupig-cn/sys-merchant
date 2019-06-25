@@ -27,6 +27,10 @@ public class MerchantDTO implements Serializable {
 
     private String county;
 
+    private String longitude;
+
+    private String latitude;
+
     private Integer concession;
 
     private Integer rebate;
@@ -126,6 +130,22 @@ public class MerchantDTO implements Serializable {
 
     public void setCounty(String county) {
         this.county = county;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
     public Integer getConcession() {
@@ -242,6 +262,8 @@ public class MerchantDTO implements Serializable {
             ", province='" + getProvince() + "'" +
             ", city='" + getCity() + "'" +
             ", county='" + getCounty() + "'" +
+            ", longitude='" + getLongitude() + "'" +
+            ", latitude='" + getLatitude() + "'" +
             ", concession=" + getConcession() +
             ", rebate=" + getRebate() +
             ", weight='" + getWeight() + "'" +

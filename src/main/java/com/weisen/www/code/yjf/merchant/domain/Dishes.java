@@ -59,6 +59,9 @@ public class Dishes implements Serializable {
     @Column(name = "logicdelete")
     private Boolean logicdelete;
 
+    @Column(name = "state")
+    private String state;
+
     @Column(name = "other")
     private String other;
 
@@ -227,6 +230,19 @@ public class Dishes implements Serializable {
         this.logicdelete = logicdelete;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public Dishes state(String state) {
+        this.state = state;
+        return this;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getOther() {
         return other;
     }
@@ -273,6 +289,7 @@ public class Dishes implements Serializable {
             ", modifierdate='" + getModifierdate() + "'" +
             ", modifiernum=" + getModifiernum() +
             ", logicdelete='" + isLogicdelete() + "'" +
+            ", state='" + getState() + "'" +
             ", other='" + getOther() + "'" +
             "}";
     }

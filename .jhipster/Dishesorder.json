@@ -2,6 +2,14 @@
     "name": "Dishesorder",
     "fields": [
         {
+            "fieldName": "bigorder",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "littleorder",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "merchantid",
             "fieldType": "String"
         },

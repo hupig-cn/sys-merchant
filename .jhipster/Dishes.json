@@ -50,6 +50,10 @@
             "fieldType": "Boolean"
         },
         {
+            "fieldName": "state",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "other",
             "fieldType": "String"
         }

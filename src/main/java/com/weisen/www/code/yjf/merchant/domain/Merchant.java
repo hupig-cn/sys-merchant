@@ -50,6 +50,12 @@ public class Merchant implements Serializable {
     @Column(name = "county")
     private String county;
 
+    @Column(name = "longitude")
+    private String longitude;
+
+    @Column(name = "latitude")
+    private String latitude;
+
     @Column(name = "concession")
     private Integer concession;
 
@@ -204,6 +210,32 @@ public class Merchant implements Serializable {
 
     public void setCounty(String county) {
         this.county = county;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public Merchant longitude(String longitude) {
+        this.longitude = longitude;
+        return this;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public Merchant latitude(String latitude) {
+        this.latitude = latitude;
+        return this;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
     public Integer getConcession() {
@@ -366,6 +398,8 @@ public class Merchant implements Serializable {
             ", province='" + getProvince() + "'" +
             ", city='" + getCity() + "'" +
             ", county='" + getCounty() + "'" +
+            ", longitude='" + getLongitude() + "'" +
+            ", latitude='" + getLatitude() + "'" +
             ", concession=" + getConcession() +
             ", rebate=" + getRebate() +
             ", weight='" + getWeight() + "'" +

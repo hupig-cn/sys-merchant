@@ -9,6 +9,10 @@ public class DishesorderDTO implements Serializable {
 
     private Long id;
 
+    private String bigorder;
+
+    private String littleorder;
+
     private String merchantid;
 
     private String location;
@@ -38,6 +42,22 @@ public class DishesorderDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getBigorder() {
+        return bigorder;
+    }
+
+    public void setBigorder(String bigorder) {
+        this.bigorder = bigorder;
+    }
+
+    public String getLittleorder() {
+        return littleorder;
+    }
+
+    public void setLittleorder(String littleorder) {
+        this.littleorder = littleorder;
     }
 
     public String getMerchantid() {
@@ -153,6 +173,8 @@ public class DishesorderDTO implements Serializable {
     public String toString() {
         return "DishesorderDTO{" +
             "id=" + getId() +
+            ", bigorder='" + getBigorder() + "'" +
+            ", littleorder='" + getLittleorder() + "'" +
             ", merchantid='" + getMerchantid() + "'" +
             ", location='" + getLocation() + "'" +
             ", name='" + getName() + "'" +
