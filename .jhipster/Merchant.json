@@ -39,11 +39,11 @@
         },
         {
             "fieldName": "longitude",
-            "fieldType": "String"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldName": "latitude",
-            "fieldType": "String"
+            "fieldType": "BigDecimal"
         },
         {
             "fieldName": "concession",

@@ -5,11 +5,13 @@ import com.weisen.www.code.yjf.merchant.repository.Rewrite_MerchantRepository;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_MerchantService;
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.mapper.MerchantMapper;
+import com.weisen.www.code.yjf.merchant.service.util.NormalConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -100,5 +102,30 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         Merchant merchant = optional.get();
 
         return merchantMapper.toDto(merchant);
+    }
+
+    /**
+     * 查询附近热门店铺
+     * @param longitude  // 经度
+     * @param latitude   // 纬度
+     * @return
+     */
+    @Override
+    public List<MerchantDTO> findPopularMerchant(BigDecimal longitude, BigDecimal latitude) {
+        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchantAndHot(BigDecimal longitude, BigDecimal latitude, NormalConstant.ONE);
+        return merchantMapper.toDto(list);
+        return null;
+    }
+
+    /**
+     * 距离最近的店铺
+     * @param longitude  // 经度
+     * @param latitude   // 纬度
+     * @return
+     */
+    @Override
+    public List<MerchantDTO> findNearMerchant(String longitude, String latitude) {
+        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchant(BigDecimal longitude, BigDecimal latitude);
+        return merchantMapper.toDto(list);
     }
 }

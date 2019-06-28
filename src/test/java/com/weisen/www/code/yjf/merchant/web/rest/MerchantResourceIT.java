@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 import static com.weisen.www.code.yjf.merchant.web.rest.TestUtil.createFormattingConversionService;
@@ -64,11 +65,11 @@ public class MerchantResourceIT {
     private static final String DEFAULT_COUNTY = "AAAAAAAAAA";
     private static final String UPDATED_COUNTY = "BBBBBBBBBB";
 
-    private static final String DEFAULT_LONGITUDE = "AAAAAAAAAA";
-    private static final String UPDATED_LONGITUDE = "BBBBBBBBBB";
+    private static final BigDecimal DEFAULT_LONGITUDE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_LONGITUDE = new BigDecimal(2);
 
-    private static final String DEFAULT_LATITUDE = "AAAAAAAAAA";
-    private static final String UPDATED_LATITUDE = "BBBBBBBBBB";
+    private static final BigDecimal DEFAULT_LATITUDE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_LATITUDE = new BigDecimal(2);
 
     private static final Integer DEFAULT_CONCESSION = 1;
     private static final Integer UPDATED_CONCESSION = 2;
@@ -288,8 +289,8 @@ public class MerchantResourceIT {
             .andExpect(jsonPath("$.[*].province").value(hasItem(DEFAULT_PROVINCE.toString())))
             .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY.toString())))
             .andExpect(jsonPath("$.[*].county").value(hasItem(DEFAULT_COUNTY.toString())))
-            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.toString())))
-            .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.toString())))
+            .andExpect(jsonPath("$.[*].longitude").value(hasItem(DEFAULT_LONGITUDE.intValue())))
+            .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.intValue())))
             .andExpect(jsonPath("$.[*].concession").value(hasItem(DEFAULT_CONCESSION)))
             .andExpect(jsonPath("$.[*].rebate").value(hasItem(DEFAULT_REBATE)))
             .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.toString())))
@@ -322,8 +323,8 @@ public class MerchantResourceIT {
             .andExpect(jsonPath("$.province").value(DEFAULT_PROVINCE.toString()))
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY.toString()))
             .andExpect(jsonPath("$.county").value(DEFAULT_COUNTY.toString()))
-            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.toString()))
-            .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.toString()))
+            .andExpect(jsonPath("$.longitude").value(DEFAULT_LONGITUDE.intValue()))
+            .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.intValue()))
             .andExpect(jsonPath("$.concession").value(DEFAULT_CONCESSION))
             .andExpect(jsonPath("$.rebate").value(DEFAULT_REBATE))
             .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT.toString()))

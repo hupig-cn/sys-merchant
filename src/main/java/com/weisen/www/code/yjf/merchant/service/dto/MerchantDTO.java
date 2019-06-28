@@ -1,5 +1,6 @@
 package com.weisen.www.code.yjf.merchant.service.dto;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -27,9 +28,9 @@ public class MerchantDTO implements Serializable {
 
     private String county;
 
-    private String longitude;
+    private BigDecimal longitude;
 
-    private String latitude;
+    private BigDecimal latitude;
 
     private Integer concession;
 
@@ -132,19 +133,19 @@ public class MerchantDTO implements Serializable {
         this.county = county;
     }
 
-    public String getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
@@ -262,8 +263,8 @@ public class MerchantDTO implements Serializable {
             ", province='" + getProvince() + "'" +
             ", city='" + getCity() + "'" +
             ", county='" + getCounty() + "'" +
-            ", longitude='" + getLongitude() + "'" +
-            ", latitude='" + getLatitude() + "'" +
+            ", longitude=" + getLongitude() +
+            ", latitude=" + getLatitude() +
             ", concession=" + getConcession() +
             ", rebate=" + getRebate() +
             ", weight='" + getWeight() + "'" +

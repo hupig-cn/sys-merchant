@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -50,11 +51,11 @@ public class Merchant implements Serializable {
     @Column(name = "county")
     private String county;
 
-    @Column(name = "longitude")
-    private String longitude;
+    @Column(name = "longitude", precision = 21, scale = 2)
+    private BigDecimal longitude;
 
-    @Column(name = "latitude")
-    private String latitude;
+    @Column(name = "latitude", precision = 21, scale = 2)
+    private BigDecimal latitude;
 
     @Column(name = "concession")
     private Integer concession;
@@ -212,29 +213,29 @@ public class Merchant implements Serializable {
         this.county = county;
     }
 
-    public String getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public Merchant longitude(String longitude) {
+    public Merchant longitude(BigDecimal longitude) {
         this.longitude = longitude;
         return this;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public Merchant latitude(String latitude) {
+    public Merchant latitude(BigDecimal latitude) {
         this.latitude = latitude;
         return this;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
@@ -398,8 +399,8 @@ public class Merchant implements Serializable {
             ", province='" + getProvince() + "'" +
             ", city='" + getCity() + "'" +
             ", county='" + getCounty() + "'" +
-            ", longitude='" + getLongitude() + "'" +
-            ", latitude='" + getLatitude() + "'" +
+            ", longitude=" + getLongitude() +
+            ", latitude=" + getLatitude() +
             ", concession=" + getConcession() +
             ", rebate=" + getRebate() +
             ", weight='" + getWeight() + "'" +

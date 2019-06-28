@@ -6,5 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface Rewrite_DishesorderService {
 
+    // 创建菜单
     ResponseEntity<DishesorderDTO> createMenu(Rewrite_CreateMenuDTO createMenuDTO);
 }
