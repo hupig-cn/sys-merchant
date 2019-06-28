@@ -112,9 +112,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
      */
     @Override
     public List<MerchantDTO> findPopularMerchant(BigDecimal longitude, BigDecimal latitude) {
-        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchantAndHot(BigDecimal longitude, BigDecimal latitude, NormalConstant.ONE);
+        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchantAndHot(longitude, latitude, NormalConstant.ONE);
         return merchantMapper.toDto(list);
-        return null;
     }
 
     /**
@@ -125,7 +124,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
      */
     @Override
     public List<MerchantDTO> findNearMerchant(String longitude, String latitude) {
-        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchant(BigDecimal longitude, BigDecimal latitude);
+        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchant(new BigDecimal(longitude), new BigDecimal(latitude));
         return merchantMapper.toDto(list);
     }
 }

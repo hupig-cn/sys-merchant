@@ -30,7 +30,7 @@ public class Rewrite_DishesorderServiceImpl implements Rewrite_DishesorderServic
 
     private final DishesorderMapper dishesorderMapper;
 
-    public Rewrite_DishesorderServiceImpl(Rewrite_DishesorderRepository rewrite_DishesorderRepository, MerchantMapper merchantMapper) {
+    public Rewrite_DishesorderServiceImpl(Rewrite_DishesorderRepository rewrite_DishesorderRepository, DishesorderMapper dishesorderMapper) {
         this.rewrite_DishesorderRepository = rewrite_DishesorderRepository;
         this.dishesorderMapper = dishesorderMapper;
     }
