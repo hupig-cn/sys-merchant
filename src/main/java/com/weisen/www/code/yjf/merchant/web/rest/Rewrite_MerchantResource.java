@@ -23,7 +23,7 @@ import java.util.Optional;
  * REST controller for managing {@link com.weisen.www.code.yjf.merchant.domain.Merchant}.
  */
 @RestController
-@RequestMapping("/api/public")
+@RequestMapping("/api")
 @Api(tags = "000-商户操作")
 public class Rewrite_MerchantResource {
 
@@ -35,18 +35,20 @@ public class Rewrite_MerchantResource {
     private String applicationName;
 
     private final Rewrite_MerchantService rewrite_MerchantService;
+    private final MerchantService merchantService;
 
-    public Rewrite_MerchantResource(Rewrite_MerchantService rewrite_MerchantService) {
+    public Rewrite_MerchantResource(MerchantService merchantService, Rewrite_MerchantService rewrite_MerchantService) {
         this.rewrite_MerchantService = rewrite_MerchantService;
+        this.merchantService = merchantService;
     }
 
-//    @GetMapping("/ObtainMerchant/{id}")
-//    @ApiOperation("根据商户ID查询商户信息")
-//    public ResponseEntity<MerchantDTO> getMerchant(@PathVariable Long id) {
-//        log.debug("REST request to get Merchant : {}", id);
-//        Optional<MerchantDTO> merchantDTO = merchantService.findOne(id);
-//        return ResponseUtil.wrapOrNotFound(merchantDTO);
-//    }
+    @GetMapping("/public/ObtainMerchant/{id}")
+    @ApiOperation("根据商户ID查询商户信息")
+    public ResponseEntity<MerchantDTO> getMerchant(@PathVariable Long id) {
+        log.debug("REST request to get Merchant : {}", id);
+        Optional<MerchantDTO> merchantDTO = merchantService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(merchantDTO);
+    }
 
     @PostMapping("/createMerchant")
     @ApiOperation("添加商家店铺")
