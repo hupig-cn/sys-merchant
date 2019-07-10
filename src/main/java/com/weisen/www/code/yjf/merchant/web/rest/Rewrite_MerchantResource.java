@@ -49,6 +49,14 @@ public class Rewrite_MerchantResource {
         Optional<MerchantDTO> merchantDTO = merchantService.findOne(id);
         return ResponseUtil.wrapOrNotFound(merchantDTO);
     }
+    
+    @GetMapping("/ObtainMerchantUserId/{userid}")
+    @ApiOperation("根据用户ID查询用户的商户信息")
+    public ResponseEntity<MerchantDTO> getMerchantUserId(@PathVariable Long userid) {
+        log.debug("REST request to get Merchant : {}", userid);
+        MerchantDTO merchantDTO = rewrite_MerchantService.findMyShop(userid);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(merchantDTO));
+    }
 
     @PostMapping("/createMerchant")
     @ApiOperation("添加商家店铺")
@@ -65,14 +73,6 @@ public class Rewrite_MerchantResource {
         log.debug("REST updateMerchant : {}", merchantDTO);
         rewrite_MerchantService.updateMerchant(merchantDTO);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功")));
-    }
-
-    @GetMapping("/findAllMyShop/{userId}")
-    @ApiOperation("查询我的店铺列表")
-    public ResponseEntity<Result> findAllMyShop(@PathVariable Long userId) {
-        log.debug("REST findAllMyShop : {}", userId);
-        List<MerchantDTO> list = rewrite_MerchantService.findAllMyShop(userId);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
     }
 
     @GetMapping("/findShopInfo/{}")
@@ -99,8 +99,4 @@ public class Rewrite_MerchantResource {
         List<MerchantDTO> list = rewrite_MerchantService.findNearMerchant(longitude,latitude);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
     }
-
-
-
-
 }

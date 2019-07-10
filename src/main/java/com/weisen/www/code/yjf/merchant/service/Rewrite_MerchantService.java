@@ -13,8 +13,8 @@ public interface Rewrite_MerchantService {
     //修改店铺信息
     void updateMerchant(MerchantDTO merchantDTO);
 
-    //查询我的店铺列表
-    List<MerchantDTO> findAllMyShop(Long userId);
+    //查询我的店铺
+    MerchantDTO findMyShop(Long userid);
 
     //查询店铺信息
     MerchantDTO findShopInfo(Long merchantId);

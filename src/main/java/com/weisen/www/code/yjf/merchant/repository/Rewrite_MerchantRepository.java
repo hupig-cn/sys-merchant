@@ -11,8 +11,7 @@ import java.util.List;
 @Repository
 public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long> {
 
-
-    List<Merchant> findAllByUserid(String userId);
+    Merchant findOneByUserid(String userid);
 
     // 根据经度纬度查询附近商家
     @Query(value = "select id,userid,merchantphoto,name,businessid,state,address,province,city,county,longitude,latitude,concession,rebate," +
