@@ -1,6 +1,7 @@
 package com.weisen.www.code.yjf.merchant.service;
 
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,9 +21,12 @@ public interface Rewrite_MerchantService {
     MerchantDTO findShopInfo(Long merchantId);
 
     //查询附近热门店铺
-    List<MerchantDTO> findPopularMerchant(BigDecimal longitude, BigDecimal latitude);
+    List<MerchantDTO> findPopularMerchant(Rewrite_ForNearShop rewrite_ForNearShop);
 
     //距离最近的店铺
-    List<MerchantDTO> findNearMerchant(String longitude,String latitude);
+    List<MerchantDTO> findNearMerchant(Rewrite_ForNearShop rewrite_ForNearShop);
+
+    //根据搜索内容查询商户
+    List<MerchantDTO> findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop);
 
 }

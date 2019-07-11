@@ -13,6 +13,8 @@ public class DishestypeDTO implements Serializable {
 
     private String state;
 
+    private String merchantid;
+
     private String creator;
 
     private String createdate;
@@ -50,6 +52,14 @@ public class DishestypeDTO implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getMerchantid() {
+        return merchantid;
+    }
+
+    public void setMerchantid(String merchantid) {
+        this.merchantid = merchantid;
     }
 
     public String getCreator() {
@@ -135,6 +145,7 @@ public class DishestypeDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", state='" + getState() + "'" +
+            ", merchantid='" + getMerchantid() + "'" +
             ", creator='" + getCreator() + "'" +
             ", createdate='" + getCreatedate() + "'" +
             ", modifier='" + getModifier() + "'" +

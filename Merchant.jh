@@ -54,6 +54,7 @@ entity Dishes {// 菜品表
 entity Dishestype {// 菜品类型表
     name String,// 类型名称
     state String,// 类型状态
+    merchantid String, // 商户id
     creator String,// 创建者
     createdate String,// 创建日期
     modifier String,// 修改者

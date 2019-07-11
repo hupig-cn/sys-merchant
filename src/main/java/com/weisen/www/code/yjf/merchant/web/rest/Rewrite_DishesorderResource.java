@@ -3,6 +3,8 @@ package com.weisen.www.code.yjf.merchant.web.rest;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_DishesorderService;
 import com.weisen.www.code.yjf.merchant.service.dto.DishesorderDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_CreateMenuDTO;
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_OrderDTO;
+import com.weisen.www.code.yjf.merchant.service.util.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -35,9 +37,10 @@ public class Rewrite_DishesorderResource {
         this.dishesorderService = dishesorderService;
     }
 
-    @PostMapping("/ObtainDishesorder/createMenu")
-    @ApiOperation("创建菜单")
-    public ResponseEntity<DishesorderDTO> createMenu (@RequestBody Rewrite_CreateMenuDTO createMenuDTO) {
-        return dishesorderService.createMenu(createMenuDTO);
+    @PostMapping("/createMenu")
+    @ApiOperation("创建菜单订单")
+    public ResponseEntity<Result> createMenu (@RequestBody Rewrite_OrderDTO rewrite_OrderDTO) {
+        Result result = dishesorderService.createMenu(rewrite_OrderDTO);
+        return ResponseEntity.ok(result);
     }
 }

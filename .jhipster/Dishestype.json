@@ -10,6 +10,10 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "merchantid",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "creator",
             "fieldType": "String"
         },

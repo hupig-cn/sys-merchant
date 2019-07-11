@@ -4,6 +4,7 @@ import com.weisen.www.code.yjf.merchant.service.MerchantService;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_MerchantService;
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
 
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.Api;
@@ -73,7 +74,7 @@ public class Rewrite_MerchantResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
     }
 
-    @GetMapping("/findShopInfo/{}")
+    @GetMapping("/findShopInfo/{userId}")
     @ApiOperation("查询店铺信息")
     public ResponseEntity<Result> findShopInfo(@PathVariable Long userId) {
         log.debug("REST findShopInfo : {}", userId);
@@ -81,23 +82,30 @@ public class Rewrite_MerchantResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",merchantDTO)));
     }
 
-    @GetMapping("/findPopularMerchant/{longitude}&{latitude}")
+    @PostMapping("/findPopularMerchant")
     @ApiOperation("查询附近热门店铺")
-    public ResponseEntity<Result> findPopularMerchant(@PathVariable BigDecimal longitude, @PathVariable BigDecimal latitude) {
-        log.debug("REST findPopularMerchant : {}", longitude);
-        List<MerchantDTO> list = rewrite_MerchantService.findPopularMerchant(longitude,latitude);
+    public ResponseEntity<Result> findPopularMerchant(@RequestBody Rewrite_ForNearShop rewrite_ForNearShop) {
+        log.debug("REST findPopularMerchant : {}", rewrite_ForNearShop);
+        List<MerchantDTO> list = rewrite_MerchantService.findPopularMerchant(rewrite_ForNearShop);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
     }
 
 
-    @GetMapping("/findNearMerchant/{longitude}&{latitude}")
+    @PostMapping("/findNearMerchant")
     @ApiOperation("距离最近的店铺")
-    public ResponseEntity<Result> findNearMerchant(@PathVariable String longitude, @PathVariable String latitude) {
-        log.debug("REST findNearMerchant : {}", longitude);
-        List<MerchantDTO> list = rewrite_MerchantService.findNearMerchant(longitude,latitude);
+    public ResponseEntity<Result> findNearMerchant(@RequestBody Rewrite_ForNearShop rewrite_ForNearShop) {
+        log.debug("REST findNearMerchant : {}", rewrite_ForNearShop);
+        List<MerchantDTO> list = rewrite_MerchantService.findNearMerchant(rewrite_ForNearShop);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
     }
 
+    @PostMapping("/findByNameLike")
+    @ApiOperation("根据搜索内容查询商户")
+    public ResponseEntity<Result> findByNameLike(@RequestBody Rewrite_ForNearShop rewrite_ForNearShop) {
+        log.debug("REST findNearMerchant : {}", rewrite_ForNearShop);
+        List<MerchantDTO> list = rewrite_MerchantService.findByNameLike(rewrite_ForNearShop);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
+    }
 
 
 

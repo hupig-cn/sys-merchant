@@ -43,6 +43,9 @@ public class DishestypeResourceIT {
     private static final String DEFAULT_STATE = "AAAAAAAAAA";
     private static final String UPDATED_STATE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_MERCHANTID = "AAAAAAAAAA";
+    private static final String UPDATED_MERCHANTID = "BBBBBBBBBB";
+
     private static final String DEFAULT_CREATOR = "AAAAAAAAAA";
     private static final String UPDATED_CREATOR = "BBBBBBBBBB";
 
@@ -114,6 +117,7 @@ public class DishestypeResourceIT {
         Dishestype dishestype = new Dishestype()
             .name(DEFAULT_NAME)
             .state(DEFAULT_STATE)
+            .merchantid(DEFAULT_MERCHANTID)
             .creator(DEFAULT_CREATOR)
             .createdate(DEFAULT_CREATEDATE)
             .modifier(DEFAULT_MODIFIER)
@@ -133,6 +137,7 @@ public class DishestypeResourceIT {
         Dishestype dishestype = new Dishestype()
             .name(UPDATED_NAME)
             .state(UPDATED_STATE)
+            .merchantid(UPDATED_MERCHANTID)
             .creator(UPDATED_CREATOR)
             .createdate(UPDATED_CREATEDATE)
             .modifier(UPDATED_MODIFIER)
@@ -166,6 +171,7 @@ public class DishestypeResourceIT {
         Dishestype testDishestype = dishestypeList.get(dishestypeList.size() - 1);
         assertThat(testDishestype.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testDishestype.getState()).isEqualTo(DEFAULT_STATE);
+        assertThat(testDishestype.getMerchantid()).isEqualTo(DEFAULT_MERCHANTID);
         assertThat(testDishestype.getCreator()).isEqualTo(DEFAULT_CREATOR);
         assertThat(testDishestype.getCreatedate()).isEqualTo(DEFAULT_CREATEDATE);
         assertThat(testDishestype.getModifier()).isEqualTo(DEFAULT_MODIFIER);
@@ -209,6 +215,7 @@ public class DishestypeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(dishestype.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
+            .andExpect(jsonPath("$.[*].merchantid").value(hasItem(DEFAULT_MERCHANTID.toString())))
             .andExpect(jsonPath("$.[*].creator").value(hasItem(DEFAULT_CREATOR.toString())))
             .andExpect(jsonPath("$.[*].createdate").value(hasItem(DEFAULT_CREATEDATE.toString())))
             .andExpect(jsonPath("$.[*].modifier").value(hasItem(DEFAULT_MODIFIER.toString())))
@@ -231,6 +238,7 @@ public class DishestypeResourceIT {
             .andExpect(jsonPath("$.id").value(dishestype.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
+            .andExpect(jsonPath("$.merchantid").value(DEFAULT_MERCHANTID.toString()))
             .andExpect(jsonPath("$.creator").value(DEFAULT_CREATOR.toString()))
             .andExpect(jsonPath("$.createdate").value(DEFAULT_CREATEDATE.toString()))
             .andExpect(jsonPath("$.modifier").value(DEFAULT_MODIFIER.toString()))
@@ -263,6 +271,7 @@ public class DishestypeResourceIT {
         updatedDishestype
             .name(UPDATED_NAME)
             .state(UPDATED_STATE)
+            .merchantid(UPDATED_MERCHANTID)
             .creator(UPDATED_CREATOR)
             .createdate(UPDATED_CREATEDATE)
             .modifier(UPDATED_MODIFIER)
@@ -283,6 +292,7 @@ public class DishestypeResourceIT {
         Dishestype testDishestype = dishestypeList.get(dishestypeList.size() - 1);
         assertThat(testDishestype.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testDishestype.getState()).isEqualTo(UPDATED_STATE);
+        assertThat(testDishestype.getMerchantid()).isEqualTo(UPDATED_MERCHANTID);
         assertThat(testDishestype.getCreator()).isEqualTo(UPDATED_CREATOR);
         assertThat(testDishestype.getCreatedate()).isEqualTo(UPDATED_CREATEDATE);
         assertThat(testDishestype.getModifier()).isEqualTo(UPDATED_MODIFIER);
