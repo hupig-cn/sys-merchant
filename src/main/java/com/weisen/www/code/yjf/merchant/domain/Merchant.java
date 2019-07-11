@@ -63,6 +63,12 @@ public class Merchant implements Serializable {
     @Column(name = "rebate")
     private Integer rebate;
 
+    @Column(name = "buslicenseimage")
+    private String buslicenseimage;
+
+    @Column(name = "creditcode")
+    private String creditcode;
+
     @Column(name = "weight")
     private String weight;
 
@@ -265,6 +271,32 @@ public class Merchant implements Serializable {
         this.rebate = rebate;
     }
 
+    public String getBuslicenseimage() {
+        return buslicenseimage;
+    }
+
+    public Merchant buslicenseimage(String buslicenseimage) {
+        this.buslicenseimage = buslicenseimage;
+        return this;
+    }
+
+    public void setBuslicenseimage(String buslicenseimage) {
+        this.buslicenseimage = buslicenseimage;
+    }
+
+    public String getCreditcode() {
+        return creditcode;
+    }
+
+    public Merchant creditcode(String creditcode) {
+        this.creditcode = creditcode;
+        return this;
+    }
+
+    public void setCreditcode(String creditcode) {
+        this.creditcode = creditcode;
+    }
+
     public String getWeight() {
         return weight;
     }
@@ -403,6 +435,8 @@ public class Merchant implements Serializable {
             ", latitude=" + getLatitude() +
             ", concession=" + getConcession() +
             ", rebate=" + getRebate() +
+            ", buslicenseimage='" + getBuslicenseimage() + "'" +
+            ", creditcode='" + getCreditcode() + "'" +
             ", weight='" + getWeight() + "'" +
             ", creator='" + getCreator() + "'" +
             ", createdate='" + getCreatedate() + "'" +

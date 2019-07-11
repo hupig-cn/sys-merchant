@@ -12,6 +12,8 @@ entity Merchant {// 商户表
     latitude BigDecimal, // 纬度
     concession Integer,// 让利比例5%，10%，15%
     rebate Integer,// 返积分比例15%，30%，50%
+    buslicenseimage String , // 营业执照Url
+    creditcode String,// 信用代码
     weight String,// 商户权重
     creator String,// 创建者
     createdate String,// 创建日期

@@ -54,6 +54,14 @@
             "fieldType": "Integer"
         },
         {
+            "fieldName": "buslicenseimage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "creditcode",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "weight",
             "fieldType": "String"
         },

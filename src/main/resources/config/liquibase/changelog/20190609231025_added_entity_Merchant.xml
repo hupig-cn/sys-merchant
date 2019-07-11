@@ -68,6 +68,14 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="buslicenseimage" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="creditcode" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="weight" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -133,6 +141,8 @@
             <column name="latitude" type="numeric"/>
             <column name="concession" type="numeric"/>
             <column name="rebate" type="numeric"/>
+            <column name="buslicenseimage" type="string"/>
+            <column name="creditcode" type="string"/>
             <column name="weight" type="string"/>
             <column name="creator" type="string"/>
             <column name="createdate" type="string"/>

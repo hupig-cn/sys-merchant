@@ -50,6 +50,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setLatitude(merchantDTO.getLatitude());
         merchant.setConcession(merchantDTO.getConcession());
         merchant.setRebate(merchantDTO.getConcession()==5?15:merchantDTO.getConcession()==10?30:50);
+        merchant.setBuslicenseimage(merchantDTO.getBuslicenseimage());
+        merchant.setCreditcode(merchantDTO.getCreditcode());
         merchant.setWeight("0");
         rewrite_MerchantRepository.save(merchant);
     }
@@ -75,6 +77,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setWeight(merchantDTO.getWeight());
         merchant.setModifierdate(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date()));
         merchant.setModifier(merchantDTO.getModifier());
+        merchant.setBuslicenseimage(merchantDTO.getBuslicenseimage());
+        merchant.setCreditcode(merchantDTO.getCreditcode());
         merchant.setModifiernum(merchantDTO.getModifiernum());
         merchant.setLogicdelete(merchantDTO.isLogicdelete());
         merchant.setOther(merchantDTO.getOther());
@@ -87,7 +91,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         Merchant merchant = rewrite_MerchantRepository.findOneByUserid(userid.toString());
         return merchantMapper.toDto(merchant);
     }
-
+    
     //查询店铺信息
     @Override
     public MerchantDTO findShopInfo(Long merchantId) {
@@ -139,6 +143,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 
         List<Merchant> list = rewrite_MerchantRepository.findByNameLike(rewrite_ForNearShop.getName(),
             fromIndex,rewrite_ForNearShop.getPageSize());
+
         return merchantMapper.toDto(list);
     }
 }

@@ -76,7 +76,7 @@ public class Rewrite_MerchantResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功")));
     }
 
-    @GetMapping("/findShopInfo/{}")
+    @GetMapping("/findShopInfo/{userId}")
     @ApiOperation("查询店铺信息")
     public ResponseEntity<Result> findShopInfo(@PathVariable Long userId) {
         log.debug("REST findShopInfo : {}", userId);
@@ -108,7 +108,6 @@ public class Rewrite_MerchantResource {
         List<MerchantDTO> list = rewrite_MerchantService.findByNameLike(rewrite_ForNearShop);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
     }
-
 
 
 }
