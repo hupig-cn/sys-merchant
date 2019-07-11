@@ -41,7 +41,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setMerchantphoto(merchantDTO.getMerchantphoto());
         merchant.setName(merchantDTO.getName());
         merchant.setBusinessid(merchantDTO.getBusinessid());
-        merchant.setState(merchantDTO.getState());
+        merchant.setState("正常");
         merchant.setAddress(merchantDTO.getAddress());
         merchant.setProvince(merchantDTO.getProvince());
         merchant.setCity(merchantDTO.getCity());
@@ -49,12 +49,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setLongitude(merchantDTO.getLongitude());
         merchant.setLatitude(merchantDTO.getLatitude());
         merchant.setConcession(merchantDTO.getConcession());
-        merchant.setRebate(merchantDTO.getRebate());
-        merchant.setWeight(merchantDTO.getWeight());
-        merchant.setCreatedate(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date()));
-        merchant.setCreator(merchantDTO.getCreator());
-        merchant.setLogicdelete(merchantDTO.isLogicdelete());
-        merchant.setOther(merchantDTO.getOther());
+        merchant.setRebate(merchantDTO.getConcession()==5?15:merchantDTO.getConcession()==10?30:50);
+        merchant.setWeight("0");
         rewrite_MerchantRepository.save(merchant);
     }
 
@@ -85,11 +81,11 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         rewrite_MerchantRepository.saveAndFlush(merchant);
     }
 
-    //查询我的店铺列表
+    //查询我的店铺
     @Override
-    public List<MerchantDTO> findAllMyShop(Long userId) {
-        List<Merchant> list = rewrite_MerchantRepository.findAllByUserid(userId.toString());
-        return merchantMapper.toDto(list);
+    public MerchantDTO findMyShop(Long userid) {
+        Merchant merchant = rewrite_MerchantRepository.findOneByUserid(userid.toString());
+        return merchantMapper.toDto(merchant);
     }
 
     //查询店铺信息
@@ -99,9 +95,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         if (!optional.isPresent()) {
             return null;
         }
-
         Merchant merchant = optional.get();
-
         return merchantMapper.toDto(merchant);
     }
 
