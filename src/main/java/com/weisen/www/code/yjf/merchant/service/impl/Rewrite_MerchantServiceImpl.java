@@ -34,13 +34,15 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 
     //添加商家店铺
     @Override
-    public void createMerchant(MerchantDTO merchantDTO) {
+    public String createMerchant(MerchantDTO merchantDTO) {
+    	Merchant merchants = rewrite_MerchantRepository.findFirstByUserid(merchantDTO.getUserid());
+    	if (merchants != null) return "请勿多次提交申请。";
         Merchant merchant = new Merchant();
         merchant.setUserid(merchantDTO.getUserid());
         merchant.setMerchantphoto(merchantDTO.getMerchantphoto());
         merchant.setName(merchantDTO.getName());
         merchant.setBusinessid(merchantDTO.getBusinessid());
-        merchant.setState("正常");
+        merchant.setState("待审核");
         merchant.setAddress(merchantDTO.getAddress());
         merchant.setProvince(merchantDTO.getProvince());
         merchant.setCity(merchantDTO.getCity());
@@ -50,7 +52,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setConcession(merchantDTO.getConcession());
         merchant.setRebate(merchantDTO.getConcession()==5?15:merchantDTO.getConcession()==10?30:50);
         merchant.setWeight("0");
-        rewrite_MerchantRepository.save(merchant);
+        return rewrite_MerchantRepository.save(merchant).getId().toString();
     }
 
     //修改店铺信息
@@ -83,7 +85,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
     //查询我的店铺
     @Override
     public MerchantDTO findMyShop(Long userid) {
-        Merchant merchant = rewrite_MerchantRepository.findOneByUserid(userid.toString());
+        Merchant merchant = rewrite_MerchantRepository.findFirstByUserid(userid.toString());
         return merchantMapper.toDto(merchant);
     }
     

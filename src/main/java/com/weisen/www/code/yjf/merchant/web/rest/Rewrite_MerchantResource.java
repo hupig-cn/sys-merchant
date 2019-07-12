@@ -60,10 +60,9 @@ public class Rewrite_MerchantResource {
 
     @PostMapping("/createMerchant")
     @ApiOperation("添加商家店铺")
-    public ResponseEntity<Result> createMerchant(@RequestBody MerchantDTO merchantDTO) {
+    public String createMerchant(@RequestBody MerchantDTO merchantDTO) {
         log.debug("REST createMerchant : {}", merchantDTO);
-        rewrite_MerchantService.createMerchant(merchantDTO);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功")));
+        return rewrite_MerchantService.createMerchant(merchantDTO);
     }
 
 

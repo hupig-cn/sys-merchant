@@ -8,7 +8,7 @@ import java.util.List;
 public interface Rewrite_MerchantService {
 
     //添加商家店铺
-    void createMerchant(MerchantDTO merchantDTO);
+    String createMerchant(MerchantDTO merchantDTO);
 
     //修改店铺信息
     void updateMerchant(MerchantDTO merchantDTO);
