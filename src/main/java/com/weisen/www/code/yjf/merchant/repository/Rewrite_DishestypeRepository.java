@@ -12,4 +12,6 @@ public interface Rewrite_DishestypeRepository extends JpaRepository<Dishestype, 
 
     @Query(value = "from Dishestype where creator = ?1 and (logicdelete is null or logicdelete = 'true')")
     public List<Dishestype> getDishestypeByCreator(String creator);
+
+    List<Dishestype> findAllByMerchantid(String merchantId);
 }

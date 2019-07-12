@@ -9,16 +9,21 @@ import com.weisen.www.code.yjf.merchant.repository.Rewrite_DishestypeRepository;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_DishesService;
 import com.weisen.www.code.yjf.merchant.service.dto.DishesDTO;
 import com.weisen.www.code.yjf.merchant.service.mapper.DishesMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class Rewrite_DishesServiceImpl implements Rewrite_DishesService {
+
+    private final Logger log = LoggerFactory.getLogger(Rewrite_DishesServiceImpl.class);
 
     private MerchantRepository merchantRepository;
 
@@ -75,8 +80,8 @@ public class Rewrite_DishesServiceImpl implements Rewrite_DishesService {
         dishes.setDishestypeid(dishesDTO.getDishestypeid());
         dishes.setPrice(dishesDTO.getPrice());
         dishes.setNum(dishesDTO.getNum());
-        dishes.setCreator(dishesDTO.getCreator());
-        dishes.setCreatedate(dishesDTO.getCreatedate());
+        dishes.setCreator(""); // 拿取创建者
+        dishes.setCreatedate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         dishes.setModifiernum(dishesDTO.getModifiernum());
         dishes.setModifier(dishesDTO.getModifier());
         dishes.setLogicdelete(dishesDTO.isLogicdelete());

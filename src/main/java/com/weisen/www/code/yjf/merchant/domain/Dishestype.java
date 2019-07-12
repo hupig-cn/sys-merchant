@@ -29,6 +29,9 @@ public class Dishestype implements Serializable {
     @Column(name = "state")
     private String state;
 
+    @Column(name = "merchantid")
+    private String merchantid;
+
     @Column(name = "creator")
     private String creator;
 
@@ -83,6 +86,19 @@ public class Dishestype implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getMerchantid() {
+        return merchantid;
+    }
+
+    public Dishestype merchantid(String merchantid) {
+        this.merchantid = merchantid;
+        return this;
+    }
+
+    public void setMerchantid(String merchantid) {
+        this.merchantid = merchantid;
     }
 
     public String getCreator() {
@@ -199,6 +215,7 @@ public class Dishestype implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", state='" + getState() + "'" +
+            ", merchantid='" + getMerchantid() + "'" +
             ", creator='" + getCreator() + "'" +
             ", createdate='" + getCreatedate() + "'" +
             ", modifier='" + getModifier() + "'" +

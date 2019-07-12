@@ -4,6 +4,7 @@ import com.weisen.www.code.yjf.merchant.domain.Merchant;
 import com.weisen.www.code.yjf.merchant.repository.Rewrite_MerchantRepository;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_MerchantService;
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
 import com.weisen.www.code.yjf.merchant.service.mapper.MerchantMapper;
 import com.weisen.www.code.yjf.merchant.service.util.NormalConstant;
 import org.slf4j.Logger;
@@ -51,6 +52,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setLatitude(merchantDTO.getLatitude());
         merchant.setConcession(merchantDTO.getConcession());
         merchant.setRebate(merchantDTO.getConcession()==5?15:merchantDTO.getConcession()==10?30:50);
+        merchant.setBuslicenseimage(merchantDTO.getBuslicenseimage());
+        merchant.setCreditcode(merchantDTO.getCreditcode());
         merchant.setWeight("0");
         return rewrite_MerchantRepository.save(merchant).getId().toString();
     }
@@ -76,6 +79,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setWeight(merchantDTO.getWeight());
         merchant.setModifierdate(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date()));
         merchant.setModifier(merchantDTO.getModifier());
+        merchant.setBuslicenseimage(merchantDTO.getBuslicenseimage());
+        merchant.setCreditcode(merchantDTO.getCreditcode());
         merchant.setModifiernum(merchantDTO.getModifiernum());
         merchant.setLogicdelete(merchantDTO.isLogicdelete());
         merchant.setOther(merchantDTO.getOther());
@@ -93,7 +98,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
     @Override
     public MerchantDTO findShopInfo(Long merchantId) {
         Optional<Merchant> optional = rewrite_MerchantRepository.findById(merchantId);
-        if(!optional.isPresent()){
+        if (!optional.isPresent()) {
             return null;
         }
         Merchant merchant = optional.get();
@@ -102,25 +107,45 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 
     /**
      * 查询附近热门店铺
-     * @param longitude  // 经度
-     * @param latitude   // 纬度
+     *
+     * @param //longitude // 经度
+     * @param //latitude  // 纬度
      * @return
      */
     @Override
-    public List<MerchantDTO> findPopularMerchant(BigDecimal longitude, BigDecimal latitude) {
-        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchantAndHot(longitude, latitude, NormalConstant.ONE);
+    public List<MerchantDTO> findPopularMerchant(Rewrite_ForNearShop rewrite_ForNearShop) {
+//        if(rewrite_ForNearShop.getStartNum()){
+//
+//        }
+        int fromIndex = rewrite_ForNearShop.getStartNum() * rewrite_ForNearShop.getPageSize();  //起始索引
+        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchantAndHot(rewrite_ForNearShop.getLongitude(),
+            rewrite_ForNearShop.getLatitude(), NormalConstant.ONE,fromIndex,rewrite_ForNearShop.getPageSize());
         return merchantMapper.toDto(list);
     }
 
     /**
      * 距离最近的店铺
-     * @param longitude  // 经度
-     * @param latitude   // 纬度
+     *
+     * @param //longitude // 经度
+     * @param //latitude  // 纬度
      * @return
      */
     @Override
-    public List<MerchantDTO> findNearMerchant(String longitude, String latitude) {
-        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchant(new BigDecimal(longitude), new BigDecimal(latitude));
+    public List<MerchantDTO> findNearMerchant(Rewrite_ForNearShop rewrite_ForNearShop) {
+        int fromIndex = rewrite_ForNearShop.getStartNum() * rewrite_ForNearShop.getPageSize(); //起始索引
+        List<Merchant> list = rewrite_MerchantRepository.findNearbyMerchant(rewrite_ForNearShop.getLongitude(),
+            rewrite_ForNearShop.getLatitude(),rewrite_ForNearShop.getDistance(),fromIndex,rewrite_ForNearShop.getPageSize());
+        return merchantMapper.toDto(list);
+    }
+
+    //根据搜索内容查询商户
+    @Override
+    public List<MerchantDTO> findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop) {
+        int fromIndex = rewrite_ForNearShop.getStartNum() * rewrite_ForNearShop.getPageSize();  //起始索引
+
+        List<Merchant> list = rewrite_MerchantRepository.findByNameLike(rewrite_ForNearShop.getName(),
+            fromIndex,rewrite_ForNearShop.getPageSize());
+
         return merchantMapper.toDto(list);
     }
 }

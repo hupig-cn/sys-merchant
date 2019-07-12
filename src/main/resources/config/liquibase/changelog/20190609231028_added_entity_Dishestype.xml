@@ -24,6 +24,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="merchantid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="creator" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -74,6 +78,7 @@
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="state" type="string"/>
+            <column name="merchantid" type="string"/>
             <column name="creator" type="string"/>
             <column name="createdate" type="string"/>
             <column name="modifier" type="string"/>

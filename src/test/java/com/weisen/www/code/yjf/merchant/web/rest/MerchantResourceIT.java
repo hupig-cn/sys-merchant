@@ -77,6 +77,12 @@ public class MerchantResourceIT {
     private static final Integer DEFAULT_REBATE = 1;
     private static final Integer UPDATED_REBATE = 2;
 
+    private static final String DEFAULT_BUSLICENSEIMAGE = "AAAAAAAAAA";
+    private static final String UPDATED_BUSLICENSEIMAGE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CREDITCODE = "AAAAAAAAAA";
+    private static final String UPDATED_CREDITCODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_WEIGHT = "AAAAAAAAAA";
     private static final String UPDATED_WEIGHT = "BBBBBBBBBB";
 
@@ -162,6 +168,8 @@ public class MerchantResourceIT {
             .latitude(DEFAULT_LATITUDE)
             .concession(DEFAULT_CONCESSION)
             .rebate(DEFAULT_REBATE)
+            .buslicenseimage(DEFAULT_BUSLICENSEIMAGE)
+            .creditcode(DEFAULT_CREDITCODE)
             .weight(DEFAULT_WEIGHT)
             .creator(DEFAULT_CREATOR)
             .createdate(DEFAULT_CREATEDATE)
@@ -193,6 +201,8 @@ public class MerchantResourceIT {
             .latitude(UPDATED_LATITUDE)
             .concession(UPDATED_CONCESSION)
             .rebate(UPDATED_REBATE)
+            .buslicenseimage(UPDATED_BUSLICENSEIMAGE)
+            .creditcode(UPDATED_CREDITCODE)
             .weight(UPDATED_WEIGHT)
             .creator(UPDATED_CREATOR)
             .createdate(UPDATED_CREATEDATE)
@@ -238,6 +248,8 @@ public class MerchantResourceIT {
         assertThat(testMerchant.getLatitude()).isEqualTo(DEFAULT_LATITUDE);
         assertThat(testMerchant.getConcession()).isEqualTo(DEFAULT_CONCESSION);
         assertThat(testMerchant.getRebate()).isEqualTo(DEFAULT_REBATE);
+        assertThat(testMerchant.getBuslicenseimage()).isEqualTo(DEFAULT_BUSLICENSEIMAGE);
+        assertThat(testMerchant.getCreditcode()).isEqualTo(DEFAULT_CREDITCODE);
         assertThat(testMerchant.getWeight()).isEqualTo(DEFAULT_WEIGHT);
         assertThat(testMerchant.getCreator()).isEqualTo(DEFAULT_CREATOR);
         assertThat(testMerchant.getCreatedate()).isEqualTo(DEFAULT_CREATEDATE);
@@ -293,6 +305,8 @@ public class MerchantResourceIT {
             .andExpect(jsonPath("$.[*].latitude").value(hasItem(DEFAULT_LATITUDE.intValue())))
             .andExpect(jsonPath("$.[*].concession").value(hasItem(DEFAULT_CONCESSION)))
             .andExpect(jsonPath("$.[*].rebate").value(hasItem(DEFAULT_REBATE)))
+            .andExpect(jsonPath("$.[*].buslicenseimage").value(hasItem(DEFAULT_BUSLICENSEIMAGE.toString())))
+            .andExpect(jsonPath("$.[*].creditcode").value(hasItem(DEFAULT_CREDITCODE.toString())))
             .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.toString())))
             .andExpect(jsonPath("$.[*].creator").value(hasItem(DEFAULT_CREATOR.toString())))
             .andExpect(jsonPath("$.[*].createdate").value(hasItem(DEFAULT_CREATEDATE.toString())))
@@ -327,6 +341,8 @@ public class MerchantResourceIT {
             .andExpect(jsonPath("$.latitude").value(DEFAULT_LATITUDE.intValue()))
             .andExpect(jsonPath("$.concession").value(DEFAULT_CONCESSION))
             .andExpect(jsonPath("$.rebate").value(DEFAULT_REBATE))
+            .andExpect(jsonPath("$.buslicenseimage").value(DEFAULT_BUSLICENSEIMAGE.toString()))
+            .andExpect(jsonPath("$.creditcode").value(DEFAULT_CREDITCODE.toString()))
             .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT.toString()))
             .andExpect(jsonPath("$.creator").value(DEFAULT_CREATOR.toString()))
             .andExpect(jsonPath("$.createdate").value(DEFAULT_CREATEDATE.toString()))
@@ -371,6 +387,8 @@ public class MerchantResourceIT {
             .latitude(UPDATED_LATITUDE)
             .concession(UPDATED_CONCESSION)
             .rebate(UPDATED_REBATE)
+            .buslicenseimage(UPDATED_BUSLICENSEIMAGE)
+            .creditcode(UPDATED_CREDITCODE)
             .weight(UPDATED_WEIGHT)
             .creator(UPDATED_CREATOR)
             .createdate(UPDATED_CREATEDATE)
@@ -403,6 +421,8 @@ public class MerchantResourceIT {
         assertThat(testMerchant.getLatitude()).isEqualTo(UPDATED_LATITUDE);
         assertThat(testMerchant.getConcession()).isEqualTo(UPDATED_CONCESSION);
         assertThat(testMerchant.getRebate()).isEqualTo(UPDATED_REBATE);
+        assertThat(testMerchant.getBuslicenseimage()).isEqualTo(UPDATED_BUSLICENSEIMAGE);
+        assertThat(testMerchant.getCreditcode()).isEqualTo(UPDATED_CREDITCODE);
         assertThat(testMerchant.getWeight()).isEqualTo(UPDATED_WEIGHT);
         assertThat(testMerchant.getCreator()).isEqualTo(UPDATED_CREATOR);
         assertThat(testMerchant.getCreatedate()).isEqualTo(UPDATED_CREATEDATE);
