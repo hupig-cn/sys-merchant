@@ -151,7 +151,7 @@ public class Rewrite_DishesServiceImpl implements Rewrite_DishesService {
     //获取商户 出售中，已下架，草稿的商品
     @Override
     public Result getInfoForGoods(Long userId) {
-        Merchant merchant = merchantRepository.findOneByUserid(userId.toString());
+        Merchant merchant = merchantRepository.findByUserid(userId.toString());
         if(merchant == null ){
             return Result.fail("商户不存在");
         }

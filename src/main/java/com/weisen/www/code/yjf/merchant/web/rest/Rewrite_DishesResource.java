@@ -18,7 +18,7 @@ import java.util.Map;
  * REST controller for managing {@link com.weisen.www.code.yjf.merchant.domain.Dishes}.
  */
 @RestController
-@RequestMapping("/api/public")
+@RequestMapping("/api/dishes")
 @Api(tags = "000-菜品操作")
 public class Rewrite_DishesResource {
 

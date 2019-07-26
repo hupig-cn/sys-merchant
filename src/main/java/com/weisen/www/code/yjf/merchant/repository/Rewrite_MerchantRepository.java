@@ -31,4 +31,6 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
         "weight,creator,createdate,modifier,modifierdate,modifiernum,logicdelete,other " +
         "from merchant where name like '%?1%' limit ?2,?3",nativeQuery = true)
     List<Merchant> findByNameLike(String name,int fromIndex,int pageSize);
+
+    Merchant findByUserid(String userid);
 }
