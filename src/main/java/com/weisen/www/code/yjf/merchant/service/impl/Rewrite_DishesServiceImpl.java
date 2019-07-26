@@ -6,9 +6,12 @@ import com.weisen.www.code.yjf.merchant.domain.Merchant;
 import com.weisen.www.code.yjf.merchant.repository.MerchantRepository;
 import com.weisen.www.code.yjf.merchant.repository.Rewrite_DishesRepository;
 import com.weisen.www.code.yjf.merchant.repository.Rewrite_DishestypeRepository;
+import com.weisen.www.code.yjf.merchant.repository.Rewrite_MerchantRepository;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_DishesService;
 import com.weisen.www.code.yjf.merchant.service.dto.DishesDTO;
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_GosCountDTO;
 import com.weisen.www.code.yjf.merchant.service.mapper.DishesMapper;
+import com.weisen.www.code.yjf.merchant.service.util.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +28,7 @@ public class Rewrite_DishesServiceImpl implements Rewrite_DishesService {
 
     private final Logger log = LoggerFactory.getLogger(Rewrite_DishesServiceImpl.class);
 
-    private MerchantRepository merchantRepository;
+    private Rewrite_MerchantRepository merchantRepository;
 
     private Rewrite_DishestypeRepository dishestypeRepository;
 
@@ -33,7 +36,7 @@ public class Rewrite_DishesServiceImpl implements Rewrite_DishesService {
 
     private final DishesMapper dishesMapper;
 
-    public Rewrite_DishesServiceImpl(MerchantRepository merchantRepository, Rewrite_DishestypeRepository dishestypeRepository, Rewrite_DishesRepository dishesRepository, DishesMapper dishesMapper) {
+    public Rewrite_DishesServiceImpl(Rewrite_MerchantRepository merchantRepository, Rewrite_DishestypeRepository dishestypeRepository, Rewrite_DishesRepository dishesRepository, DishesMapper dishesMapper) {
         this.merchantRepository = merchantRepository;
         this.dishestypeRepository = dishestypeRepository;
         this.dishesRepository = dishesRepository;
@@ -143,5 +146,23 @@ public class Rewrite_DishesServiceImpl implements Rewrite_DishesService {
     @Override
     public void deleteListDishes(List<Long> dishesId) {
         dishesId.forEach(x -> dishesRepository.deleteById(x));
+    }
+
+    //获取商户 出售中，已下架，草稿的商品
+    @Override
+    public Result getInfoForGoods(Long userId) {
+        Merchant merchant = merchantRepository.findOneByUserid(userId.toString());
+        if(merchant == null ){
+            return Result.fail("商户不存在");
+        }
+        // 草稿
+        long zero = dishesRepository.getDishesByMerchantidAndState(merchant.getId().toString(),"0").stream().count();
+        // 上架
+        long one = dishesRepository.getDishesByMerchantidAndState(merchant.getId().toString(),"1").stream().count();
+        // 下架
+        long two = dishesRepository.getDishesByMerchantidAndState(merchant.getId().toString(),"2").stream().count();
+
+        Rewrite_GosCountDTO rewrite_GosCountDTO = new Rewrite_GosCountDTO(one,two,zero);
+        return Result.suc("成功",rewrite_GosCountDTO);
     }
 }

@@ -1,6 +1,7 @@
 package com.weisen.www.code.yjf.merchant.service;
 
 import com.weisen.www.code.yjf.merchant.service.dto.DishesDTO;
+import com.weisen.www.code.yjf.merchant.service.util.Result;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -37,6 +38,9 @@ public interface Rewrite_DishesService {
 
     //批量删除
     void deleteListDishes(List<Long> dishesId);
+
+    //获取商户 出售中，已下架，草稿的商品
+    Result getInfoForGoods(Long userId);
 
 
 }

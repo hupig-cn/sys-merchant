@@ -107,5 +107,12 @@ public class Rewrite_DishesResource {
         return ResponseEntity.ok(Result.suc("成功"));
     }
 
+    @GetMapping("/getInfoForGoods/{userid}")
+    @ApiOperation("获取商户 出售中，已下架，草稿的商品")
+    public ResponseEntity<Result> getInfoForGoods (@PathVariable Long userid) {
+        Result result = dishesService.getInfoForGoods(userid);
+        return ResponseEntity.ok(result);
+    }
+
 
 }

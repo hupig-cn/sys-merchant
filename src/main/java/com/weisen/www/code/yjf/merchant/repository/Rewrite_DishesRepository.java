@@ -13,6 +13,9 @@ public interface Rewrite_DishesRepository extends JpaRepository<Dishes, Long> {
     @Query(value = "from Dishes where dishestypeid = ?1")
     List<Dishes> getDishesByType (Long dishestypeId);
 
+    // state = 0 草稿  1 上架   2下架
     @Query(value = "from Dishes where merchantid = ?1 and state = ?2")
     List<Dishes> getDishesByMerchantidAndState(String merchantId,String state);
+
+
 }
