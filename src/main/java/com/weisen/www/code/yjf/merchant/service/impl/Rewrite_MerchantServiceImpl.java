@@ -148,4 +148,14 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 
         return merchantMapper.toDto(list);
     }
+
+    // 分页倒叙查询商家
+    @Override
+    public List<MerchantDTO> findAllMerchant(int satrtPage, int pageSize) {
+        List<Merchant> list = rewrite_MerchantRepository.findAllMerchant(satrtPage * pageSize, pageSize);
+        if(list != null){
+            return merchantMapper.toDto(list);
+        }
+        return null;
+    }
 }

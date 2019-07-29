@@ -33,4 +33,9 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
     List<Merchant> findByNameLike(String name,int fromIndex,int pageSize);
 
     Merchant findByUserid(String userid);
+
+    @Query(value = "select id,userid,merchantphoto,name,businessid,state,address,province,city,county,longitude,latitude,concession,rebate,\" +\n" +
+        "        \"weight,creator,createdate,modifier,modifierdate,modifiernum,logicdelete,other " +
+        "from merchant order by createdate desc limit ?1,?2",nativeQuery = true)
+    List<Merchant> findAllMerchant(int indexPage,int pageSize);
 }

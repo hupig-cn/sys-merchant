@@ -29,4 +29,7 @@ public interface Rewrite_MerchantService {
     //根据搜索内容查询商户
     List<MerchantDTO> findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop);
 
+    // 分页倒叙查询商家
+    List<MerchantDTO> findAllMerchant(int satrtPage,int pageSize);
+
 }
