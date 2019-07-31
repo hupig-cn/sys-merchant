@@ -108,9 +108,9 @@ public class Rewrite_MerchantResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
     }
 
-    @GetMapping("/findAllMerchant/{satrtPage}&{pageSize}")
+    @GetMapping("/findAllMerchant")
     @ApiOperation("分页倒叙查询商家")
-    public ResponseEntity<Result> findAllMerchant(@PathVariable int satrtPage,@PathVariable int pageSize) {
+    public ResponseEntity<Result> findAllMerchant(@RequestParam int satrtPage, int pageSize) {
         log.debug("REST findAllMerchant : {}");
         List<MerchantDTO> list = rewrite_MerchantService.findAllMerchant(satrtPage,pageSize);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
