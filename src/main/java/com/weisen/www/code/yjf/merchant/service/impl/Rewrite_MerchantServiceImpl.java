@@ -83,7 +83,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setRebate(merchantDTO.getRebate());
         merchant.setWeight(merchantDTO.getWeight());
         merchant.setModifierdate(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date()));
-        merchant.setModifier(merchantDTO.getModifier());
+        merchant.setModifier(merchantDTO.getId().toString());
         merchant.setBuslicenseimage(merchantDTO.getBuslicenseimage());
         merchant.setCreditcode(merchantDTO.getCreditcode());
         merchant.setModifiernum(merchantDTO.getModifiernum());
