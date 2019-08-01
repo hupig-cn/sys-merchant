@@ -44,6 +44,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setName(merchantDTO.getName());
         merchant.setBusinessid(merchantDTO.getBusinessid());
         merchant.setState("待审核");
+        merchant.setShow(merchantDTO.getShow());
         merchant.setAddress(merchantDTO.getAddress());
         merchant.setProvince(merchantDTO.getProvince());
         merchant.setCity(merchantDTO.getCity());
@@ -71,6 +72,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setAddress(merchantDTO.getAddress());
         merchant.setProvince(merchantDTO.getProvince());
         merchant.setCity(merchantDTO.getCity());
+        merchant.setShow(merchantDTO.getShow());
         merchant.setCounty(merchantDTO.getCounty());
         merchant.setLongitude(merchantDTO.getLongitude());
         merchant.setLatitude(merchantDTO.getLatitude());

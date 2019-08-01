@@ -80,6 +80,9 @@ public class MerchantResourceIT {
     private static final String DEFAULT_BUSLICENSEIMAGE = "AAAAAAAAAA";
     private static final String UPDATED_BUSLICENSEIMAGE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_SHOW = "AAAAAAAAAA";
+    private static final String UPDATED_SHOW = "BBBBBBBBBB";
+
     private static final String DEFAULT_CREDITCODE = "AAAAAAAAAA";
     private static final String UPDATED_CREDITCODE = "BBBBBBBBBB";
 
@@ -169,6 +172,7 @@ public class MerchantResourceIT {
             .concession(DEFAULT_CONCESSION)
             .rebate(DEFAULT_REBATE)
             .buslicenseimage(DEFAULT_BUSLICENSEIMAGE)
+            .show(DEFAULT_SHOW)
             .creditcode(DEFAULT_CREDITCODE)
             .weight(DEFAULT_WEIGHT)
             .creator(DEFAULT_CREATOR)
@@ -202,6 +206,7 @@ public class MerchantResourceIT {
             .concession(UPDATED_CONCESSION)
             .rebate(UPDATED_REBATE)
             .buslicenseimage(UPDATED_BUSLICENSEIMAGE)
+            .show(UPDATED_SHOW)
             .creditcode(UPDATED_CREDITCODE)
             .weight(UPDATED_WEIGHT)
             .creator(UPDATED_CREATOR)
@@ -249,6 +254,7 @@ public class MerchantResourceIT {
         assertThat(testMerchant.getConcession()).isEqualTo(DEFAULT_CONCESSION);
         assertThat(testMerchant.getRebate()).isEqualTo(DEFAULT_REBATE);
         assertThat(testMerchant.getBuslicenseimage()).isEqualTo(DEFAULT_BUSLICENSEIMAGE);
+        assertThat(testMerchant.getShow()).isEqualTo(DEFAULT_SHOW);
         assertThat(testMerchant.getCreditcode()).isEqualTo(DEFAULT_CREDITCODE);
         assertThat(testMerchant.getWeight()).isEqualTo(DEFAULT_WEIGHT);
         assertThat(testMerchant.getCreator()).isEqualTo(DEFAULT_CREATOR);
@@ -306,6 +312,7 @@ public class MerchantResourceIT {
             .andExpect(jsonPath("$.[*].concession").value(hasItem(DEFAULT_CONCESSION)))
             .andExpect(jsonPath("$.[*].rebate").value(hasItem(DEFAULT_REBATE)))
             .andExpect(jsonPath("$.[*].buslicenseimage").value(hasItem(DEFAULT_BUSLICENSEIMAGE.toString())))
+            .andExpect(jsonPath("$.[*].show").value(hasItem(DEFAULT_SHOW.toString())))
             .andExpect(jsonPath("$.[*].creditcode").value(hasItem(DEFAULT_CREDITCODE.toString())))
             .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.toString())))
             .andExpect(jsonPath("$.[*].creator").value(hasItem(DEFAULT_CREATOR.toString())))
@@ -342,6 +349,7 @@ public class MerchantResourceIT {
             .andExpect(jsonPath("$.concession").value(DEFAULT_CONCESSION))
             .andExpect(jsonPath("$.rebate").value(DEFAULT_REBATE))
             .andExpect(jsonPath("$.buslicenseimage").value(DEFAULT_BUSLICENSEIMAGE.toString()))
+            .andExpect(jsonPath("$.show").value(DEFAULT_SHOW.toString()))
             .andExpect(jsonPath("$.creditcode").value(DEFAULT_CREDITCODE.toString()))
             .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT.toString()))
             .andExpect(jsonPath("$.creator").value(DEFAULT_CREATOR.toString()))
@@ -388,6 +396,7 @@ public class MerchantResourceIT {
             .concession(UPDATED_CONCESSION)
             .rebate(UPDATED_REBATE)
             .buslicenseimage(UPDATED_BUSLICENSEIMAGE)
+            .show(UPDATED_SHOW)
             .creditcode(UPDATED_CREDITCODE)
             .weight(UPDATED_WEIGHT)
             .creator(UPDATED_CREATOR)
@@ -422,6 +431,7 @@ public class MerchantResourceIT {
         assertThat(testMerchant.getConcession()).isEqualTo(UPDATED_CONCESSION);
         assertThat(testMerchant.getRebate()).isEqualTo(UPDATED_REBATE);
         assertThat(testMerchant.getBuslicenseimage()).isEqualTo(UPDATED_BUSLICENSEIMAGE);
+        assertThat(testMerchant.getShow()).isEqualTo(UPDATED_SHOW);
         assertThat(testMerchant.getCreditcode()).isEqualTo(UPDATED_CREDITCODE);
         assertThat(testMerchant.getWeight()).isEqualTo(UPDATED_WEIGHT);
         assertThat(testMerchant.getCreator()).isEqualTo(UPDATED_CREATOR);

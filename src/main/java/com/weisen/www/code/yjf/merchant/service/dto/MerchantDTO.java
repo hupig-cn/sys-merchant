@@ -38,6 +38,8 @@ public class MerchantDTO implements Serializable {
 
     private String buslicenseimage;
 
+    private String show;
+
     private String creditcode;
 
     private String weight;
@@ -177,6 +179,14 @@ public class MerchantDTO implements Serializable {
         this.buslicenseimage = buslicenseimage;
     }
 
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
+    }
+
     public String getCreditcode() {
         return creditcode;
     }
@@ -288,6 +298,7 @@ public class MerchantDTO implements Serializable {
             ", concession=" + getConcession() +
             ", rebate=" + getRebate() +
             ", buslicenseimage='" + getBuslicenseimage() + "'" +
+            ", show='" + getShow() + "'" +
             ", creditcode='" + getCreditcode() + "'" +
             ", weight='" + getWeight() + "'" +
             ", creator='" + getCreator() + "'" +

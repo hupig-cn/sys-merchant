@@ -58,6 +58,10 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "show",
+            "fieldType": "String"
+        },
+        {
             "fieldName": "creditcode",
             "fieldType": "String"
         },

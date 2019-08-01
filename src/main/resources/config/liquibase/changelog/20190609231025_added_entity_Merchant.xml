@@ -72,6 +72,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="jhi_show" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="creditcode" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -142,6 +146,7 @@
             <column name="concession" type="numeric"/>
             <column name="rebate" type="numeric"/>
             <column name="buslicenseimage" type="string"/>
+            <column name="jhi_show" type="string"/>
             <column name="creditcode" type="string"/>
             <column name="weight" type="string"/>
             <column name="creator" type="string"/>
