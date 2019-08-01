@@ -51,12 +51,15 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         merchant.setCounty(merchantDTO.getCounty());
         merchant.setLongitude(merchantDTO.getLongitude());
         merchant.setLatitude(merchantDTO.getLatitude());
+        merchant.setCreatedate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         merchant.setConcession(merchantDTO.getConcession());
         merchant.setRebate(merchantDTO.getConcession()==5?15:merchantDTO.getConcession()==10?30:50);
         merchant.setBuslicenseimage(merchantDTO.getBuslicenseimage());
         merchant.setCreditcode(merchantDTO.getCreditcode());
         merchant.setWeight("0");
-        return rewrite_MerchantRepository.save(merchant).getId().toString();
+        rewrite_MerchantRepository.save(merchant);
+        merchant.setCreator(merchant.getId().toString());
+        return merchant.getId().toString();
     }
 
     //修改店铺信息
