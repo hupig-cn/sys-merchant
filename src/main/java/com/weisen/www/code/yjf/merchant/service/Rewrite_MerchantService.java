@@ -18,7 +18,7 @@ public interface Rewrite_MerchantService {
     MerchantDTO findMyShop(Long userid);
 
     //查询店铺信息
-    MerchantDTO findShopInfo(Long merchantId);
+    MerchantDTO findShopInfo(Long userid);
 
     //查询附近热门店铺
     List<MerchantDTO> findPopularMerchant(Rewrite_ForNearShop rewrite_ForNearShop);

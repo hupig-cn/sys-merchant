@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long> {
@@ -35,7 +36,7 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
     Merchant findByUserid(String userid);
 
     @Query(value = "select id,userid,merchantphoto,name,businessid,state,address,province,city,county,longitude,latitude,concession,rebate," +
-        " buslicenseimage,creditcode,weight,creator,createdate,modifier,modifierdate,modifiernum,logicdelete,other " +
+        " buslicenseimage,creditcode,weight,creator,createdate,modifier,modifierdate,modifiernum,logicdelete,other,jhi_show " +
         "from merchant order by createdate desc limit ?1,?2",nativeQuery = true)
     List<Merchant> findAllMerchant(int indexPage,int pageSize);
 }

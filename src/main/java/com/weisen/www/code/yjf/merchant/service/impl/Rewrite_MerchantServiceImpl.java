@@ -101,12 +101,11 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
     
     //查询店铺信息
     @Override
-    public MerchantDTO findShopInfo(Long merchantId) {
-        Optional<Merchant> optional = rewrite_MerchantRepository.findById(merchantId);
-        if (!optional.isPresent()) {
-            return null;
+    public MerchantDTO findShopInfo(Long userid) {
+        Merchant merchant = rewrite_MerchantRepository.findByUserid(String.valueOf(userid));
+        if(merchant == null) {
+        	return null;
         }
-        Merchant merchant = optional.get();
         return merchantMapper.toDto(merchant);
     }
 
