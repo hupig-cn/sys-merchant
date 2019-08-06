@@ -4,8 +4,8 @@ public class NormalConstant {
 
     public static final String ONE = "1";
 
-    public static final String PASS = "已通过";
+    public static final String PASS = "1";
 
-    public static final String NO_PASS = "待审核";
+    public static final String NO_PASS = "0";
 
 }
