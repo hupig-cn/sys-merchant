@@ -102,9 +102,9 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
     //查询店铺信息
     @Override
     public MerchantDTO findShopInfo(Long userid) {
-        Merchant merchant = rewrite_MerchantRepository.findByUserid(String.valueOf(userid));
-        if(merchant == null) {
-        	return null;
+        Merchant merchant = rewrite_MerchantRepository.findByUserid(userid.toString());
+        if (null == merchant) {
+            return null;
         }
         return merchantMapper.toDto(merchant);
     }
@@ -156,7 +156,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
     // 分页倒叙查询商家
     @Override
     public List<MerchantDTO> findAllMerchant(int satrtPage, int pageSize) {
-        List<Merchant> list = rewrite_MerchantRepository.findAllMerchant(satrtPage * pageSize, pageSize);
+        List<Merchant> list = rewrite_MerchantRepository.findAllMerchant(NormalConstant.PASS,satrtPage * pageSize, pageSize);
         if(list != null){
             return merchantMapper.toDto(list);
         }

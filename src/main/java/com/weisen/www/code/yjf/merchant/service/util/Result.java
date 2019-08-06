@@ -1,10 +1,10 @@
 package com.weisen.www.code.yjf.merchant.service.util;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 @SuppressWarnings("serial")
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
@@ -55,7 +55,9 @@ public class Result implements Serializable {
 			this.totalElements = null;
 		} else if (data != null && !(data instanceof List<?>)) {
 			this.data = Arrays.asList(data);
-		} else {
+		} else if(data == null){
+            this.data = "";
+        }else{
 			if (!((List<?>) data).isEmpty()) this.data = data;
 		}
 	}
@@ -92,4 +94,10 @@ public class Result implements Serializable {
 		this.data = data;
 	}
 	
+	
+	public static void main(String[] args) {
+		String s = "Gasd asda";
+		String str = s.toUpperCase();
+		System.out.println(str);
+	}
 }
