@@ -38,4 +38,12 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
         " buslicenseimage,jhi_show,creditcode,weight,creator,createdate,modifier,modifierdate,modifiernum,logicdelete,other,jhi_show " +
         "from merchant where state = ?1 order by createdate desc limit ?2,?3",nativeQuery = true)
     List<Merchant> findAllMerchant(String state,int indexPage,int pageSize);
+
+    // (后台)商户列表
+    @Query(value = "select * from merchant where (?1 is null or userid = ?1) and (?2 is null or name = ?2) and (?3 is null or state = ?3) " +
+        "order by createdate desc limit ?4,?5" ,nativeQuery = true)
+    List<Merchant> adminFindAllMerchant(String userid,String name,String type,int indexPage,int pageSize);
+
+    @Query(value = "select count(*) from merchant where (?1 is null or userid = ?1) and (?2 is null or name = ?2) and (?3 is null or state = ?3)" ,nativeQuery = true)
+    Long countAdmin(String userid,String name,String type);
 }

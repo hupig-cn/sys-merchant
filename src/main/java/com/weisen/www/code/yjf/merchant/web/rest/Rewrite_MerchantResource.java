@@ -5,6 +5,7 @@ import com.weisen.www.code.yjf.merchant.service.Rewrite_MerchantService;
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
 
 import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
+import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_JudgeMerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.Api;
@@ -116,5 +117,21 @@ public class Rewrite_MerchantResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
     }
 
+    @GetMapping("/admin/adminFindAllMerchant/{userid}&{name}&{type}&{satrtPage}&{pageSize}")
+    @ApiOperation("(后台)商户列表")
+    public ResponseEntity<Result> adminFindAllMerchant(@PathVariable String userid,@PathVariable String name,@PathVariable String type,
+                                                       @PathVariable int satrtPage,@PathVariable int pageSize) {
+        log.debug("REST adminFindAllMerchant : {}");
+        Result result = rewrite_MerchantService.adminFindAllMerchant(userid,name,type,satrtPage,pageSize);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
+    @PostMapping("/admin/judgeMerchant")
+    @ApiOperation("(后台)审批商户")
+    public ResponseEntity<Result> judgeMerchant(@RequestBody Rewrite_JudgeMerchantDTO rewrite_JudgeMerchantDTO) {
+        log.debug("REST adminFindAllMerchant : {}");
+        Result result = rewrite_MerchantService.judgeMerchant(rewrite_JudgeMerchantDTO);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
 
 }
