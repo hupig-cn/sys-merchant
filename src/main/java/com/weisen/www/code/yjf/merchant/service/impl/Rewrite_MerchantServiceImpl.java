@@ -180,7 +180,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
             rewrite_AdminMerchantDTO.setUserid(x.getUserid());
             rewrite_AdminMerchantDTO.setName(x.getName());
             rewrite_AdminMerchantDTO.setShopLocation(x.getAddress());
-            rewrite_AdminMerchantDTO.setShopType(x.getState());
+            rewrite_AdminMerchantDTO.setShopType(x.getBusinessid());
             rewrite_AdminMerchantDTO.setCreateTime(x.getCreatedate());
             rewrite_AdminMerchantDTO.setState(x.getState());
             rewrite_AdminMerchantDTO.setConcession(x.getConcession().toString()+"%");
