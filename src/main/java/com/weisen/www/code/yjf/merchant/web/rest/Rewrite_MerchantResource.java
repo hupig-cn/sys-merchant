@@ -1,26 +1,31 @@
 package com.weisen.www.code.yjf.merchant.web.rest;
 
-import com.weisen.www.code.yjf.merchant.service.MerchantService;
-import com.weisen.www.code.yjf.merchant.service.Rewrite_MerchantService;
-import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
-
-import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
-import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_JudgeMerchantDTO;
-import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_MerchentForAll;
-import com.weisen.www.code.yjf.merchant.service.util.Result;
-import io.github.jhipster.web.util.ResponseUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
+import com.weisen.www.code.yjf.merchant.service.MerchantService;
+import com.weisen.www.code.yjf.merchant.service.Rewrite_MerchantService;
+import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
+import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_JudgeMerchantDTO;
+import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_MerchentForAll;
+import com.weisen.www.code.yjf.merchant.service.util.Result;
+
+import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * REST controller for managing {@link com.weisen.www.code.yjf.merchant.domain.Merchant}.

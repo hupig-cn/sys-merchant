@@ -1,5 +1,14 @@
 package com.weisen.www.code.yjf.merchant.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.weisen.www.code.yjf.merchant.domain.Merchant;
 import com.weisen.www.code.yjf.merchant.repository.Rewrite_MerchantRepository;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_MerchantService;
@@ -10,24 +19,10 @@ import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_JudgeMerchant
 import com.weisen.www.code.yjf.merchant.service.mapper.MerchantMapper;
 import com.weisen.www.code.yjf.merchant.service.util.NormalConstant;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @Transactional
 public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
-
-    private final Logger log = LoggerFactory.getLogger(Rewrite_MerchantServiceImpl.class);
 
     private final Rewrite_MerchantRepository rewrite_MerchantRepository;
 

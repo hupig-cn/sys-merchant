@@ -1,12 +1,11 @@
 package com.weisen.www.code.yjf.merchant.service;
 
+import java.util.List;
+
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_JudgeMerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 public interface Rewrite_MerchantService {
 

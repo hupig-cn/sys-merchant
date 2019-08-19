@@ -1,25 +1,21 @@
 package com.weisen.www.code.yjf.merchant.service.impl;
 
-import com.weisen.www.code.yjf.merchant.domain.Shoplocation;
-import com.weisen.www.code.yjf.merchant.repository.Rewrite_ShoplocationRepository;
-import com.weisen.www.code.yjf.merchant.repository.ShoplocationRepository;
-import com.weisen.www.code.yjf.merchant.service.Rewrite_ShoplocationService;
-import com.weisen.www.code.yjf.merchant.service.dto.ShoplocationDTO;
-import com.weisen.www.code.yjf.merchant.service.mapper.ShoplocationMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.weisen.www.code.yjf.merchant.domain.Shoplocation;
+import com.weisen.www.code.yjf.merchant.repository.Rewrite_ShoplocationRepository;
+import com.weisen.www.code.yjf.merchant.service.Rewrite_ShoplocationService;
+import com.weisen.www.code.yjf.merchant.service.dto.ShoplocationDTO;
+import com.weisen.www.code.yjf.merchant.service.mapper.ShoplocationMapper;
+
 @Service
 @Transactional
 public class Rewrite_ShoplocationServiceImpl implements Rewrite_ShoplocationService {
-
-    private final Logger log = LoggerFactory.getLogger(ShoplocationServiceImpl.class);
 
     private final Rewrite_ShoplocationRepository rewrite_ShoplocationRepository;
 

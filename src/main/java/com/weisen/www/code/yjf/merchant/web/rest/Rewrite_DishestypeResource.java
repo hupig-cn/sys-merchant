@@ -1,13 +1,8 @@
 package com.weisen.www.code.yjf.merchant.web.rest;
 
-import com.weisen.www.code.yjf.merchant.service.Rewrite_DishesService;
-import com.weisen.www.code.yjf.merchant.service.Rewrite_DishestypeService;
-import com.weisen.www.code.yjf.merchant.service.dto.DishestypeDTO;
-import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
-import com.weisen.www.code.yjf.merchant.service.util.Result;
-import io.github.jhipster.web.util.ResponseUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
+import com.weisen.www.code.yjf.merchant.service.Rewrite_DishestypeService;
+import com.weisen.www.code.yjf.merchant.service.dto.DishestypeDTO;
+import com.weisen.www.code.yjf.merchant.service.util.Result;
+
+import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/menu")
@@ -28,7 +28,7 @@ public class Rewrite_DishestypeResource {
 
     private Rewrite_DishestypeService rewrite_DishestypeService;
 
-    public Rewrite_DishestypeResource(Rewrite_DishesService dishesService) {
+    public Rewrite_DishestypeResource(Rewrite_DishestypeService rewrite_DishestypeService) {
         this.rewrite_DishestypeService = rewrite_DishestypeService;
     }
 

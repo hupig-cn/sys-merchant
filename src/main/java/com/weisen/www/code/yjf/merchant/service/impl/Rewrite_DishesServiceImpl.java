@@ -1,9 +1,21 @@
 package com.weisen.www.code.yjf.merchant.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.weisen.www.code.yjf.merchant.domain.Dishes;
 import com.weisen.www.code.yjf.merchant.domain.Dishestype;
 import com.weisen.www.code.yjf.merchant.domain.Merchant;
-import com.weisen.www.code.yjf.merchant.repository.MerchantRepository;
 import com.weisen.www.code.yjf.merchant.repository.Rewrite_DishesRepository;
 import com.weisen.www.code.yjf.merchant.repository.Rewrite_DishestypeRepository;
 import com.weisen.www.code.yjf.merchant.repository.Rewrite_MerchantRepository;
@@ -12,21 +24,10 @@ import com.weisen.www.code.yjf.merchant.service.dto.DishesDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_GosCountDTO;
 import com.weisen.www.code.yjf.merchant.service.mapper.DishesMapper;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class Rewrite_DishesServiceImpl implements Rewrite_DishesService {
-
-    private final Logger log = LoggerFactory.getLogger(Rewrite_DishesServiceImpl.class);
 
     private Rewrite_MerchantRepository merchantRepository;
 

@@ -1,9 +1,8 @@
 package com.weisen.www.code.yjf.merchant.service;
 
-import com.weisen.www.code.yjf.merchant.domain.Dishestype;
-import com.weisen.www.code.yjf.merchant.service.dto.DishestypeDTO;
-
 import java.util.List;
+
+import com.weisen.www.code.yjf.merchant.service.dto.DishestypeDTO;
 
 public interface Rewrite_DishestypeService {
 

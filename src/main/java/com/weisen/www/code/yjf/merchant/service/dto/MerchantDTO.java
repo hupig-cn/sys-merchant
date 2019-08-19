@@ -6,6 +6,7 @@ import java.util.Objects;
 /**
  * A DTO for the {@link com.weisen.www.code.yjf.merchant.domain.Merchant} entity.
  */
+@SuppressWarnings("serial")
 public class MerchantDTO implements Serializable {
 
     private Long id;
