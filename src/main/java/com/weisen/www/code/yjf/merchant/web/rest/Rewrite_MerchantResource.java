@@ -37,7 +37,7 @@ public class Rewrite_MerchantResource {
 
     private final Logger log = LoggerFactory.getLogger(Rewrite_MerchantResource.class);
 
-    private static final String ENTITY_NAME = "merchantMerchant";
+//    private static final String ENTITY_NAME = "merchantMerchant";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
