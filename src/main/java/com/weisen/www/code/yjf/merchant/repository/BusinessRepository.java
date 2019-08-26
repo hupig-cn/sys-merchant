@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data  repository for the Business entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface BusinessRepository extends JpaRepository<Business, Long> {
 

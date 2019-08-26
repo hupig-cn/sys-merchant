@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data  repository for the Dishestype entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface DishestypeRepository extends JpaRepository<Dishestype, Long> {
 
