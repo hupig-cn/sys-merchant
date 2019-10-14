@@ -1,5 +1,6 @@
 package com.weisen.www.code.yjf.merchant.web.rest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -117,9 +118,9 @@ public class Rewrite_MerchantResource {
 
     @GetMapping("/public/findAllMerchant")
     @ApiOperation("分页倒叙查询商家")
-    public ResponseEntity<Result> findAllMerchant(@RequestParam int satrtPage, int pageSize) {
+    public ResponseEntity<Result> findAllMerchant(@RequestParam int satrtPage, int pageSize,BigDecimal longitude,BigDecimal latitude) {
         log.debug("REST findAllMerchant : {}");
-        List<MerchantDTO> list = rewrite_MerchantService.findAllMerchant(satrtPage,pageSize);
+        List<MerchantDTO> list = rewrite_MerchantService.findAllMerchant(satrtPage,pageSize,longitude,latitude);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
     }
 

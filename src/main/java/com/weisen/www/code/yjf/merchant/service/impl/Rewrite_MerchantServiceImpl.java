@@ -1,5 +1,6 @@
 package com.weisen.www.code.yjf.merchant.service.impl;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,7 @@ import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
 import com.weisen.www.code.yjf.merchant.service.dto.show.Rewrite_AdminMerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_JudgeMerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.mapper.MerchantMapper;
+import com.weisen.www.code.yjf.merchant.service.util.LocationUtils;
 import com.weisen.www.code.yjf.merchant.service.util.NormalConstant;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 
@@ -155,10 +157,15 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 
     // 分页倒叙查询商家
     @Override
-    public List<MerchantDTO> findAllMerchant(int satrtPage, int pageSize) {
+    public List<MerchantDTO> findAllMerchant(int satrtPage, int pageSize,BigDecimal longitude,BigDecimal latitude) {
         List<Merchant> list = rewrite_MerchantRepository.findAllMerchant(NormalConstant.PASS,satrtPage * pageSize, pageSize);
         if(list != null){
-            return merchantMapper.toDto(list);
+        	List<MerchantDTO> returnList = merchantMapper.toDto(list);
+        	for (MerchantDTO merchantDTO : returnList) {
+        		merchantDTO.setDistance(LocationUtils.getDistance(longitude.doubleValue(), latitude.doubleValue(),
+					Double.parseDouble(merchantDTO.getLongitude().toString()), Double.parseDouble(merchantDTO.getLatitude().toString())));
+			}
+            return returnList;
         }
         return null;
     }

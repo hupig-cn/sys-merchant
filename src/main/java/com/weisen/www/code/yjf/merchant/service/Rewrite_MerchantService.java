@@ -1,5 +1,6 @@
 package com.weisen.www.code.yjf.merchant.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
@@ -31,7 +32,7 @@ public interface Rewrite_MerchantService {
     List<MerchantDTO> findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop);
 
     // 分页倒叙查询商家
-    List<MerchantDTO> findAllMerchant(int satrtPage,int pageSize);
+    List<MerchantDTO> findAllMerchant(int satrtPage, int pageSize,BigDecimal longitude,BigDecimal latitude);
 
     // (后台)商户列表
     Result adminFindAllMerchant(String userid,String merchantName, String type,int satrtPage, int pageSize);

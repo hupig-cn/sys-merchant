@@ -58,6 +58,8 @@ public class MerchantDTO implements Serializable {
     private Boolean logicdelete;
 
     private String other;
+    
+    private double distance;
 
 
     public Long getId() {
@@ -260,7 +262,15 @@ public class MerchantDTO implements Serializable {
         this.other = other;
     }
 
-    @Override
+    public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
