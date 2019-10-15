@@ -161,10 +161,12 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
         List<Merchant> list = rewrite_MerchantRepository.findAllMerchant(NormalConstant.PASS,satrtPage * pageSize, pageSize);
         if(list != null){
         	List<MerchantDTO> returnList = merchantMapper.toDto(list);
-        	for (MerchantDTO merchantDTO : returnList) {
-        		merchantDTO.setDistance(LocationUtils.getDistance(longitude.doubleValue(), latitude.doubleValue(),
-					Double.parseDouble(merchantDTO.getLongitude().toString()), Double.parseDouble(merchantDTO.getLatitude().toString())));
-			}
+			if (longitude != null && latitude != null) {
+        		for (MerchantDTO merchantDTO : returnList) {
+        			merchantDTO.setDistance(LocationUtils.getDistance(longitude.doubleValue(), latitude.doubleValue(),
+        					Double.parseDouble(merchantDTO.getLongitude().toString()), Double.parseDouble(merchantDTO.getLatitude().toString())));
+        		}
+        	}
             return returnList;
         }
         return null;
