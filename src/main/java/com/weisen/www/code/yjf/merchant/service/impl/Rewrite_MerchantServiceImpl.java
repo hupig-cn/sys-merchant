@@ -3,6 +3,7 @@ package com.weisen.www.code.yjf.merchant.service.impl;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -147,12 +148,58 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
     //根据搜索内容查询商户
     @Override
     public List<MerchantDTO> findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop) {
-        int fromIndex = rewrite_ForNearShop.getStartNum() * rewrite_ForNearShop.getPageSize();  //起始索引
-
-        List<Merchant> list = rewrite_MerchantRepository.findByNameLike(rewrite_ForNearShop.getName(),
-            fromIndex,rewrite_ForNearShop.getPageSize());
-
-        return merchantMapper.toDto(list);
+        int fromIndex = (rewrite_ForNearShop.getStartNum() - 1) * rewrite_ForNearShop.getPageSize();  //起始索引
+        List<Merchant> list = rewrite_MerchantRepository.findByNameLike(rewrite_ForNearShop.getName(),rewrite_ForNearShop.getCity(),fromIndex,rewrite_ForNearShop.getPageSize());
+        List<MerchantDTO> merchantdto = new ArrayList<MerchantDTO>();
+        list.forEach(x -> { 
+        	MerchantDTO rewrite_AdminMerchantDTO = new MerchantDTO();
+        	double disance = LocationUtils.getDistance(
+        			(rewrite_ForNearShop.getLongitude()).doubleValue(),(rewrite_ForNearShop.getLatitude()).doubleValue(), (x.getLongitude()).doubleValue(), (x.getLatitude().doubleValue()));
+            rewrite_AdminMerchantDTO.setId(x.getId());
+            rewrite_AdminMerchantDTO.setUserid(x.getUserid());
+            rewrite_AdminMerchantDTO.setMerchantphoto(x.getMerchantphoto());            
+            rewrite_AdminMerchantDTO.setName(x.getName());
+            rewrite_AdminMerchantDTO.setBusinessid(x.getBusinessid());
+            rewrite_AdminMerchantDTO.setState(x.getState());
+            rewrite_AdminMerchantDTO.setAddress(x.getAddress());
+            rewrite_AdminMerchantDTO.setProvince(x.getProvince());
+            rewrite_AdminMerchantDTO.setCity(x.getCity());
+            rewrite_AdminMerchantDTO.setCounty(x.getCounty());
+            rewrite_AdminMerchantDTO.setLongitude(x.getLongitude());
+            rewrite_AdminMerchantDTO.setLatitude(x.getLatitude());
+            rewrite_AdminMerchantDTO.setConcession(x.getConcession());
+            rewrite_AdminMerchantDTO.setRebate(x.getRebate());
+            rewrite_AdminMerchantDTO.setBuslicenseimage(x.getBuslicenseimage());
+            rewrite_AdminMerchantDTO.setShow(x.getShow());
+            rewrite_AdminMerchantDTO.setCreditcode(x.getCreditcode());
+            rewrite_AdminMerchantDTO.setWeight(x.getWeight());
+            rewrite_AdminMerchantDTO.setCreator(x.getCreator());
+            rewrite_AdminMerchantDTO.setCreatedate(x.getCreatedate());
+            rewrite_AdminMerchantDTO.setModifier(x.getModifier());
+            rewrite_AdminMerchantDTO.setModifierdate(x.getModifierdate());
+            rewrite_AdminMerchantDTO.setModifiernum(x.getModifiernum());
+            rewrite_AdminMerchantDTO.setModifiernum(x.getModifiernum());
+            rewrite_AdminMerchantDTO.setLogicdelete(x.isLogicdelete());
+            rewrite_AdminMerchantDTO.setOther(x.getOther());
+        	rewrite_AdminMerchantDTO.setDistance(disance);
+            merchantdto.add(rewrite_AdminMerchantDTO);
+        });
+        if(rewrite_ForNearShop.getType()==1) {
+        	merchantdto.sort(new Comparator<MerchantDTO>() {
+    			@Override
+    			public int compare(MerchantDTO o1, MerchantDTO o2) {
+    				return (int) (o1.getRebate() - o2.getRebate());
+    			}
+    		});// 按照返积分比例排序
+        }else {
+        	  merchantdto.sort(new Comparator<MerchantDTO>() {
+      			@Override
+      			public int compare(MerchantDTO o1, MerchantDTO o2) {
+      				return (int) (o1.getDistance() - o2.getDistance());
+      			}
+      		});// 按照距离排序
+        } 
+        return merchantdto;
     }
 
     // 分页倒叙查询商家
