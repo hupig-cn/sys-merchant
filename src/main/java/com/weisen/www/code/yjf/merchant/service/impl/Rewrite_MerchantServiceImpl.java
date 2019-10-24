@@ -147,9 +147,10 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 
     //根据搜索内容查询商户
     @Override
-    public List<MerchantDTO> findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop) {
-        int fromIndex = (rewrite_ForNearShop.getStartNum() - 1) * rewrite_ForNearShop.getPageSize();  //起始索引
+    public Result findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop) {
+        int fromIndex = rewrite_ForNearShop.getStartNum()  * rewrite_ForNearShop.getPageSize();  //起始索引
         List<Merchant> list = rewrite_MerchantRepository.findByNameLike(rewrite_ForNearShop.getName(),rewrite_ForNearShop.getCity(),fromIndex,rewrite_ForNearShop.getPageSize());
+        Integer count=rewrite_MerchantRepository.findByNameLikeCount(rewrite_ForNearShop.getName(),rewrite_ForNearShop.getCity());
         List<MerchantDTO> merchantdto = new ArrayList<MerchantDTO>();
         list.forEach(x -> { 
         	MerchantDTO rewrite_AdminMerchantDTO = new MerchantDTO();
@@ -199,7 +200,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
       			}
       		});// 按照距离排序
         } 
-        return merchantdto;
+        return Result.suc("成功",merchantdto,count);
     }
 
     // 分页倒叙查询商家

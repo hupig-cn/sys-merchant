@@ -29,7 +29,7 @@ public interface Rewrite_MerchantService {
     List<MerchantDTO> findNearMerchant(Rewrite_ForNearShop rewrite_ForNearShop);
 
     //根据搜索内容查询商户
-    List<MerchantDTO> findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop);
+    Result findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop);
 
     // 分页倒叙查询商家
     List<MerchantDTO> findAllMerchant(int satrtPage, int pageSize,BigDecimal longitude,BigDecimal latitude);

@@ -112,8 +112,8 @@ public class Rewrite_MerchantResource {
     @ApiOperation("根据搜索内容查询商户")
     public ResponseEntity<Result> findByNameLike(@RequestBody Rewrite_ForNearShop rewrite_ForNearShop) {
         log.debug("REST findNearMerchant : {}", rewrite_ForNearShop);
-        List<MerchantDTO> list = rewrite_MerchantService.findByNameLike(rewrite_ForNearShop);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功",list)));
+        Result list = rewrite_MerchantService.findByNameLike(rewrite_ForNearShop);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(list));
     }
 
     @GetMapping("/public/findAllMerchant")
