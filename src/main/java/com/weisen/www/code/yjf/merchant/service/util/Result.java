@@ -46,6 +46,10 @@ public class Result implements Serializable {
 		return fail("操作失败");
 	}
 	
+	public static Result fail(String message,Object data) {
+		return new Result(FAILURE, message, 0, data);
+	}
+
 	private Result(int code, String message, Integer totalElements, Object data) {
 		super();
 		this.code = code;
