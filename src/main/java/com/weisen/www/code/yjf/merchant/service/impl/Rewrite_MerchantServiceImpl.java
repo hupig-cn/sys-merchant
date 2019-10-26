@@ -16,6 +16,7 @@ import com.weisen.www.code.yjf.merchant.repository.Rewrite_MerchantRepository;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_MerchantService;
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_MerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.show.Rewrite_AdminMerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_JudgeMerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.mapper.MerchantMapper;
@@ -67,31 +68,21 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 
     //修改店铺信息
     @Override
-    public void updateMerchant(MerchantDTO merchantDTO) {
+    public void updateMerchant(Rewrite_MerchantDTO merchantDTO) {
         Merchant merchant = new Merchant();
-        merchant.setId(merchantDTO.getId());
         merchant.setUserid(merchantDTO.getUserid());
         merchant.setMerchantphoto(merchantDTO.getMerchantphoto());
         merchant.setName(merchantDTO.getName());
         merchant.setBusinessid(merchantDTO.getBusinessid());
-        merchant.setState(merchantDTO.getState());
         merchant.setAddress(merchantDTO.getAddress());
         merchant.setProvince(merchantDTO.getProvince());
         merchant.setCity(merchantDTO.getCity());
-        merchant.setShow(merchantDTO.getShow());
         merchant.setCounty(merchantDTO.getCounty());
         merchant.setLongitude(merchantDTO.getLongitude());
         merchant.setLatitude(merchantDTO.getLatitude());
         merchant.setConcession(merchantDTO.getConcession());
-        merchant.setRebate(merchantDTO.getRebate());
-        merchant.setWeight(merchantDTO.getWeight());
         merchant.setModifierdate(new SimpleDateFormat("yyyy-MM-dd HH-mm-ss").format(new Date()));
-        merchant.setModifier(merchantDTO.getId().toString());
-        merchant.setBuslicenseimage(merchantDTO.getBuslicenseimage());
         merchant.setCreditcode(merchantDTO.getCreditcode());
-        merchant.setModifiernum(merchantDTO.getModifiernum());
-        merchant.setLogicdelete(merchantDTO.isLogicdelete());
-        merchant.setOther(merchantDTO.getOther());
         rewrite_MerchantRepository.saveAndFlush(merchant);
     }
 
