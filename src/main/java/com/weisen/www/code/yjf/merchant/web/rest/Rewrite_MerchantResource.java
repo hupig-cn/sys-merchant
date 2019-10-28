@@ -20,6 +20,7 @@ import com.weisen.www.code.yjf.merchant.service.MerchantService;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_MerchantService;
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_MerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_JudgeMerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_MerchentForAll;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
@@ -77,7 +78,7 @@ public class Rewrite_MerchantResource {
 
     @PostMapping("/updateMerchant")
     @ApiOperation("修改店铺信息")
-    public ResponseEntity<Result> updateMerchant(@RequestBody MerchantDTO merchantDTO) {
+    public ResponseEntity<Result> updateMerchant(@RequestBody Rewrite_MerchantDTO merchantDTO) {
         log.debug("REST updateMerchant : {}", merchantDTO);
         rewrite_MerchantService.updateMerchant(merchantDTO);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(Result.suc("成功")));

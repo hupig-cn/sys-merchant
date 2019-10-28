@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.weisen.www.code.yjf.merchant.service.dto.MerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_ForNearShop;
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_MerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_JudgeMerchantDTO;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 
@@ -14,7 +15,7 @@ public interface Rewrite_MerchantService {
     String createMerchant(MerchantDTO merchantDTO);
 
     //修改店铺信息
-    void updateMerchant(MerchantDTO merchantDTO);
+    void updateMerchant(Rewrite_MerchantDTO merchantDTO);
 
     //查询我的店铺
     MerchantDTO findMyShop(Long userid);
