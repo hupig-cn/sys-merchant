@@ -33,7 +33,7 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
     List<Merchant> findByNameLike(String name,String city,int fromIndex,int pageSize);
    
     @Query(value = "select count(*) " + 
-    		"from merchant where name like %?1% and city = like %?2% ",nativeQuery = true)
+    		"from merchant where name like %?1% and city  like %?2% ",nativeQuery = true)
     Integer findByNameLikeCount(String name,String city);
 
     Merchant findByUserid(String userid);
