@@ -192,7 +192,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 			merchantdto.sort(new Comparator<MerchantDTO>() {
 				@Override
 				public int compare(MerchantDTO o1, MerchantDTO o2) {
-					return (int) (o1.getRebate() - o2.getRebate());
+					return (int) (o2.getRebate() - o1.getRebate());
 				}
 			});// 按照返积分比例排序
 		} else {
