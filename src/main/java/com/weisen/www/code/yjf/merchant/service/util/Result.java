@@ -1,7 +1,6 @@
 package com.weisen.www.code.yjf.merchant.service.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.weisen.www.code.quanquan.basic.service.util.Result;
 
 import java.io.Serializable;
 import java.util.Arrays;
