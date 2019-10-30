@@ -145,6 +145,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		return merchantMapper.toDto(list);
 	}
 
+
 	// 根据搜索内容查询商户
 	@Override
 	public Result findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop) {

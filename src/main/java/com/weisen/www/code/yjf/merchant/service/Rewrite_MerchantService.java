@@ -15,7 +15,7 @@ public interface Rewrite_MerchantService {
     String createMerchant(MerchantDTO merchantDTO);
 
     //修改店铺信息
-    Result updateMerchant(Rewrite_MerchantDTO merchantDTO);
+    void updateMerchant(Rewrite_MerchantDTO merchantDTO);
 
     //查询我的店铺
     MerchantDTO findMyShop(Long userid);
