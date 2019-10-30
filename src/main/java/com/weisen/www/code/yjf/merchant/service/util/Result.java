@@ -1,6 +1,7 @@
 package com.weisen.www.code.yjf.merchant.service.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.weisen.www.code.quanquan.basic.service.util.Result;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -38,6 +39,10 @@ public class Result implements Serializable {
 		return suc("操作成功");
 	}
 	
+	public static Result fail(String message,Object data) {
+		return new Result(FAILURE, message, 0, data);
+	}
+	
 	public static Result fail (String message) {
 		return new Result(FAILURE, message, null, null);
 	}
@@ -54,13 +59,14 @@ public class Result implements Serializable {
 		if (data != null && !(data instanceof List<?>)) {
 			this.data = Arrays.asList(data);
 		} else if (data == null) {
-			this.totalElements = null;
-			this.data = "";
+			this.totalElements = 0;
+			this.data = Arrays.asList();
         } else {
 			if (!((List<?>) data).isEmpty()) {
 				this.data = data;
 			} else {
 				this.data = Arrays.asList();
+				this.totalElements = 0;
 			}
 		}
 	}
