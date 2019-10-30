@@ -1,10 +1,18 @@
 package com.weisen.www.code.yjf.merchant.service.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Rewrite_MerchantDTO {
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@SuppressWarnings("serial")
+@ApiModel(value = "修改店铺DTO")
+public class Rewrite_MerchantDTO implements Serializable {
+
 	private String userid;
 
+	@ApiModelProperty(value = "店铺门头照")
 	private String merchantphoto;
 
 	private String name;
@@ -26,8 +34,6 @@ public class Rewrite_MerchantDTO {
 	private Integer concession;
 
 	private String creditcode;
-
-	private String modifierdate;
 
 	private Boolean logicdelete;
 
@@ -125,14 +131,6 @@ public class Rewrite_MerchantDTO {
 
 	public void setCreditcode(String creditcode) {
 		this.creditcode = creditcode;
-	}
-
-	public String getModifierdate() {
-		return modifierdate;
-	}
-
-	public void setModifierdate(String modifierdate) {
-		this.modifierdate = modifierdate;
 	}
 
 	public Boolean getLogicdelete() {
