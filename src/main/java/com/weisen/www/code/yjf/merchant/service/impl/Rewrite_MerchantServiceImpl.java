@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.weisen.www.code.yjf.merchant.web.rest.SensitiveWord;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,6 +78,10 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		if (merchant == null) {
 			return Result.fail("没有该用户!");
 		} else {
+            if (!SensitiveWord.check(merchantDTO.getName())) {
+                Result.fail("商户名称含有敏感词，重新输入！！");
+            }
+
 			merchant.setUserid(merchantDTO.getUserid());
 			merchant.setMerchantphoto(merchantDTO.getMerchantphoto());
 			merchant.setName(merchantDTO.getName());
@@ -263,7 +268,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 
 		return Result.suc("成功");
 	}
-	
+
 	public static void ListSort(List<MerchantDTO> list){
 		Collections.sort(list,new Comparator<MerchantDTO>() {
 			@Override
@@ -289,7 +294,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 			}
 		});
 	}
-	
+
 	public static List Page(Integer pageNum,Integer pageSize,Integer sum,List T) {
 		int pageNo=pageNum*pageSize;
 		if(pageNo+pageSize>sum) {
@@ -299,5 +304,5 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		}
 		return T;
 	}
-	
+
 }
