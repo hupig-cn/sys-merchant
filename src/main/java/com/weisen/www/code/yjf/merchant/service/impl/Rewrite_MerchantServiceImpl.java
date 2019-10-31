@@ -47,6 +47,9 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		Merchant merchants = rewrite_MerchantRepository.findFirstByUserid(merchantDTO.getUserid());
 		if (merchants != null)
 			return "请勿多次提交申请。";
+		if (!SensitiveWord.check(merchantDTO.getName())) {
+			Result.fail("商户名称含有敏感词，重新输入！！");
+		}
 		Merchant merchant = new Merchant();
 		merchant.setUserid(merchantDTO.getUserid());
 		merchant.setMerchantphoto(merchantDTO.getMerchantphoto());
