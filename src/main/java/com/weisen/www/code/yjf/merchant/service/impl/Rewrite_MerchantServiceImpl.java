@@ -3,6 +3,7 @@ package com.weisen.www.code.yjf.merchant.service.impl;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -151,7 +152,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 	public Result findByNameLike(Rewrite_ForNearShop rewrite_ForNearShop) {
 		int fromIndex = rewrite_ForNearShop.getStartNum() * rewrite_ForNearShop.getPageSize(); // 起始索引
 		List<Merchant> list = rewrite_MerchantRepository.findByNameLike(rewrite_ForNearShop.getName(),
-				rewrite_ForNearShop.getCity(), fromIndex, rewrite_ForNearShop.getPageSize());
+				rewrite_ForNearShop.getCity());
 		Integer count = rewrite_MerchantRepository.findByNameLikeCount(rewrite_ForNearShop.getName(),
 				rewrite_ForNearShop.getCity());
 		List<MerchantDTO> merchantdto = new ArrayList<MerchantDTO>();
@@ -190,12 +191,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 			merchantdto.add(rewrite_AdminMerchantDTO);
 		});
 		if (rewrite_ForNearShop.getType() == 1) {
-			merchantdto.sort(new Comparator<MerchantDTO>() {
-				@Override
-				public int compare(MerchantDTO o1, MerchantDTO o2) {
-					return (int) (o2.getRebate() - o1.getRebate());
-				}
-			});// 按照返积分比例排序
+			ListSort(merchantdto);
 		} else {
 			merchantdto.sort(new Comparator<MerchantDTO>() {
 				@Override
@@ -204,7 +200,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 				}
 			});// 按照距离排序
 		}
-		return Result.suc("成功", merchantdto, count);
+		List dto = Page(rewrite_ForNearShop.getStartNum(), rewrite_ForNearShop.getPageSize(), count, merchantdto);
+		return Result.suc("成功", dto, count);
 	}
 
 	// 分页倒叙查询商家
@@ -266,4 +263,40 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 
 		return Result.suc("成功");
 	}
+	
+	public static void ListSort(List<MerchantDTO> list){
+		Collections.sort(list,new Comparator<MerchantDTO>() {
+			@Override
+			public int compare(MerchantDTO o1, MerchantDTO o2) {
+				try {
+					if (o1.getRebate() > o2.getRebate()) {
+						return -1;
+					} else if (o1.getRebate() < o2.getRebate()) {
+						return 1;
+					} else {
+						if (o1.getDistance() > o2.getDistance()) {
+							return 1;
+						} else if (o1.getDistance() < o2.getDistance()) {
+							return -1;
+						} else {
+							return 0;
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return 0;
+			}
+		});
+	}
+	
+	public static List Page(Integer pageNum,Integer pageSize,Integer sum,List T) {
+		if(pageNum+pageSize>sum) {
+			T=T.subList(pageNum*pageSize, sum);
+		}else {
+			T=T.subList(pageNum*pageSize,(pageNum*pageSize)+pageSize);
+		}
+		return T;
+	}
+	
 }

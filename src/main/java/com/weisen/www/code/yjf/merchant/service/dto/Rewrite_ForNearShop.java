@@ -12,7 +12,7 @@ public class Rewrite_ForNearShop {
 	@ApiModelProperty(value = "纬度", example = "")
     private BigDecimal latitude;   // 纬度
 	
-	@ApiModelProperty(value = "起始条目", example = "1")
+	@ApiModelProperty(value = "起始条目", example = "0")
     private int startNum;  // 起始条目
 
 	@ApiModelProperty(value = "一页数量", example = "15")
@@ -24,10 +24,10 @@ public class Rewrite_ForNearShop {
 	@ApiModelProperty(value = " 内容", example = "")
     private String name;  // 内容
 	
-	@ApiModelProperty(value = "城市", example = "广州市")
+	@ApiModelProperty(value = "城市", example = "")
     private String city; // 城市
 	
-	@ApiModelProperty(value = "类型", example = "0")
+	@ApiModelProperty(value = "类型", example = "1")
 	private Integer type; // 类型
 	
     public String getName() {
