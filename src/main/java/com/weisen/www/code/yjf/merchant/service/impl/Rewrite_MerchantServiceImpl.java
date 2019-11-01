@@ -78,10 +78,9 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		if (merchant == null) {
 			return Result.fail("没有该用户!");
 		} else {
-            if (!SensitiveWord.check(merchantDTO.getName())) {
-                Result.fail("商户名称含有敏感词，重新输入！！");
-            }
-
+			if (!SensitiveWord.check(merchantDTO.getName())) {
+				Result.fail("商户名称含有敏感词，重新输入！！");
+			}
 			merchant.setUserid(merchantDTO.getUserid());
 			merchant.setMerchantphoto(merchantDTO.getMerchantphoto());
 			merchant.setName(merchantDTO.getName());
@@ -92,9 +91,20 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 			merchant.setCounty(merchantDTO.getCounty());
 			merchant.setLongitude(merchantDTO.getLongitude());
 			merchant.setLatitude(merchantDTO.getLatitude());
-			merchant.setConcession(merchantDTO.getConcession());
 			merchant.setModifierdate(TimeUtil.getDate());
 			merchant.setCreditcode(merchantDTO.getCreditcode());
+			merchant.setConcession(merchantDTO.getConcession());
+			// 让利比例5%，10%，15%
+			// 返积分比例15%，30%，50%
+			if (merchantDTO.getConcession().equals(5)) {
+				merchant.setRebate(15);
+			}
+			if (merchantDTO.getConcession().equals(10)) {
+				merchant.setRebate(30);
+			}
+			if (merchantDTO.getConcession().equals(15)) {
+				merchant.setRebate(50);
+			}
 			rewrite_MerchantRepository.saveAndFlush(merchant);
 			return Result.suc("修改成功!");
 		}
@@ -150,7 +160,6 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 				rewrite_ForNearShop.getPageSize());
 		return merchantMapper.toDto(list);
 	}
-
 
 	// 根据搜索内容查询商户
 	@Override
@@ -269,8 +278,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		return Result.suc("成功");
 	}
 
-	public static void ListSort(List<MerchantDTO> list){
-		Collections.sort(list,new Comparator<MerchantDTO>() {
+	public static void ListSort(List<MerchantDTO> list) {
+		Collections.sort(list, new Comparator<MerchantDTO>() {
 			@Override
 			public int compare(MerchantDTO o1, MerchantDTO o2) {
 				try {
@@ -295,12 +304,12 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		});
 	}
 
-	public static List Page(Integer pageNum,Integer pageSize,Integer sum,List T) {
-		int pageNo=pageNum*pageSize;
-		if(pageNo+pageSize>sum) {
-			T=T.subList(pageNo, sum);
-		}else {
-			T=T.subList(pageNo,pageNo+pageSize);
+	public static List Page(Integer pageNum, Integer pageSize, Integer sum, List T) {
+		int pageNo = pageNum * pageSize;
+		if (pageNo + pageSize > sum) {
+			T = T.subList(pageNo, sum);
+		} else {
+			T = T.subList(pageNo, pageNo + pageSize);
 		}
 		return T;
 	}
