@@ -44,6 +44,9 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 	// 添加商家店铺
 	@Override
 	public String createMerchant(MerchantDTO merchantDTO) {
+		if (!SensitiveWord.check(merchantDTO.getName())) {
+			Result.fail("商户名称含有敏感词，重新输入！！");
+		}
 		Merchant merchants = rewrite_MerchantRepository.findFirstByUserid(merchantDTO.getUserid());
 		if (merchants != null)
 			return "请勿多次提交申请。";
@@ -74,6 +77,9 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 	// 修改店铺信息
 	@Override
 	public Result updateMerchant(Rewrite_MerchantDTO merchantDTO) {
+		if (!SensitiveWord.check(merchantDTO.getName())) {
+			Result.fail("商户名称含有敏感词，重新输入！！");
+		}
 		Merchant merchant = rewrite_MerchantRepository.findByUserid(merchantDTO.getUserid());
 		if (merchant == null) {
 			return Result.fail("没有该用户!");
