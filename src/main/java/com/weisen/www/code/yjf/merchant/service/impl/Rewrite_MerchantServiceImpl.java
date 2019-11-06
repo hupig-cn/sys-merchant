@@ -161,6 +161,9 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 			double disance = LocationUtils.getDistance((rewrite_ForNearShop.getLongitude()).doubleValue(),
 					(rewrite_ForNearShop.getLatitude()).doubleValue(), (x.getLongitude()).doubleValue(),
 					(x.getLatitude().doubleValue()));
+//			if(disance>500000) {
+//				return;
+//			}
 			rewrite_AdminMerchantDTO.setId(x.getId());
 			rewrite_AdminMerchantDTO.setUserid(x.getUserid());
 			rewrite_AdminMerchantDTO.setMerchantphoto(x.getMerchantphoto());
@@ -200,8 +203,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 				}
 			});// 按照距离排序
 		}
-		List dto = Page(rewrite_ForNearShop.getStartNum(), rewrite_ForNearShop.getPageSize(), count, merchantdto);
-		return Result.suc("成功", dto, count);
+		List dto = Page(rewrite_ForNearShop.getStartNum(), rewrite_ForNearShop.getPageSize(), merchantdto.size(), merchantdto);
+		return Result.suc("成功", dto, merchantdto.size());
 	}
 
 	// 分页倒叙查询商家
@@ -264,6 +267,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		return Result.suc("成功");
 	}
 	
+	//根据2个字段排序
 	public static void ListSort(List<MerchantDTO> list){
 		Collections.sort(list,new Comparator<MerchantDTO>() {
 			@Override
@@ -290,7 +294,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		});
 	}
 	
-	public static List Page(Integer pageNum,Integer pageSize,Integer sum,List T) {
+	//逻辑分页
+	public static List Page(Integer pageNum,Integer pageSize,Integer sum, List T) {
 		int pageNo=pageNum*pageSize;
 		if(pageNo+pageSize>sum) {
 			T=T.subList(pageNo, sum);

@@ -159,8 +159,16 @@
         </loadData>
     </changeSet>
 
-    <changeSet id="20190609231025-1-relations" author="jhipster">
-
+    <changeSet id="20191106152125relations" author="jhipster">
+		<addColumn tableName="merchant">
+			<column type="string" name="business_tag"></column>
+		</addColumn>
+		<addColumn tableName="merchant">
+			<column type="numeric" name="audit"></column>
+		</addColumn>
+		<addColumn tableName="merchant">
+			<column type="string" name="reason"></column>
+		</addColumn>
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>
