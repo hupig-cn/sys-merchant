@@ -1,0 +1,40 @@
+{
+    "name": "ManageOrg",
+    "fields": [
+        {
+            "fieldName": "pid",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "csort",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "ctime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "desc",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191107055505",
+    "entityTableName": "manage_org",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "merchant",
+    "applications": "*",
+    "microserviceName": "merchant"
+}

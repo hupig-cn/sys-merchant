@@ -17,6 +17,9 @@
     <include file="config/liquibase/changelog/20190609231028_added_entity_Dishestype.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190609231029_added_entity_Shoplocation.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190609231030_added_entity_Dishesorder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191107055503_added_entity_ManageUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191107055504_added_entity_ManageMenus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191107055505_added_entity_ManageOrg.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

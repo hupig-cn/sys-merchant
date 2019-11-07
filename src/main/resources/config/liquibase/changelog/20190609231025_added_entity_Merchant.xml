@@ -161,13 +161,13 @@
 
     <changeSet id="20191106152125relations" author="jhipster">
 		<addColumn tableName="merchant">
-			<column type="string" name="business_tag"></column>
+			<column type="varchar(255)" name="business_tag"></column>
 		</addColumn>
 		<addColumn tableName="merchant">
-			<column type="numeric" name="audit"></column>
+			<column type="integer" name="audit"></column>
 		</addColumn>
 		<addColumn tableName="merchant">
-			<column type="string" name="reason"></column>
+			<column type="varchar(255)" name="reason"></column>
 		</addColumn>
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

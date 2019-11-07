@@ -1,0 +1,48 @@
+{
+    "name": "ManageMenus",
+    "fields": [
+        {
+            "fieldName": "pid",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "icon",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "href",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "csort",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "notice",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "target",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191107055504",
+    "entityTableName": "manage_menus",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "merchant",
+    "applications": "*",
+    "microserviceName": "merchant"
+}
