@@ -28,9 +28,10 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
     List<Merchant>  findNearbyMerchantAndHot(BigDecimal longitude,BigDecimal latitude,String state,int fromIndex,int pageSize);
 
     //名字模糊查询商户
-    @Query(value = "select id,userid,merchantphoto,name,businessid,state,address,province,city,county,longitude,latitude,concession,rebate," + 
-    		"buslicenseimage,jhi_show,creditcode,weight,creator,createdate,modifier,modifierdate,modifiernum,logicdelete,other " + 
-    		"from merchant where name like %?1% and  province in (select pname FROM basic.area where name like %?2% )",nativeQuery = true)
+    @Query(value = "select m.id,m.userid,merchantphoto,m.name,businessid,m.state,m.address,m.province,m.city,m.county,longitude,latitude,concession,rebate," + 
+    		"    buslicenseimage,jhi_show,creditcode,weight,m.creator,m.createdate,m.modifier,m.modifierdate,m.modifiernum,m.logicdelete,m.other,u.phone" + 
+    		"    from merchant  m LEFT JOIN basic.linkuser u on u.userid= m.userid " + 
+    		"where m.name like %?1% and  m.province in (select gname FROM basic.area where name like %?2% )",nativeQuery = true)
     List<Merchant> findByNameLike(String name,String city);
    
     @Query(value = "select count(*) " + 
