@@ -212,7 +212,6 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 			rewrite_AdminMerchantDTO.setLogicdelete(x.isLogicdelete());
 			rewrite_AdminMerchantDTO.setOther(x.getOther());
 			rewrite_AdminMerchantDTO.setDistance(disance);
-			rewrite_AdminMerchantDTO.setPhone(x.getPhone());
 			
 			merchantdto.add(rewrite_AdminMerchantDTO);
 		});
