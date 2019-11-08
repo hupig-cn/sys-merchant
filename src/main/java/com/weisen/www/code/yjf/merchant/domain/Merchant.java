@@ -99,6 +99,9 @@ public class Merchant implements Serializable {
 
     @Column(name = "other")
     private String other;
+    
+    @Column(name = "phone")
+    private String phone;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -422,6 +425,14 @@ public class Merchant implements Serializable {
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
+    public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -433,7 +444,7 @@ public class Merchant implements Serializable {
         return id != null && id.equals(((Merchant) o).id);
     }
 
-    @Override
+	@Override
     public int hashCode() {
         return 31;
     }

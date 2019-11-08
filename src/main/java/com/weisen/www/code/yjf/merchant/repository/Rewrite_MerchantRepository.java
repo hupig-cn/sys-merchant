@@ -33,9 +33,9 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
     		"    from merchant  m LEFT JOIN basic.linkuser u on u.userid= m.userid " + 
     		"where m.name like %?1% and  m.province in (select gname FROM basic.area where name like %?2% )",nativeQuery = true)
     List<Merchant> findByNameLike(String name,String city);
-   
+    
     @Query(value = "select count(*) " + 
-    		"from merchant where name like %?1% and province in (select pname FROM basic.area where name like %?2% ) ",nativeQuery = true)
+    		"from merchant  m LEFT JOIN basic.linkuser u on u.userid= m.userid where m.name like %?1% and m.province in (select gname FROM basic.area where name like %?2% ) ",nativeQuery = true)
     Integer findByNameLikeCount(String name,String city);
 
     Merchant findByUserid(String userid);

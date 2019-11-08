@@ -60,9 +60,22 @@ public class MerchantDTO implements Serializable {
     private String other;
     
     private double distance;
+    
+    private String phone;
+    
+    public String getPhone() {
+		return phone;
+	}
 
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public Long getId() {
+	public Boolean getLogicdelete() {
+		return logicdelete;
+	}
+
+	public Long getId() {
         return id;
     }
 

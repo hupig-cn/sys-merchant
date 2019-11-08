@@ -179,7 +179,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		List<MerchantDTO> merchantdto = new ArrayList<MerchantDTO>();
 		list.forEach(x -> {
 			MerchantDTO rewrite_AdminMerchantDTO = new MerchantDTO();
-			double disance = LocationUtils.getDistance((rewrite_ForNearShop.getLongitude()).doubleValue(),
+			double disance = LocationUtils.getDistance((rewrite_ForNearShop.getLongitude()).doubleValue(), 
 					(rewrite_ForNearShop.getLatitude()).doubleValue(), (x.getLongitude()).doubleValue(),
 					(x.getLatitude().doubleValue()));
 //			if(disance>500000) {
@@ -212,6 +212,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 			rewrite_AdminMerchantDTO.setLogicdelete(x.isLogicdelete());
 			rewrite_AdminMerchantDTO.setOther(x.getOther());
 			rewrite_AdminMerchantDTO.setDistance(disance);
+			rewrite_AdminMerchantDTO.setPhone(x.getPhone());
+			
 			merchantdto.add(rewrite_AdminMerchantDTO);
 		});
 		if (rewrite_ForNearShop.getType() == 1) {
@@ -226,6 +228,11 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		}
 		List dto = Page(rewrite_ForNearShop.getStartNum(), rewrite_ForNearShop.getPageSize(), merchantdto.size(), merchantdto);
 		return Result.suc("成功", dto, merchantdto.size());
+	}
+
+	private void findAll1() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// 分页倒叙查询商家
