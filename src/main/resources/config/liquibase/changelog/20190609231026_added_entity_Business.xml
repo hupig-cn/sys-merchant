@@ -84,7 +84,12 @@
         </loadData>
     </changeSet>
 
-    <changeSet id="20191107145300-relations" author="jhipster">
+	<changeSet id="20190609231026-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    
+    <changeSet id="20191107145300-addColumn" author="jhipster">
 		<addColumn tableName="business">
 			<column name="csort" type="integer"></column>
 		</addColumn>
@@ -94,7 +99,6 @@
 		<addColumn tableName="business">
 			<column name="level" type="integer"></column>
 		</addColumn>
-		
     </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    
 </databaseChangeLog>
