@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long> {
@@ -50,4 +51,7 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
 
     @Query(value = "select count(*) from merchant where (?1 is null or userid = ?1) and (?2 is null or name = ?2) and (?3 is null or state = ?3)" ,nativeQuery = true)
     Long countAdmin(String userid,String name,String type);
+    
+    @Query(value = " select m.*,u.phone from merchant m LEFT join basic.linkuser u on u.userid=m.userid where m.userid = ?1 ", nativeQuery = true)
+    Map<String,Object> findFirstByUseridAndUserdeails(String userid);
 }

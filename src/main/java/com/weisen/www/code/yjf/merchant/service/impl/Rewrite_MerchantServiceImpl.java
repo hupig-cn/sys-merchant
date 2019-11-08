@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.weisen.www.code.yjf.merchant.web.rest.SensitiveWord;
@@ -287,6 +288,12 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		return Result.suc("成功");
 	}
 
+	//查询商铺消息 和用户信息
+	@Override
+	public Result findMyShopAndUserdeail(Long userid) {
+		Map<String,Object> merchant = rewrite_MerchantRepository.findFirstByUseridAndUserdeails(userid.toString());
+		return Result.suc("成功",merchant);
+	}
 	
 	//根据2个字段排序
 	public static void ListSort(List<MerchantDTO> list) {
@@ -325,5 +332,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		}
 		return T;
 	}
+
+
 
 }
