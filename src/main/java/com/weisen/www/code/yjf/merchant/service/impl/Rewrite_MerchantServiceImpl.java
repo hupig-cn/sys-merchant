@@ -332,7 +332,11 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 	public static List Page(Integer pageNum, Integer pageSize, Integer sum, List T) {
 		int pageNo = pageNum * pageSize;
 		if (pageNo + pageSize > sum) {
-			T = T.subList(pageNo, sum);
+			if (pageNo > sum) {
+				T = null;
+			} else {
+				T = T.subList(pageNo, sum);
+			}
 		} else {
 			T = T.subList(pageNo, pageNo + pageSize);
 		}
