@@ -150,4 +150,12 @@ public class Rewrite_MerchantResource {
 		Result merchantDTO = rewrite_MerchantService.findMyShopAndUserdeail(userid);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(merchantDTO));
 	}
+	
+	@GetMapping("/public/ObtainMerchantUserIdI2/{userid}")
+	@ApiOperation("根据用户ID查询用户的商户信息和用户信息")
+	public ResponseEntity<Result> getMerchantUserIdii(@PathVariable Long userid) {
+		log.debug("REST request to get Merchant : {}", userid);
+		Result merchantDTO = rewrite_MerchantService.findMyShopAndUserdeail(userid);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(merchantDTO));
+	}
 }
