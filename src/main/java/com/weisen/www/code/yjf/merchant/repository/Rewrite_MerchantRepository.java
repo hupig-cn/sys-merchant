@@ -31,7 +31,7 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
     @Query(value = "select m.id,m.userid,merchantphoto,m.name,businessid,m.state,m.address,m.province,m.city,m.county,longitude,latitude,concession,rebate," + 
     		"    buslicenseimage,jhi_show,creditcode,weight,m.creator,m.createdate,m.modifier,m.modifierdate,m.modifiernum,m.logicdelete,m.other,u.phone" + 
     		"    from merchant  m LEFT JOIN basic.linkuser u on u.userid= m.userid " + 
-    		"where m.name like %1?%  and m.state != '待审核'  and  m.province = ?2 or m.city = ?2  and   m.state != '待审核''",nativeQuery = true)
+    		"where m.name like %?1%  and m.state != '待审核'  and  m.province = ?2 or m.city = ?2  and  m.state != '待审核' ",nativeQuery = true)
     List<Merchant> findByNameLike(String name,String city);
     
     @Query(value = "select count(*) " + 
