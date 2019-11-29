@@ -70,6 +70,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		merchant.setBuslicenseimage(merchantDTO.getBuslicenseimage());
 		merchant.setCreditcode(merchantDTO.getCreditcode());
 		merchant.setWeight("0");
+		// 新加一个营业时间字段
+		merchant.setOther(merchantDTO.getOther());
 		rewrite_MerchantRepository.save(merchant);
 		merchant.setCreator(merchant.getId().toString());
 		return merchant.getId().toString();
@@ -101,6 +103,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 			merchant.setModifierdate(TimeUtil.getDate());
 			merchant.setCreditcode(merchantDTO.getCreditcode());
 			merchant.setConcession(merchantDTO.getConcession());
+			// 新加一个营业时间的字段
+			merchant.setOther(merchantDTO.getOther());
 			// 让利比例5%，10%，15%
 			// 返积分比例15%，30%，50%
 			if (merchantDTO.getConcession().equals(5)) {
@@ -179,7 +183,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		List<MerchantDTO> merchantdto = new ArrayList<MerchantDTO>();
 		list.forEach(x -> {
 			MerchantDTO rewrite_AdminMerchantDTO = new MerchantDTO();
-			double disance = LocationUtils.getDistance((rewrite_ForNearShop.getLongitude()).doubleValue(), 
+			double disance = LocationUtils.getDistance((rewrite_ForNearShop.getLongitude()).doubleValue(),
 					(rewrite_ForNearShop.getLatitude()).doubleValue(), (x.getLongitude()).doubleValue(),
 					(x.getLatitude().doubleValue()));
 //			if(disance>500000) {
@@ -212,7 +216,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 			rewrite_AdminMerchantDTO.setLogicdelete(x.isLogicdelete());
 			rewrite_AdminMerchantDTO.setOther(x.getOther());
 			rewrite_AdminMerchantDTO.setDistance(disance);
-			
+
 			merchantdto.add(rewrite_AdminMerchantDTO);
 		});
 		if (rewrite_ForNearShop.getType() == 1) {
@@ -225,13 +229,14 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 				}
 			});// 按照距离排序
 		}
-		List dto = Page(rewrite_ForNearShop.getStartNum(), rewrite_ForNearShop.getPageSize(), merchantdto.size(), merchantdto);
+		List dto = Page(rewrite_ForNearShop.getStartNum(), rewrite_ForNearShop.getPageSize(), merchantdto.size(),
+				merchantdto);
 		return Result.suc("成功", dto, merchantdto.size());
 	}
 
 	private void findAll1() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	// 分页倒叙查询商家
@@ -294,14 +299,14 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		return Result.suc("成功");
 	}
 
-	//查询商铺消息 和用户信息
+	// 查询商铺消息 和用户信息
 	@Override
 	public Result findMyShopAndUserdeail(Long userid) {
-		Map<String,Object> merchant = rewrite_MerchantRepository.findFirstByUseridAndUserdeails(userid.toString());
-		return Result.suc("成功",merchant);
+		Map<String, Object> merchant = rewrite_MerchantRepository.findFirstByUseridAndUserdeails(userid.toString());
+		return Result.suc("成功", merchant);
 	}
-	
-	//根据2个字段排序
+
+	// 根据2个字段排序
 	public static void ListSort(List<MerchantDTO> list) {
 		Collections.sort(list, new Comparator<MerchantDTO>() {
 
@@ -338,7 +343,5 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		}
 		return T;
 	}
-
-
 
 }

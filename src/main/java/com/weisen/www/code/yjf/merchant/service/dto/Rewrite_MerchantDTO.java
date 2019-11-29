@@ -37,6 +37,9 @@ public class Rewrite_MerchantDTO implements Serializable {
 
 	private Boolean logicdelete;
 
+	@ApiModelProperty(value = "商家店铺营业时间")
+	private String other;
+
 	public String getUserid() {
 		return userid;
 	}
@@ -139,6 +142,14 @@ public class Rewrite_MerchantDTO implements Serializable {
 
 	public void setLogicdelete(Boolean logicdelete) {
 		this.logicdelete = logicdelete;
+	}
+
+	public String getOther() {
+		return other;
+	}
+
+	public void setOther(String other) {
+		this.other = other;
 	}
 
 }
