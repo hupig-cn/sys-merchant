@@ -178,8 +178,8 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 		int fromIndex = rewrite_ForNearShop.getStartNum() * rewrite_ForNearShop.getPageSize(); // 起始索引
 		List<Merchant> list = rewrite_MerchantRepository.findByNameLike(rewrite_ForNearShop.getName(),
 				rewrite_ForNearShop.getCity());
-		Integer count = rewrite_MerchantRepository.findByNameLikeCount(rewrite_ForNearShop.getName(),
-				rewrite_ForNearShop.getCity());
+//		Integer count = rewrite_MerchantRepository.findByNameLikeCount(rewrite_ForNearShop.getName(),
+//				rewrite_ForNearShop.getCity());
 		List<MerchantDTO> merchantdto = new ArrayList<MerchantDTO>();
 		list.forEach(x -> {
 			MerchantDTO rewrite_AdminMerchantDTO = new MerchantDTO();
@@ -337,7 +337,11 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 	public static List Page(Integer pageNum, Integer pageSize, Integer sum, List T) {
 		int pageNo = pageNum * pageSize;
 		if (pageNo + pageSize > sum) {
-			T = T.subList(pageNo, sum);
+			if (pageNo > sum) {
+				T = null;
+			} else {
+				T = T.subList(pageNo, sum);
+			}
 		} else {
 			T = T.subList(pageNo, pageNo + pageSize);
 		}
