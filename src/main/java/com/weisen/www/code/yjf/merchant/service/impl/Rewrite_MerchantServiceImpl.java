@@ -303,6 +303,9 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 	@Override
 	public Result findMyShopAndUserdeail(Long userid) {
 		Map<String, Object> merchant = rewrite_MerchantRepository.findFirstByUseridAndUserdeails(userid.toString());
+		if(merchant.isEmpty()) {
+			return Result.suc("成功", null);
+		}
 		return Result.suc("成功", merchant);
 	}
 
