@@ -93,4 +93,10 @@
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    
+    <changeSet id="20191216175800-addColumn" author="jhipster">
+		<addColumn tableName="dishestype">
+			<column type="integer" name="typeorder"></column>
+		</addColumn>
+    </changeSet>
 </databaseChangeLog>

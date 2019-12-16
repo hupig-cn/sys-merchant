@@ -29,9 +29,18 @@ public class DishestypeDTO implements Serializable {
     private Boolean logicdelete;
 
     private String other;
+    
+    private Integer typeorder;
 
+    public Integer getTypeorder() {
+		return typeorder;
+	}
 
-    public Long getId() {
+	public void setTypeorder(Integer typeorder) {
+		this.typeorder = typeorder;
+	}
+
+	public Long getId() {
         return id;
     }
 

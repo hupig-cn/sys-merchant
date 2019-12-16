@@ -56,8 +56,20 @@ public class Dishestype implements Serializable {
 
     @Column(name = "other")
     private String other;
+    
+    @Column(name = "typeorder")
+    private String typeorder;
+    
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public String getTypeorder() {
+		return typeorder;
+	}
+
+	public void setTypeorder(String typeorder) {
+		this.typeorder = typeorder;
+	}
+
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
