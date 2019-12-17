@@ -55,4 +55,6 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
     
     @Query(value = " select m.*,u.phone from merchant m LEFT join basic.linkuser u on u.userid=m.userid where m.userid = ?1 ", nativeQuery = true)
     Map<String,Object> findFirstByUseridAndUserdeails(String userid);
+    
+    Merchant findMerchantById(Long id);
 }
