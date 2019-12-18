@@ -7,4 +7,6 @@ public interface Rewrite_OrderingMealsService {
 	Result getMerchantNameAndData(String id);
 
     Result merchantDishestype(String id);
+
+	Result getMerchantType(String id);
 }

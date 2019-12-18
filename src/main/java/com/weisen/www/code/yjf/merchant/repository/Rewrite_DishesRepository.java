@@ -16,6 +16,9 @@ public interface Rewrite_DishesRepository extends JpaRepository<Dishes, Long> {
     // state = 0 草稿  1 上架   2下架
     @Query(value = "from Dishes where merchantid = ?1 and state = ?2")
     List<Dishes> getDishesByMerchantidAndState(String merchantId,String state);
+    
+    @Query(value = "select * from Dishes where merchantid = ?1 and state = 1 and dishestypeid = ?2 and logicdelete = 1",nativeQuery = true)
+    List<Dishes> findByMerchantidAndDishestypeid(String merchantid,String dishestypeid);
 
 
 }
