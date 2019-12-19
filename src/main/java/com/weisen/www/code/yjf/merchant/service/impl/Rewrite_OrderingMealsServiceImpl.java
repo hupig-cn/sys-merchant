@@ -63,10 +63,11 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             if (state.equals("0")){
                 continue;
             }
-
+            List<Dishes> as = dishesRepository.findByMerchantidAndDishestypeid(id, dishestype.getId() + "");
             Rewrite_typeDTO rewrite_typeDTO = new Rewrite_typeDTO();
             rewrite_typeDTO.setName(name);
             rewrite_typeDTO.setId(a+"");
+            rewrite_typeDTO.setDishesList(as);
             ++a;
             list.add(rewrite_typeDTO);
         }
@@ -99,7 +100,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 							dishesAndTypeDTOList.add(dishesAndTypeDTO);
 
 						}
-						
+
 					}
 				}
 			}
