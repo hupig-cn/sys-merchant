@@ -69,6 +69,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
         List<Rewrite_typeDTO> list = new ArrayList<>();
         for (int i = 0; i < allByMerchantid.size(); i++) {
             Dishestype dishestype = allByMerchantid.get(i);
+            Long distyid = dishestype.getId();
             String name = dishestype.getName();
             String state = dishestype.getState();
             if (state.equals("0")) {
@@ -86,6 +87,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
                 rewrite_ordertianjiaDTO.setCainame(dishes.getName());
                 rewrite_ordertianjiaDTO.setCaiprice(dishes.getPrice());
                 rewrite_ordertianjiaDTO.setCainum("0");
+                rewrite_ordertianjiaDTO.setUrl("http://app.yuanscore.com:8083/services/basic/api/public/getFiles/" + dishes.getImage());
                 typelist.add(rewrite_ordertianjiaDTO);
             }
 
@@ -105,6 +107,8 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 
                 }
             }
+            rewrite_typeDTO.setId(distyid+"");
+            rewrite_typeDTO.setList(typelist);
             list.add(rewrite_typeDTO);
 
         }
