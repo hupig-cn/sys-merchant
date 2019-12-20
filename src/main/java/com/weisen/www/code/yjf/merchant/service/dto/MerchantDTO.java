@@ -58,11 +58,11 @@ public class MerchantDTO implements Serializable {
     private Boolean logicdelete;
 
     private String other;
-    
+
     private double distance;
-    
+
     private String phone;
-    
+
     public String getPhone() {
 		return phone;
 	}

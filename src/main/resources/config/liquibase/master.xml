@@ -20,7 +20,11 @@
     <include file="config/liquibase/changelog/20191107055503_added_entity_ManageUser.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191107055504_added_entity_ManageMenus.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20191107055505_added_entity_ManageOrg.xml" relativeToChangelogFile="false"/>
+<<<<<<< HEAD
     <include file="config/liquibase/changelog/20191219022738_added_entity_Dishesbuy.xml" relativeToChangelogFile="false"/>
+=======
+    <include file="config/liquibase/changelog/20191219091905_added_entity_DishesShop.xml" relativeToChangelogFile="false"/>
+>>>>>>> branch 'code' of git@github.com:hupig-cn/sys-merchant.git
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
