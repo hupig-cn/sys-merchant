@@ -172,7 +172,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             dishesShop.setPrice(ds.getPrice());
             dishesShop.setCreateDate(TimeUtil.getDate());
             dishesShopRepository.save(dishesShop);
-            return Result.suc("", ds.getNum());
+            return Result.suc("", dishesShop.getNum());
         } else if (num == 0) {
             dishesShopRepository.delete(d);
             return Result.suc("", 0);
@@ -227,7 +227,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             ros.setNum(num+"");
             ros.setPrice(price);
             ros.setSum(num*Double.valueOf(price)+"");
-            c.add(ros);
+            c.add(ros);	
         }
         ro.setList(c);
         String name = merchantData.getName();
@@ -236,9 +236,8 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
         ro.setOrther(other);
 
         Result result = inAllOrders(iocId, merchatid);
-        Map<String,Double> data = (Map<String, Double>) result.getData();
-        Double aDouble = data.get("sum");
-        ro.setZongsum(aDouble+"");
+        String data = result.getMessage();
+        ro.setZongsum(data);
         return Result.suc("查询成功",ro);
     }
 
@@ -259,9 +258,9 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             sum = sum.add(numB.multiply(priceB));
             
         }
-        return Result.suc("查询成功!",sum);
+        return Result.suc(sum+"");
         }
-		return Result.suc("查询成功!");
+		return Result.suc("0");
     }
 
 
