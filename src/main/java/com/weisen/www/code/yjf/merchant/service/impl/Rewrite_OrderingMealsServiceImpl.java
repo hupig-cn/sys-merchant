@@ -17,6 +17,7 @@ import com.weisen.www.code.yjf.merchant.service.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -175,7 +176,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             dishesShop.setPrice(ds.getPrice());
             dishesShop.setCreateDate(TimeUtil.getDate());
             dishesShopRepository.save(dishesShop);
-            return Result.suc("", ds.getNum());
+            return Result.suc("", dishesShop.getNum());
         } else if (num == 0) {
             dishesShopRepository.delete(d);
             return Result.suc("", 0);
@@ -230,7 +231,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             ros.setNum(num+"");
             ros.setPrice(price);
             ros.setSum(num*Double.valueOf(price)+"");
-            c.add(ros);
+            c.add(ros);	
         }
         ro.setList(c);
         String name = merchantData.getName();
@@ -239,9 +240,8 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
         ro.setOrther(other);
 
         Result result = inAllOrders(iocId, merchatid);
-        Map<String,Double> data = (Map<String, Double>) result.getData();
-        Double aDouble = data.get("sum");
-        ro.setZongsum(aDouble+"");
+        String data = result.getMessage();
+        ro.setZongsum(data);
         return Result.suc("查询成功",ro);
     }
 
@@ -251,17 +251,20 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
     @Override
     public Result inAllOrders(String iocId, String merchatid) {
         List<DishesShop> ds = dishesShopRepository.findDishesShopByMerchatidAndIoc(Integer.valueOf(merchatid), iocId);
-        Double sum = 0.0;
-        if (ds.size() == 0){
-            return Result.suc("查询成功",sum);
-        }
+        if (!ds.isEmpty()) {
+        BigDecimal sum = new BigDecimal(0).setScale(2, BigDecimal.ROUND_DOWN);
         for (int i = 0; i < ds.size(); i++) {
             DishesShop dishesShop = ds.get(i);
             Integer num = dishesShop.getNum();
             String price = dishesShop.getPrice();
-            sum = sum + num * Double.valueOf(price);
+            BigDecimal numB = new BigDecimal(num);
+            BigDecimal priceB = new BigDecimal(price).setScale(2, BigDecimal.ROUND_DOWN);
+            sum = sum.add(numB.multiply(priceB));
+            
         }
-        return Result.suc("查询成功",sum);
+        return Result.suc(sum+"");
+        }
+		return Result.suc("0");
     }
 
 
