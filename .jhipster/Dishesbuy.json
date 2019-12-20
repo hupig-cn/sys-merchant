@@ -1,0 +1,72 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "merchant",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "merchantid",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "userid",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "dishesid",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "count",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "state",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "creator",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "createtime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "modifier",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "modifinum",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "modifitime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "logicDelete",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "other",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "orderid",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20191219022738",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "dishesbuy",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no",
+    "microserviceName": "merchant"
+}

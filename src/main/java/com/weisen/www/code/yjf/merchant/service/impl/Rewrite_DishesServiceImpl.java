@@ -55,7 +55,8 @@ public class Rewrite_DishesServiceImpl implements Rewrite_DishesService {
         Merchant merchant = optional.get();
         List<Dishestype> dishestypeListByCreator = dishestypeRepository.getDishestypeByCreator(merchant.getCreator());
         for (Dishestype dishestype : dishestypeListByCreator) {
-            List<DishesDTO> dishesByType = dishesRepository.getDishesByType(dishestype.getId()).stream().map(dishesMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+            List<DishesDTO> dishesByType = dishesRepository.getDishesByType(dishestype.getId().toString())
+            		.stream().map(dishesMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
             dishesMap.put(dishestype.getName(), dishesByType);
         }
         return ResponseEntity.ok(dishesMap);

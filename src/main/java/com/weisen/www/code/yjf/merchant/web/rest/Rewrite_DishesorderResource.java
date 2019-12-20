@@ -1,5 +1,7 @@
 package com.weisen.www.code.yjf.merchant.web.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.weisen.www.code.yjf.merchant.service.Rewrite_DishesorderService;
+import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_DishesbuyDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.Rewrite_OrderDTO;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 
@@ -59,4 +63,19 @@ public class Rewrite_DishesorderResource {
     public String getTest(@PathVariable String name) {
         return "调用了MERCHANT的查询接口";
     }
+    
+    @PostMapping("/getMenu")
+    @ApiOperation("根据当前用户当前商店查询历史点单")
+    public ResponseEntity<Result> getMenu (@RequestParam Long userid,@RequestParam Long merchantid) {
+        Result result = dishesorderService.getMenu(userid, merchantid);
+        return ResponseEntity.ok(result);
+    }
+    
+    @PostMapping("/updateMenu")
+    @ApiOperation("根据当前用户当前商店查询历史点单")
+    public ResponseEntity<Result> updateMenu (@RequestBody Rewrite_DishesbuyDTO dishesbuyDTO) {
+        Result result = dishesorderService.updateMenu(dishesbuyDTO);
+        return ResponseEntity.ok(result);
+    }
+    
 }
