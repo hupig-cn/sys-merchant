@@ -1,0 +1,40 @@
+{
+    "name": "DishesShop",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ioc",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "filesid",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "num",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "other",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createDate",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20191219091905",
+    "entityTableName": "dishes_shop",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "merchant",
+    "applications": "*",
+    "microserviceName": "merchant"
+}
