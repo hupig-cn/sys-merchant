@@ -16,6 +16,7 @@ import com.weisen.www.code.yjf.merchant.service.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -240,17 +241,20 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
     @Override
     public Result inAllOrders(String iocId, String merchatid) {
         List<DishesShop> ds = dishesShopRepository.findDishesShopByMerchatidAndIoc(Integer.valueOf(merchatid), iocId);
-        Double sum = 0.0;
-        if (ds.size() == 0){
-            return Result.suc("查询成功",sum);
-        }
+        if (!ds.isEmpty()) {
+        BigDecimal sum = new BigDecimal(0).setScale(2, BigDecimal.ROUND_DOWN);
         for (int i = 0; i < ds.size(); i++) {
             DishesShop dishesShop = ds.get(i);
             Integer num = dishesShop.getNum();
             String price = dishesShop.getPrice();
-            sum = sum + num * Double.valueOf(price);
+            BigDecimal numB = new BigDecimal(num);
+            BigDecimal priceB = new BigDecimal(price).setScale(2, BigDecimal.ROUND_DOWN);
+            sum = sum.add(numB.multiply(priceB));
+            
         }
-        return Result.suc("查询成功",sum);
+        return Result.suc("查询成功!",sum);
+        }
+		return Result.suc("查询成功!");
     }
 
 
