@@ -96,16 +96,18 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 
             } else {
                 for (int j = 0; j < cc.size(); j++) {
-                    DishesShop dishesShop = cc.get(i);
-                    String name1 = dishesShop.getName();
-                    for (int k = 0; k < typelist.size(); k++) {
-                        Rewrite_ordertianjiaDTO rewrite_ordertianjiaDTO = typelist.get(k);
-                        String oname = rewrite_ordertianjiaDTO.getCainame();
-                        if (oname.equals(name1)) {
-                            rewrite_ordertianjiaDTO.setCainum(dishesShop.getNum()+ "");
-                        }
-                    }
-
+                	
+						
+                		DishesShop dishesShop = cc.get(j);
+                		String name1 = dishesShop.getName();
+                		for (int k = 0; k < typelist.size(); k++) {
+                			Rewrite_ordertianjiaDTO rewrite_ordertianjiaDTO = typelist.get(k);
+                			String oname = rewrite_ordertianjiaDTO.getCainame();
+                			if (oname.equals(name1)) {
+                				rewrite_ordertianjiaDTO.setCainum(dishesShop.getNum()+ "");
+                			}
+                		}
+					
                 }
             }
             rewrite_typeDTO.setId(distyid+"");
