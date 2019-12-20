@@ -10,6 +10,7 @@ import com.weisen.www.code.yjf.merchant.service.Rewrite_OrderingMealsService;
 import com.weisen.www.code.yjf.merchant.service.dto.DishesAndTypeDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderShop2DTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderdishtDTO;
+import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_ordertianjiaDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_typeDTO;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import com.weisen.www.code.yjf.merchant.service.util.TimeUtil;
@@ -65,37 +66,43 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
         List<Dishestype> allByMerchantid = rewrite_dishestypeRepository.findAllByMerchantid(id);
         List<DishesShop> cc = dishesShopRepository.findDishesShopByMerchatidAndIoc(Integer.valueOf(id), iocid);
 
-
         List<Rewrite_typeDTO> list = new ArrayList<>();
         for (int i = 0; i < allByMerchantid.size(); i++) {
             Dishestype dishestype = allByMerchantid.get(i);
             String name = dishestype.getName();
             String state = dishestype.getState();
-            Integer num = 0;
             if (state.equals("0")) {
                 continue;
             }
             List<Dishes> as = dishesRepository.findByMerchantidAndDishestypeid(id, dishestype.getId() + "");
             Rewrite_typeDTO rewrite_typeDTO = new Rewrite_typeDTO();
             rewrite_typeDTO.setName(name);
+            List<Rewrite_ordertianjiaDTO> typelist = new ArrayList<>();
 
             for (int j = 0; j < as.size(); j++) {
-
-
+                Dishes dishes = as.get(j);
+                Rewrite_ordertianjiaDTO rewrite_ordertianjiaDTO = new Rewrite_ordertianjiaDTO();
+                rewrite_ordertianjiaDTO.setCaiid(dishes.getId());
+                rewrite_ordertianjiaDTO.setCainame(dishes.getName());
+                rewrite_ordertianjiaDTO.setCaiprice(dishes.getPrice());
+                rewrite_ordertianjiaDTO.setCainum("0");
+                typelist.add(rewrite_ordertianjiaDTO);
             }
 
             if (cc == null || cc.size() == 0) {
-
-                rewrite_typeDTO.setId(0 + "");
 
             } else {
                 for (int j = 0; j < cc.size(); j++) {
                     DishesShop dishesShop = cc.get(i);
                     String name1 = dishesShop.getName();
-                    if (name.equals(name1)) {
-                        num = dishesShop.getNum();
-                        rewrite_typeDTO.setId(num + "");
+                    for (int k = 0; k < typelist.size(); k++) {
+                        Rewrite_ordertianjiaDTO rewrite_ordertianjiaDTO = typelist.get(k);
+                        String oname = rewrite_ordertianjiaDTO.getCainame();
+                        if (oname.equals(name1)) {
+                            rewrite_ordertianjiaDTO.setCainum(dishesShop.getNum()+ "");
+                        }
                     }
+
                 }
             }
             list.add(rewrite_typeDTO);
