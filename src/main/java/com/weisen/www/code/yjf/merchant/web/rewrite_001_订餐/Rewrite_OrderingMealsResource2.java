@@ -48,6 +48,7 @@ public class Rewrite_OrderingMealsResource2 {
      * merchatid 商家id
      * name 商家食物
      * */
+    @CrossOrigin
     @PostMapping("/public/post/takingOrders")
     @ApiOperation("点餐")
     public ResponseEntity<Result> takingOrders(@RequestParam String iocId,
@@ -59,7 +60,7 @@ public class Rewrite_OrderingMealsResource2 {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
-
+    @CrossOrigin
     @PostMapping("/public/post/takingOrdersNum")
     @ApiOperation("重置菜的数量")
     public ResponseEntity<Result> takingOrdersNum(@RequestParam String iocId,
@@ -69,7 +70,7 @@ public class Rewrite_OrderingMealsResource2 {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
-
+    @CrossOrigin
     @PostMapping("/public/post/merchantOrders2")
     @ApiOperation("点了菜的详情")
     public ResponseEntity<Result> merchantOrders2(@RequestParam String iocId,
@@ -80,7 +81,7 @@ public class Rewrite_OrderingMealsResource2 {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
-
+    @CrossOrigin
     @PostMapping("/public/post/inAllOrders")
     @ApiOperation("总价")
     public ResponseEntity<Result> inAllOrders(@RequestParam String iocId,

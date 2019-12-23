@@ -66,7 +66,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
     public Result merchantDishestype(String id, String iocid) {
         List<Dishestype> allByMerchantid = rewrite_dishestypeRepository.findAllByMerchantid(id);
         List<DishesShop> cc = dishesShopRepository.findDishesShopByMerchatidAndIoc(Integer.valueOf(id), iocid);
-
+        Integer num = 0;
         List<Rewrite_typeDTO> list = new ArrayList<>();
         for (int i = 0; i < allByMerchantid.size(); i++) {
             Dishestype dishestype = allByMerchantid.get(i);
@@ -96,13 +96,15 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 
             } else {
                 for (int j = 0; j < cc.size(); j++) {
-                    DishesShop dishesShop = cc.get(i);
+                    DishesShop dishesShop = cc.get(j);
                     String name1 = dishesShop.getName();
                     for (int k = 0; k < typelist.size(); k++) {
                         Rewrite_ordertianjiaDTO rewrite_ordertianjiaDTO = typelist.get(k);
                         String oname = rewrite_ordertianjiaDTO.getCainame();
                         if (oname.equals(name1)) {
-                            rewrite_ordertianjiaDTO.setCainum(dishesShop.getNum()+ "");
+                            Integer num1 = dishesShop.getNum();
+                            rewrite_ordertianjiaDTO.setCainum(num1+"");
+                            num +=num1;
                         }
                     }
 
@@ -113,7 +115,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             list.add(rewrite_typeDTO);
 
         }
-        return Result.suc("查询成功", list);
+        return Result.suc("查询成功", list,num);
     }
 
     //根据商家id查找店铺菜单类型
@@ -231,7 +233,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             ros.setNum(num+"");
             ros.setPrice(price);
             ros.setSum(num*Double.valueOf(price)+"");
-            c.add(ros);	
+            c.add(ros);
         }
         ro.setList(c);
         String name = merchantData.getName();
@@ -251,20 +253,22 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
     @Override
     public Result inAllOrders(String iocId, String merchatid) {
         List<DishesShop> ds = dishesShopRepository.findDishesShopByMerchatidAndIoc(Integer.valueOf(merchatid), iocId);
+        Integer cainum = 0;
         if (!ds.isEmpty()) {
         BigDecimal sum = new BigDecimal(0).setScale(2, BigDecimal.ROUND_DOWN);
         for (int i = 0; i < ds.size(); i++) {
             DishesShop dishesShop = ds.get(i);
             Integer num = dishesShop.getNum();
+            cainum +=num;
             String price = dishesShop.getPrice();
             BigDecimal numB = new BigDecimal(num);
             BigDecimal priceB = new BigDecimal(price).setScale(2, BigDecimal.ROUND_DOWN);
             sum = sum.add(numB.multiply(priceB));
-            
+
         }
-        return Result.suc(sum+"");
+        return Result.suc(sum+"","",cainum);
         }
-		return Result.suc("0");
+		return Result.suc("0","",cainum);
     }
 
 
