@@ -107,7 +107,6 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
                             num +=num1;
                         }
                     }
-
                 }
             }
             rewrite_typeDTO.setId(distyid+"");
