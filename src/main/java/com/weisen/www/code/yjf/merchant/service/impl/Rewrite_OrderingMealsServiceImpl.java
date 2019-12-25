@@ -67,6 +67,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
         List<Dishestype> allByMerchantid = rewrite_dishestypeRepository.findAllByMerchantid(id);
         List<DishesShop> cc = dishesShopRepository.findDishesShopByMerchatidAndIoc(Integer.valueOf(id), iocid);
         Integer num = 0;
+        Integer caishu = 0;
         List<Rewrite_typeDTO> list = new ArrayList<>();
         for (int i = 0; i < allByMerchantid.size(); i++) {
             Dishestype dishestype = allByMerchantid.get(i);
@@ -80,6 +81,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             Rewrite_typeDTO rewrite_typeDTO = new Rewrite_typeDTO();
             rewrite_typeDTO.setName(name);
             List<Rewrite_ordertianjiaDTO> typelist = new ArrayList<>();
+            caishu+=as.size();
 
             for (int j = 0; j < as.size(); j++) {
                 Dishes dishes = as.get(j);
@@ -114,7 +116,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             list.add(rewrite_typeDTO);
 
         }
-        return Result.suc("查询成功", list,num);
+        return Result.suc("查询成功", list,caishu);
     }
 
     //根据商家id查找店铺菜单类型
