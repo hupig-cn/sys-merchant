@@ -18,4 +18,5 @@ public interface Rewrite_OrderingMealsService {
 
     Result inAllOrders(String iocId, String merchatid);
 
+    Result takingOrders2(Object chishi);
 }

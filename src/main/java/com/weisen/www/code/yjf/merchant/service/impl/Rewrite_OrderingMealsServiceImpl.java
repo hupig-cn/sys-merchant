@@ -270,5 +270,11 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		return Result.suc("0","",cainum);
     }
 
+    @Override
+    public Result takingOrders2(Object chishi) {
+        System.out.println(chishi.toString());
+        return Result.suc();
+    }
+
 
 }

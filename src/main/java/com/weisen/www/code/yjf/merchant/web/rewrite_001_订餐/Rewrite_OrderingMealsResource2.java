@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -57,6 +58,21 @@ public class Rewrite_OrderingMealsResource2 {
                                                @RequestParam String name) {
         Result result = orderingMealsService.takingOrders(iocId,num,merchatid,name);
         log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders",iocId+":"+num+":"+merchatid , result);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
+    /**
+     * iocid 餐位
+     * num 数量
+     * merchatid 商家id
+     * name 商家食物
+     * */
+    @CrossOrigin
+    @PostMapping("/public/post/takingOrders2")
+    @ApiOperation("new点餐")
+    public ResponseEntity<Result> takingOrders(@RequestParam Object chishi) {
+        Result result = orderingMealsService.takingOrders2(chishi);
+        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders","" , result);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
