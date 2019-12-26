@@ -70,9 +70,9 @@ public class Rewrite_OrderingMealsResource2 {
     @CrossOrigin
     @PostMapping("/public/post/takingOrders2")
     @ApiOperation("new点餐")
-    public ResponseEntity<Result> takingOrders(@RequestParam Object chishi) {
+    public ResponseEntity<Result> takingOrders(@RequestParam List<Object> chishi) {
         Result result = orderingMealsService.takingOrders2(chishi);
-        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders","" , result);
+        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders",chishi , result);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 

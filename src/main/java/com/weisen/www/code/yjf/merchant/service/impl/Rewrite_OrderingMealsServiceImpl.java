@@ -8,10 +8,7 @@ import com.weisen.www.code.yjf.merchant.domain.Merchant;
 import com.weisen.www.code.yjf.merchant.repository.*;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_OrderingMealsService;
 import com.weisen.www.code.yjf.merchant.service.dto.DishesAndTypeDTO;
-import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderShop2DTO;
-import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderdishtDTO;
-import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_ordertianjiaDTO;
-import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_typeDTO;
+import com.weisen.www.code.yjf.merchant.service.dto.submit.*;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import com.weisen.www.code.yjf.merchant.service.util.TimeUtil;
 import org.springframework.stereotype.Service;
@@ -273,9 +270,12 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
     }
 
     @Override
-    public Result takingOrders2(Object chishi) {
-        System.out.println(chishi.toString());
-        return Result.suc();
+    public Result takingOrders2(List<Object> chishi) {
+        for (int i = 0; i < chishi.size(); i++) {
+            Object o = chishi.get(i);
+            System.out.println(o.toString());
+        }
+        return Result.fail();
     }
 
 
