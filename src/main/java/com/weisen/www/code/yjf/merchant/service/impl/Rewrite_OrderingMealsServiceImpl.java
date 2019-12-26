@@ -1,16 +1,14 @@
 package com.weisen.www.code.yjf.merchant.service.impl;
 import com.google.common.collect.Lists;
 
-import com.weisen.www.code.yjf.merchant.domain.Dishes;
-import com.weisen.www.code.yjf.merchant.domain.DishesShop;
-import com.weisen.www.code.yjf.merchant.domain.Dishestype;
-import com.weisen.www.code.yjf.merchant.domain.Merchant;
+import com.weisen.www.code.yjf.merchant.domain.*;
 import com.weisen.www.code.yjf.merchant.repository.*;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_OrderingMealsService;
 import com.weisen.www.code.yjf.merchant.service.dto.DishesAndTypeDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.*;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import com.weisen.www.code.yjf.merchant.service.util.TimeUtil;
+import org.aspectj.weaver.ArrayReferenceType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -270,12 +268,37 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
     }
 
     @Override
-    public Result takingOrders2(List<Object> chishi) {
+    public Result takingOrders2(Rewrite_orderShop2DTO4 list) {
+        //点菜 商家id 座位id 用户 点的菜品
+        String ioc = list.getIoc();
+        List<Rewrite_orderShop2DTO3> chishi = list.getChishi();
+        String mid = list.getMid();
+        String sum = list.getSum();
+        String userid = list.getUserid();
         for (int i = 0; i < chishi.size(); i++) {
-            Object o = chishi.get(i);
-            System.out.println(o.toString());
+            Rewrite_orderShop2DTO3 rewrite_orderShop2DTO3 = chishi.get(i);
+            rewrite_orderShop2DTO3.getCaiid();
+            String cainame = rewrite_orderShop2DTO3.getCainame();
+            String caiprice = rewrite_orderShop2DTO3.getCaiprice();
+            Integer cainum = rewrite_orderShop2DTO3.getCainum();
+            String url = rewrite_orderShop2DTO3.getUrl();
+            Dishesorder dishesorder = new Dishesorder();
+
+            dishesorder.setBigorder(TimeUtil.getDate()+"::"+mid+"::"+ioc);
+            dishesorder.setMerchantid(mid);
+            dishesorder.setLocation(ioc);
+            dishesorder.setName(cainame);
+            dishesorder.setState("0");//0-已付款 正在做
+            dishesorder.setCreator(userid);
+            dishesorder.setCreatedate(TimeUtil.getDate());//现在创建的
+            dishesorder.setNum(Integer.valueOf(cainum));
+            dishesorder.setPrice(caiprice);
+            dishesorder.setNumprice(cainum*Double.parseDouble(caiprice)+"");
+            dishesorder.setOther(url);
+            dishesorder.setSum(sum);
+            rewrite_dishesorderRepository.save(dishesorder);
         }
-        return Result.fail();
+        return Result.suc("下单成功");
     }
 
 

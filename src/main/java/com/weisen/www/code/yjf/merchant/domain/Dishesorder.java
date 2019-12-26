@@ -66,6 +66,50 @@ public class Dishesorder implements Serializable {
     @Column(name = "other")
     private String other;
 
+    @Column(name = "num")
+    private Integer num;
+
+    @Column(name = "price")
+    private String price;
+
+    @Column(name = "numprice")
+    private String numprice;
+
+    @Column(name = "sum")
+    private String sum;
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getNumprice() {
+        return numprice;
+    }
+
+    public void setNumprice(String numprice) {
+        this.numprice = numprice;
+    }
+
+    public String getSum() {
+        return sum;
+    }
+
+    public void setSum(String sum) {
+        this.sum = sum;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;

@@ -1,6 +1,8 @@
 package com.weisen.www.code.yjf.merchant.web.rewrite_001_订餐;
 
 import com.weisen.www.code.yjf.merchant.service.Rewrite_OrderingMealsService;
+import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderShop2DTO3;
+import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderShop2DTO4;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.Api;
@@ -70,9 +72,9 @@ public class Rewrite_OrderingMealsResource2 {
     @CrossOrigin
     @PostMapping("/public/post/takingOrders2")
     @ApiOperation("new点餐")
-    public ResponseEntity<Result> takingOrders(@RequestParam List<Object> chishi) {
-        Result result = orderingMealsService.takingOrders2(chishi);
-        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders",chishi , result);
+    public ResponseEntity<Result> takingOrders(@RequestBody Rewrite_orderShop2DTO4 list) {
+        Result result = orderingMealsService.takingOrders2(list);
+        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders",list, result);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 

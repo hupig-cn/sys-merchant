@@ -108,4 +108,12 @@
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    <changeSet id="20191226144110-addColumn" author="shuishui">
+        <addColumn tableName="dishesorder">
+            <column type="integer" name="num"></column>
+            <column type="varchar(20)" name="price"></column>
+            <column type="varchar(20)" name="numprice"></column>
+            <column type="varchar(20)" name="sum"></column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
