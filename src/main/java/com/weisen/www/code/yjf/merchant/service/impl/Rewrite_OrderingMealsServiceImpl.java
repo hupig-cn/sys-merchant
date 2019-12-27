@@ -273,8 +273,8 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
         String ioc = list.getIoc();
         List<Rewrite_orderShop2DTO3> chishi = list.getChishi();
         String mid = list.getMid();
-        String sum = list.getSum();
-        String userid = list.getUserid();
+        String date = TimeUtil.getDate();
+        String ac = date+"::"+mid+"::"+ioc;
         for (int i = 0; i < chishi.size(); i++) {
             Rewrite_orderShop2DTO3 rewrite_orderShop2DTO3 = chishi.get(i);
             rewrite_orderShop2DTO3.getCaiid();
@@ -284,21 +284,19 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
             String url = rewrite_orderShop2DTO3.getUrl();
             Dishesorder dishesorder = new Dishesorder();
 
-            dishesorder.setBigorder(TimeUtil.getDate()+"::"+mid+"::"+ioc);
+            dishesorder.setBigorder(ac);
             dishesorder.setMerchantid(mid);
             dishesorder.setLocation(ioc);
             dishesorder.setName(cainame);
             dishesorder.setState("0");//0-已付款 正在做
-            dishesorder.setCreator(userid);
             dishesorder.setCreatedate(TimeUtil.getDate());//现在创建的
             dishesorder.setNum(Integer.valueOf(cainum));
             dishesorder.setPrice(caiprice);
             dishesorder.setNumprice(cainum*Double.parseDouble(caiprice)+"");
             dishesorder.setOther(url);
-            dishesorder.setSum(sum);
             rewrite_dishesorderRepository.save(dishesorder);
         }
-        return Result.suc("下单成功");
+        return Result.suc("下单成功",ac);
     }
 
 

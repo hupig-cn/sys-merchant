@@ -13,10 +13,6 @@ public class Rewrite_orderShop2DTO4 implements Serializable {
 
     private String ioc;
 
-    private String userid;
-
-    private String sum;
-
     private List<Rewrite_orderShop2DTO3> chishi;
 
     public String getMid() {
@@ -35,21 +31,6 @@ public class Rewrite_orderShop2DTO4 implements Serializable {
         this.ioc = ioc;
     }
 
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
-    public String getSum() {
-        return sum;
-    }
-
-    public void setSum(String sum) {
-        this.sum = sum;
-    }
 
     public List<Rewrite_orderShop2DTO3> getChishi() {
         return chishi;
