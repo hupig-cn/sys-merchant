@@ -23,4 +23,8 @@ public interface Rewrite_OrderingMealsService {
     Result inAllOrders(String iocId, String merchatid);
 
     Result takingOrders2(Rewrite_orderShop2DTO4 list);
+
+    Result createCaiOrder(String userid, String orderid);
+
+    Result caiorder(String orderid);
 }

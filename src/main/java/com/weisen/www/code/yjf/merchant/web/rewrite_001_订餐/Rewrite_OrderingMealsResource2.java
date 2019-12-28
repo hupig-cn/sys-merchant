@@ -78,6 +78,37 @@ public class Rewrite_OrderingMealsResource2 {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
     }
 
+
+    /**
+     * iocid 餐位
+     * num 数量
+     * merchatid 商家id
+     * name 商家食物
+     * */
+    @CrossOrigin
+    @PostMapping("/public/post/createCaiOrder")
+    @ApiOperation("付款ojbk")
+    public ResponseEntity<Result> createCaiOrder(@RequestParam String userid,@RequestParam String orderid) {
+        Result result = orderingMealsService.createCaiOrder(userid,orderid);
+        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/createCaiOrder","", result);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
+
+
+    /**
+     * iocid 餐位
+     * num 数量
+     * merchatid 商家id
+     * name 商家食物
+     * */
+    @CrossOrigin
+    @PostMapping("/public/post/caiorder")
+    @ApiOperation("订单详情")
+    public ResponseEntity<Result> caiorder(@RequestParam String orderid) {
+        Result result = orderingMealsService.caiorder(orderid);
+        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/createCaiOrder","", result);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+    }
     @CrossOrigin
     @PostMapping("/public/post/takingOrdersNum")
     @ApiOperation("重置菜的数量")

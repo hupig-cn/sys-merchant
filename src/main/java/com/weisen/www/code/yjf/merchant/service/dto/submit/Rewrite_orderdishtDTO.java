@@ -15,8 +15,6 @@ public class Rewrite_orderdishtDTO implements Serializable {
 
     private String iocid;//几号座
 
-    private String orther; // 备注
-
     private List<Rewrite_orderShop2DTO> list;
 
     private String zongsum;
@@ -35,14 +33,6 @@ public class Rewrite_orderdishtDTO implements Serializable {
 
     public void setIocid(String iocid) {
         this.iocid = iocid;
-    }
-
-    public String getOrther() {
-        return orther;
-    }
-
-    public void setOrther(String orther) {
-        this.orther = orther;
     }
 
     public List<Rewrite_orderShop2DTO> getList() {
