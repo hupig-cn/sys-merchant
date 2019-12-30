@@ -1,6 +1,5 @@
 package com.weisen.www.code.yjf.merchant.domain;
 
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -21,224 +20,217 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Dishestype implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "name")
-    private String name;
+	@Column(name = "name")
+	private String name;
 
-    @Column(name = "state")
-    private String state;
+	@Column(name = "state")
+	private String state;
 
-    @Column(name = "merchantid")
-    private String merchantid;
+	@Column(name = "merchantid")
+	private String merchantid;
 
-    @Column(name = "creator")
-    private String creator;
+	@Column(name = "creator")
+	private String creator;
 
-    @Column(name = "createdate")
-    private String createdate;
+	@Column(name = "createdate")
+	private String createdate;
 
-    @Column(name = "modifier")
-    private String modifier;
+	@Column(name = "modifier")
+	private String modifier;
 
-    @Column(name = "modifierdate")
-    private String modifierdate;
+	@Column(name = "modifierdate")
+	private String modifierdate;
 
-    @Column(name = "modifiernum")
-    private Long modifiernum;
+	@Column(name = "modifiernum")
+	private Long modifiernum;
 
-    @Column(name = "logicdelete")
-    private Boolean logicdelete;
+	@Column(name = "logicdelete")
+	private Boolean logicdelete;
 
-    @Column(name = "other")
-    private String other;
-    
-    @Column(name = "typeorder")
-    private String typeorder;
-    
+	@Column(name = "other")
+	private String other;
 
-    public String getTypeorder() {
+	@Column(name = "typeorder")
+	private Integer typeorder;
+
+	public Integer getTypeorder() {
 		return typeorder;
 	}
 
-	public void setTypeorder(String typeorder) {
+	public void setTypeorder(Integer typeorder) {
 		this.typeorder = typeorder;
 	}
 
-	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not
+	// remove
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Dishestype name(String name) {
-        this.name = name;
-        return this;
-    }
+	public Dishestype name(String name) {
+		this.name = name;
+		return this;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getState() {
-        return state;
-    }
+	public String getState() {
+		return state;
+	}
 
-    public Dishestype state(String state) {
-        this.state = state;
-        return this;
-    }
+	public Dishestype state(String state) {
+		this.state = state;
+		return this;
+	}
 
-    public void setState(String state) {
-        this.state = state;
-    }
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    public String getMerchantid() {
-        return merchantid;
-    }
+	public String getMerchantid() {
+		return merchantid;
+	}
 
-    public Dishestype merchantid(String merchantid) {
-        this.merchantid = merchantid;
-        return this;
-    }
+	public Dishestype merchantid(String merchantid) {
+		this.merchantid = merchantid;
+		return this;
+	}
 
-    public void setMerchantid(String merchantid) {
-        this.merchantid = merchantid;
-    }
+	public void setMerchantid(String merchantid) {
+		this.merchantid = merchantid;
+	}
 
-    public String getCreator() {
-        return creator;
-    }
+	public String getCreator() {
+		return creator;
+	}
 
-    public Dishestype creator(String creator) {
-        this.creator = creator;
-        return this;
-    }
+	public Dishestype creator(String creator) {
+		this.creator = creator;
+		return this;
+	}
 
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
 
-    public String getCreatedate() {
-        return createdate;
-    }
+	public String getCreatedate() {
+		return createdate;
+	}
 
-    public Dishestype createdate(String createdate) {
-        this.createdate = createdate;
-        return this;
-    }
+	public Dishestype createdate(String createdate) {
+		this.createdate = createdate;
+		return this;
+	}
 
-    public void setCreatedate(String createdate) {
-        this.createdate = createdate;
-    }
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate;
+	}
 
-    public String getModifier() {
-        return modifier;
-    }
+	public String getModifier() {
+		return modifier;
+	}
 
-    public Dishestype modifier(String modifier) {
-        this.modifier = modifier;
-        return this;
-    }
+	public Dishestype modifier(String modifier) {
+		this.modifier = modifier;
+		return this;
+	}
 
-    public void setModifier(String modifier) {
-        this.modifier = modifier;
-    }
+	public void setModifier(String modifier) {
+		this.modifier = modifier;
+	}
 
-    public String getModifierdate() {
-        return modifierdate;
-    }
+	public String getModifierdate() {
+		return modifierdate;
+	}
 
-    public Dishestype modifierdate(String modifierdate) {
-        this.modifierdate = modifierdate;
-        return this;
-    }
+	public Dishestype modifierdate(String modifierdate) {
+		this.modifierdate = modifierdate;
+		return this;
+	}
 
-    public void setModifierdate(String modifierdate) {
-        this.modifierdate = modifierdate;
-    }
+	public void setModifierdate(String modifierdate) {
+		this.modifierdate = modifierdate;
+	}
 
-    public Long getModifiernum() {
-        return modifiernum;
-    }
+	public Long getModifiernum() {
+		return modifiernum;
+	}
 
-    public Dishestype modifiernum(Long modifiernum) {
-        this.modifiernum = modifiernum;
-        return this;
-    }
+	public Dishestype modifiernum(Long modifiernum) {
+		this.modifiernum = modifiernum;
+		return this;
+	}
 
-    public void setModifiernum(Long modifiernum) {
-        this.modifiernum = modifiernum;
-    }
+	public void setModifiernum(Long modifiernum) {
+		this.modifiernum = modifiernum;
+	}
 
-    public Boolean isLogicdelete() {
-        return logicdelete;
-    }
+	public Boolean isLogicdelete() {
+		return logicdelete;
+	}
 
-    public Dishestype logicdelete(Boolean logicdelete) {
-        this.logicdelete = logicdelete;
-        return this;
-    }
+	public Dishestype logicdelete(Boolean logicdelete) {
+		this.logicdelete = logicdelete;
+		return this;
+	}
 
-    public void setLogicdelete(Boolean logicdelete) {
-        this.logicdelete = logicdelete;
-    }
+	public void setLogicdelete(Boolean logicdelete) {
+		this.logicdelete = logicdelete;
+	}
 
-    public String getOther() {
-        return other;
-    }
+	public String getOther() {
+		return other;
+	}
 
-    public Dishestype other(String other) {
-        this.other = other;
-        return this;
-    }
+	public Dishestype other(String other) {
+		this.other = other;
+		return this;
+	}
 
-    public void setOther(String other) {
-        this.other = other;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+	public void setOther(String other) {
+		this.other = other;
+	}
+	// jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+	// setters here, do not remove
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Dishestype)) {
-            return false;
-        }
-        return id != null && id.equals(((Dishestype) o).id);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof Dishestype)) {
+			return false;
+		}
+		return id != null && id.equals(((Dishestype) o).id);
+	}
 
-    @Override
-    public int hashCode() {
-        return 31;
-    }
+	@Override
+	public int hashCode() {
+		return 31;
+	}
 
-    @Override
-    public String toString() {
-        return "Dishestype{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", state='" + getState() + "'" +
-            ", merchantid='" + getMerchantid() + "'" +
-            ", creator='" + getCreator() + "'" +
-            ", createdate='" + getCreatedate() + "'" +
-            ", modifier='" + getModifier() + "'" +
-            ", modifierdate='" + getModifierdate() + "'" +
-            ", modifiernum=" + getModifiernum() +
-            ", logicdelete='" + isLogicdelete() + "'" +
-            ", other='" + getOther() + "'" +
-            "}";
-    }
+	@Override
+	public String toString() {
+		return "Dishestype{" + "id=" + getId() + ", name='" + getName() + "'" + ", state='" + getState() + "'"
+				+ ", merchantid='" + getMerchantid() + "'" + ", creator='" + getCreator() + "'" + ", createdate='"
+				+ getCreatedate() + "'" + ", modifier='" + getModifier() + "'" + ", modifierdate='" + getModifierdate()
+				+ "'" + ", modifiernum=" + getModifiernum() + ", logicdelete='" + isLogicdelete() + "'" + ", other='"
+				+ getOther() + "'" + "}";
+	}
 }

@@ -1,10 +1,7 @@
 package com.weisen.www.code.yjf.merchant.service;
 
-import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderShop2DTO3;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderShop2DTO4;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
-
-import java.util.List;
 
 public interface Rewrite_OrderingMealsService {
 

@@ -39,6 +39,9 @@ public interface Rewrite_MerchantRepository extends JpaRepository<Merchant, Long
     Integer findByNameLikeCount(String name,String city);
 
     Merchant findByUserid(String userid);
+    
+    // 根据商户ID和经营类型查找该数据
+    Merchant findByUseridAndBusinessid(String userid, String businessId);
 
     @Query(value = "select id,userid,merchantphoto,name,businessid,state,address,province,city,county,longitude,latitude,concession,rebate," +
         " buslicenseimage,jhi_show,creditcode,weight,creator,createdate,modifier,modifierdate,modifiernum,logicdelete,other,jhi_show " +

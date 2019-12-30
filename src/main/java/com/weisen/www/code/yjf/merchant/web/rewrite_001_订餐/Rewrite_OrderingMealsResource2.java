@@ -1,7 +1,6 @@
 package com.weisen.www.code.yjf.merchant.web.rewrite_001_订餐;
 
 import com.weisen.www.code.yjf.merchant.service.Rewrite_OrderingMealsService;
-import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderShop2DTO3;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.Rewrite_orderShop2DTO4;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -12,11 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.Optional;
-
-
 
 @RestController
 @RequestMapping("/api")
@@ -31,112 +26,91 @@ public class Rewrite_OrderingMealsResource2 {
 		this.orderingMealsService = orderingMealsService;
 	}
 
-
-
-
 	@CrossOrigin
 	@PostMapping("/public/post/merchantDishestype")
 	@ApiOperation("根据用户id查找店铺分类表")
-	public ResponseEntity<Result> merchantDishestype(@RequestParam String id,
-                                                     @RequestParam String iocid) {
-		Result result = orderingMealsService.merchantDishestype(id,iocid);
-		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/merchantDishestype",id , result);
+	public ResponseEntity<Result> merchantDishestype(@RequestParam String id, @RequestParam String iocid) {
+		Result result = orderingMealsService.merchantDishestype(id, iocid);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/merchantDishestype", id, result);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
 	}
 
+	/**
+	 * iocid 餐位 num 数量 merchatid 商家id name 商家食物
+	 */
+	@CrossOrigin
+	@PostMapping("/public/post/takingOrders")
+	@ApiOperation("点餐")
+	public ResponseEntity<Result> takingOrders(@RequestParam String iocId, @RequestParam Integer num,
+			@RequestParam String merchatid, @RequestParam String name) {
+		Result result = orderingMealsService.takingOrders(iocId, num, merchatid, name);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders",
+				iocId + ":" + num + ":" + merchatid, result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
 
 	/**
-     * iocid 餐位
-     * num 数量
-     * merchatid 商家id
-     * name 商家食物
-     * */
-    @CrossOrigin
-    @PostMapping("/public/post/takingOrders")
-    @ApiOperation("点餐")
-    public ResponseEntity<Result> takingOrders(@RequestParam String iocId,
-                                               @RequestParam Integer num,
-                                               @RequestParam String merchatid,
-                                               @RequestParam String name) {
-        Result result = orderingMealsService.takingOrders(iocId,num,merchatid,name);
-        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders",iocId+":"+num+":"+merchatid , result);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
-    }
+	 * iocid 餐位 num 数量 merchatid 商家id name 商家食物
+	 */
+	@CrossOrigin
+	@PostMapping("/public/post/takingOrders2")
+	@ApiOperation("new点餐")
+	public ResponseEntity<Result> takingOrders(@RequestBody Rewrite_orderShop2DTO4 list) {
+		Result result = orderingMealsService.takingOrders2(list);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders", list, result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
 
-    /**
-     * iocid 餐位
-     * num 数量
-     * merchatid 商家id
-     * name 商家食物
-     * */
-    @CrossOrigin
-    @PostMapping("/public/post/takingOrders2")
-    @ApiOperation("new点餐")
-    public ResponseEntity<Result> takingOrders(@RequestBody Rewrite_orderShop2DTO4 list) {
-        Result result = orderingMealsService.takingOrders2(list);
-        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrders",list, result);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
-    }
+	/**
+	 * iocid 餐位 num 数量 merchatid 商家id name 商家食物
+	 */
+	@CrossOrigin
+	@PostMapping("/public/post/createCaiOrder")
+	@ApiOperation("付款ojbk")
+	public ResponseEntity<Result> createCaiOrder(@RequestParam String userid, @RequestParam String orderid) {
+		Result result = orderingMealsService.createCaiOrder(userid, orderid);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/createCaiOrder", "", result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
 
+	/**
+	 * iocid 餐位 num 数量 merchatid 商家id name 商家食物
+	 */
+	@CrossOrigin
+	@PostMapping("/public/post/caiorder")
+	@ApiOperation("订单详情")
+	public ResponseEntity<Result> caiorder(@RequestParam String orderid) {
+		Result result = orderingMealsService.caiorder(orderid);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/createCaiOrder", "", result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
 
-    /**
-     * iocid 餐位
-     * num 数量
-     * merchatid 商家id
-     * name 商家食物
-     * */
-    @CrossOrigin
-    @PostMapping("/public/post/createCaiOrder")
-    @ApiOperation("付款ojbk")
-    public ResponseEntity<Result> createCaiOrder(@RequestParam String userid,@RequestParam String orderid) {
-        Result result = orderingMealsService.createCaiOrder(userid,orderid);
-        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/createCaiOrder","", result);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
-    }
+	@CrossOrigin
+	@PostMapping("/public/post/takingOrdersNum")
+	@ApiOperation("重置菜的数量")
+	public ResponseEntity<Result> takingOrdersNum(@RequestParam String iocId, @RequestParam String merchatid) {
+		Result result = orderingMealsService.takingOrdersNum(iocId, merchatid);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrdersNum", iocId + ":" + merchatid,
+				result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
 
+	@CrossOrigin
+	@PostMapping("/public/post/merchantOrders2")
+	@ApiOperation("点了菜的详情")
+	public ResponseEntity<Result> merchantOrders2(@RequestParam String iocId, @RequestParam String merchatid,
+			@Value("无备注") String other) {
+		Result result = orderingMealsService.merchantOrders(iocId, merchatid, other);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/merchantOrders2", iocId, result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
 
-    /**
-     * iocid 餐位
-     * num 数量
-     * merchatid 商家id
-     * name 商家食物
-     * */
-    @CrossOrigin
-    @PostMapping("/public/post/caiorder")
-    @ApiOperation("订单详情")
-    public ResponseEntity<Result> caiorder(@RequestParam String orderid) {
-        Result result = orderingMealsService.caiorder(orderid);
-        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/createCaiOrder","", result);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
-    }
-    @CrossOrigin
-    @PostMapping("/public/post/takingOrdersNum")
-    @ApiOperation("重置菜的数量")
-    public ResponseEntity<Result> takingOrdersNum(@RequestParam String iocId,
-                                                  @RequestParam String merchatid) {
-        Result result = orderingMealsService.takingOrdersNum(iocId,merchatid);
-        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/takingOrdersNum",iocId+":"+merchatid , result);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
-    }
-
-    @CrossOrigin
-    @PostMapping("/public/post/merchantOrders2")
-    @ApiOperation("点了菜的详情")
-    public ResponseEntity<Result> merchantOrders2(@RequestParam String iocId,
-                                                  @RequestParam String merchatid,
-                                                  @Value("无备注") String other) {
-        Result result = orderingMealsService.merchantOrders(iocId,merchatid,other);
-        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/merchantOrders2",iocId , result);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
-    }
-
-    @CrossOrigin
-    @PostMapping("/public/post/inAllOrders")
-    @ApiOperation("总价")
-    public ResponseEntity<Result> inAllOrders(@RequestParam String iocId,
-                                              @RequestParam String merchatid) {
-        Result result = orderingMealsService.inAllOrders(iocId,merchatid);
-        log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/inAllOrders",iocId , result);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
-    }
+	@CrossOrigin
+	@PostMapping("/public/post/inAllOrders")
+	@ApiOperation("总价")
+	public ResponseEntity<Result> inAllOrders(@RequestParam String iocId, @RequestParam String merchatid) {
+		Result result = orderingMealsService.inAllOrders(iocId, merchatid);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/takingOrders/inAllOrders", iocId, result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
 }
