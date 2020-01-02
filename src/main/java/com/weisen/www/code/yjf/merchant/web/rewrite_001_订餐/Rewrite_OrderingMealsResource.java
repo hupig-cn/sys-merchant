@@ -66,4 +66,19 @@ public class Rewrite_OrderingMealsResource {
 		log.debug("访问地址: {},传入值: {},返回值: {}", "/test/loc",id , result);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
 	}
+	
+	/**
+	 * 完成支付后更改订单状态
+	 * @author sxx
+	 * @date 2019-1-2 21:43:31
+	 */
+	@CrossOrigin
+	@PostMapping("/public/post/changeOrderState")
+	@ApiOperation("完成支付后更改订单状态")
+	public ResponseEntity<Result> changeOrderState(@RequestParam String orderid) {
+		Result result = orderingMealsService.changeOrderState(orderid);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/changeOrderState", orderid, result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
+
 }

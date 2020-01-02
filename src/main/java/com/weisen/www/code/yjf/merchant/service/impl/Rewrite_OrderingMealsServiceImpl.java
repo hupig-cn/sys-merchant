@@ -23,6 +23,8 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 
 	private final Rewrite_DishestypeRepository rewrite_dishestypeRepository;
 
+	private final UserorderRepository userorderRepository;
+
 	private final Rewrite_DishesRepository dishesRepository;
 
 	private final Rewrite_DishesorderRepository rewrite_dishesorderRepository;
@@ -30,10 +32,12 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 	private final DishesShopRepository dishesShopRepository;
 
 	public Rewrite_OrderingMealsServiceImpl(Rewrite_MerchantRepository merchantRepository,
+			UserorderRepository userorderRepository,
 			Rewrite_DishestypeRepository rewrite_dishestypeRepository, Rewrite_DishesRepository dishesRepository,
 			Rewrite_DishesorderRepository rewrite_dishesorderRepository, DishesShopRepository dishesShopRepository) {
 		this.merchantRepository = merchantRepository;
 		this.rewrite_dishestypeRepository = rewrite_dishestypeRepository;
+		this.userorderRepository = userorderRepository;
 		this.dishesRepository = dishesRepository;
 		this.rewrite_dishesorderRepository = rewrite_dishesorderRepository;
 		this.dishesShopRepository = dishesShopRepository;
@@ -292,7 +296,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 			dishesorder.setMerchantid(mid);
 			dishesorder.setLocation(ioc);
 			dishesorder.setName(cainame);
-			dishesorder.setState("0");// 0-未付款 1
+			dishesorder.setState("1");// 1-未付款 2-已付款  3-已上菜
 			dishesorder.setCreatedate(TimeUtil.getDate());// 现在创建的
 			dishesorder.setNum(Integer.valueOf(cainum));
 			dishesorder.setPrice(caiprice);
@@ -310,7 +314,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		for (int i = 0; i < ds2.size(); i++) {
 			Dishesorder ds = ds2.get(i);
 			ds.setId(ds.getId());
-			ds.setState("1");
+			ds.setState("2");  // 1-未付款 2-已付款  3-已上菜
 			ds.setCreator(userid);
 			rewrite_dishesorderRepository.save(ds);
 		}
@@ -355,6 +359,34 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		ro.setList(list);
 		ro.setZongsum(sum + "");
 		return Result.suc("查询成功", ro);
+	}
+	
+	// 完成支付后更改订单状态
+	@Override
+	public Result changeOrderState(String orderid) {
+		Userorder ordercodeStatus = userorderRepository.findUserorderByOrdercode(orderid);
+		if (ordercodeStatus!=null) {
+			if (ordercodeStatus.getOrderstatus() == "2" || ordercodeStatus.getOrderstatus().equals("2")) {
+				List<Dishesorder> dishesOrderList = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
+				if (!dishesOrderList.isEmpty()) {
+					for (Dishesorder dishesorder : dishesOrderList) {
+						dishesorder.setId(dishesorder.getId());
+						dishesorder.setState("2");
+						dishesorder.setModifierdate(TimeUtil.getDate());// 修改时间
+						rewrite_dishesorderRepository.save(dishesorder);
+					}
+					
+				}else {
+					return Result.fail("没有点餐！");
+				}
+			} else {
+				return Result.fail("订单未支付！");
+			}
+			
+		}else {
+			return Result.fail("没有生成订单！");
+		}
+		return Result.suc("订单已支付！");
 	}
 
 }

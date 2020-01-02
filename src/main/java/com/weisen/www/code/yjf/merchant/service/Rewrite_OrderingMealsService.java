@@ -24,4 +24,7 @@ public interface Rewrite_OrderingMealsService {
     Result createCaiOrder(String userid, String orderid);
 
     Result caiorder(String orderid);
+
+    Result changeOrderState(String orderid);
+
 }
