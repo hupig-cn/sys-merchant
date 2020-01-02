@@ -7,6 +7,8 @@ import com.weisen.www.code.yjf.merchant.service.dto.DishesAndTypeDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.*;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import com.weisen.www.code.yjf.merchant.service.util.TimeUtil;
+
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
@@ -274,8 +276,9 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		String ioc = list.getIoc();
 		List<Rewrite_orderShop2DTO3> chishi = list.getChishi();
 		String mid = list.getMid();
-		String date = TimeUtil.getDate();
-		String ac = date + "::" + mid + "::" + ioc;
+//		String date = TimeUtil.getDate();
+		String ac = RandomStringUtils.randomAlphanumeric(32);
+//		String ac = date + "::" + mid + "::" + ioc;
 		for (int i = 0; i < chishi.size(); i++) {
 			Rewrite_orderShop2DTO3 rewrite_orderShop2DTO3 = chishi.get(i);
 			rewrite_orderShop2DTO3.getCaiid();
