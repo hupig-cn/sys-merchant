@@ -152,6 +152,11 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 			if (dishesType == null) {
 				return Result.fail("您没有该菜品分类哦!");
 			}
+			List<Dishes> dishesList = rewrite_DishesRepository.findByMerchantidAndDishestypeid(merchantId,
+					id.toString());
+			if (!dishesList.isEmpty()) {
+				return Result.fail("该菜品分类下还有菜品!你不能对其删除哦!");
+			}
 			rewrite_DishestypeRepository.delete(dishesType);
 			return Result.suc("删除成功!");
 		}
@@ -239,6 +244,7 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 	@Override
 	public Result updateDishes(List<Rewrite_NewDishesDTO> rewrite_NewDishesDTOList) {
 		String merchantId = null;
+		Long dishesId = null;
 		for (Rewrite_NewDishesDTO rewrite_NewDishesDTO : rewrite_NewDishesDTOList) {
 			Merchant merchant = rewrite_MerchantRepository
 					.findByUseridAndBusinessid(rewrite_NewDishesDTO.getMerchantId(), "餐饮");
@@ -252,7 +258,11 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 				return Result.fail("该菜品名称已存在哦!请重新定义!");
 			}
 			merchantId = rewrite_NewDishesDTO.getMerchantId();
-
+			dishesId = rewrite_NewDishesDTO.getId();
+			Dishes dishesOne = rewrite_DishesRepository.findDishesByIdAndMerchantid(dishesId, merchantId);
+			if (dishesOne == null) {
+				return Result.fail("您还没有该菜品哦!赶紧去添加吧!");
+			}
 		}
 
 		// 获取到该商家的所有菜品
