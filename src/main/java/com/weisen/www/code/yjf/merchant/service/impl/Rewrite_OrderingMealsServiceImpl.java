@@ -364,14 +364,18 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 	// 完成支付后更改订单状态
 	@Override
 	public Result changeOrderState(String orderid) {
+		// 查找大订单
 		Userorder ordercodeStatus = userorderRepository.findUserorderByOrdercode(orderid);
+		// 如果有订单
 		if (ordercodeStatus!=null) {
+			// 状态为已付款
 			if (ordercodeStatus.getOrderstatus() == "2" || ordercodeStatus.getOrderstatus().equals("2")) {
+				// 如果小订单不为空,将小订单状态改为已支付
 				List<Dishesorder> dishesOrderList = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
 				if (!dishesOrderList.isEmpty()) {
 					for (Dishesorder dishesorder : dishesOrderList) {
 						dishesorder.setId(dishesorder.getId());
-						dishesorder.setState("2");
+						dishesorder.setState("2");    // 1-未付款 2-已付款  3-已上菜
 						dishesorder.setModifierdate(TimeUtil.getDate());// 修改时间
 						rewrite_dishesorderRepository.save(dishesorder);
 					}
