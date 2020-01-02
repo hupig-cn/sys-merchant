@@ -18,7 +18,7 @@ public interface Rewrite_DishesRepository extends JpaRepository<Dishes, Long> {
 	List<Dishes> getDishesByMerchantidAndState(String merchantId, String state);
 
 	@Query(value = "select * from Dishes where merchantid = ?1 and state = 1 and dishestypeid = ?2 and logicdelete = 1", nativeQuery = true)
-	List<Dishes> findByMerchantidAndDishestypeid(String merchantid, String dishestypeid);
+	List<Dishes> findByMerchantidAndDishestypeid2(String merchantid, String dishestypeid);
 
 	Dishes findDishesByMerchantidAndNameAndState(String Merchantid, String Name, String State);
 
@@ -29,5 +29,11 @@ public interface Rewrite_DishesRepository extends JpaRepository<Dishes, Long> {
 	Dishes findByMerchantidAndName(String Merchantid, String Name);
 
 	// 查找商家所有菜品
-	List<Dishes> findByMerchantid( String Merchantid);
+	List<Dishes> findByMerchantid(String Merchantid);
+
+	// 根据商家ID和分类ID查询数据
+	List<Dishes> findByMerchantidAndDishestypeid(String merchantId, String dishesTypeId);
+
+	// 根据id查找单件菜品
+	Dishes findDishesByIdAndMerchantid(Long id, String merchantId);
 }

@@ -69,7 +69,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 			if (state.equals("0")) {
 				continue;
 			}
-			List<Dishes> as = dishesRepository.findByMerchantidAndDishestypeid(id, dishestype.getId() + "");
+			List<Dishes> as = dishesRepository.findByMerchantidAndDishestypeid2(id, dishestype.getId() + "");
 			Rewrite_typeDTO rewrite_typeDTO = new Rewrite_typeDTO();
 			rewrite_typeDTO.setName(name);
 			List<Rewrite_ordertianjiaDTO> typelist = new ArrayList<>();
@@ -121,7 +121,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 			for (Dishestype dishestype : dishestypeList) {
 				if (dishestype.getState().equals("1") || dishestype.getState().equals("1")) {
 					Long typeId = dishestype.getId();
-					List<Dishes> dishesList = dishesRepository.findByMerchantidAndDishestypeid(id, "" + typeId);
+					List<Dishes> dishesList = dishesRepository.findByMerchantidAndDishestypeid2(id, "" + typeId);
 					if (!dishesList.isEmpty()) {
 						for (Dishes Dishes : dishesList) {
 							DishesAndTypeDTO dishesAndTypeDTO = new DishesAndTypeDTO();
