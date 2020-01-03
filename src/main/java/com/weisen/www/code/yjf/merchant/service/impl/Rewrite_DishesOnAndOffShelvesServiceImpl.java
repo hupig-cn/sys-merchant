@@ -64,7 +64,7 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 			dishestype.setState("1");
 			dishestype.setCreator(merchantId);
 			dishestype.setCreatedate(TimeUtil.getDate());
-			dishestype.setLogicdelete(true);
+			dishestype.setLogicdelete(false);
 			dishestype.setModifiernum(1L);
 			dishestype.setTypeorder(bigTypeNum + 1);
 			rewrite_DishestypeRepository.save(dishestype);
@@ -77,7 +77,7 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 			dishestype.setState("1");
 			dishestype.setCreator(merchantId);
 			dishestype.setCreatedate(TimeUtil.getDate());
-			dishestype.setLogicdelete(true);
+			dishestype.setLogicdelete(false);
 			dishestype.setModifiernum(1L);
 			dishestype.setTypeorder(1);
 			rewrite_DishestypeRepository.save(dishestype);
@@ -200,7 +200,7 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 			// 创建者
 			dishes.setCreator(rewrite_NewDishesDTO.getMerchantId());
 			// 逻辑删除
-			dishes.setLogicdelete(true);
+			dishes.setLogicdelete(false);
 			// 菜品库存
 			dishes.setNum(rewrite_NewDishesDTO.getName());
 			// 菜品状态
@@ -227,7 +227,7 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 			dishes.setPrice(rewrite_NewDishesDTO.getPrice());
 			dishes.setCreatedate(TimeUtil.getDate());
 			dishes.setCreator(rewrite_NewDishesDTO.getMerchantId());
-			dishes.setLogicdelete(true);
+			dishes.setLogicdelete(false);
 			dishes.setNum(rewrite_NewDishesDTO.getNum());
 			dishes.setState(rewrite_NewDishesDTO.getState());
 			dishes.setOther(rewrite_NewDishesDTO.getOther());
