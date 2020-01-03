@@ -42,5 +42,5 @@ public interface Rewrite_MerchantService {
 	Result judgeMerchant(Rewrite_JudgeMerchantDTO rewrite_JudgeMerchantDTO);
 	
 	// 查询我的店铺 添加用户信息
-	Result findMyShopAndUserdeail(Long userid);
+	Result findMyShopAndUserdeail(String userid);
 }
