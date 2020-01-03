@@ -302,7 +302,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 	// 查询商铺消息 和用户信息
 	@Override
 	public Result findMyShopAndUserdeail(String userid) {
-		Map<String, Object> merchant = rewrite_MerchantRepository.findFirstByUseridAndUserdeails(userid.toString());
+		Map<String, Object> merchant = rewrite_MerchantRepository.findFirstByUseridAndUserdeails(userid);
 		if (merchant.isEmpty()) {
 			return Result.fail("该商家不存在!请重新输入查找!");
 		}
