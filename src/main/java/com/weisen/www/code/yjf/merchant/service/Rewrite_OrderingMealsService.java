@@ -9,6 +9,7 @@ public interface Rewrite_OrderingMealsService {
 
     Result merchantDishestype(String id ,String iocid);
 
+    // ('该接口没有被用到')
 	Result getMerchantType(String id);
 
     Result takingOrders(String iocId, Integer num, String merchatid,String name);

@@ -54,13 +54,13 @@ public class Rewrite_OrderingMealsResource {
 	}
 	
 	/**
-	 * 根据用户id查找店铺菜单类型
+	 * 根据用户id查找店铺菜单类型('该接口没有被用到')
 	 * @author sxx
 	 * @date 2019-12-17 17:43:31
 	 */
 	@CrossOrigin
 	@PostMapping("/public/get/merchantType")
-	@ApiOperation("根据用户id查找店铺菜单类型")
+	@ApiOperation("根据用户id查找店铺菜单类型('该接口没有被用到')")
 	public ResponseEntity<Result> getMerchantType(@RequestParam String id) {
 		Result result = orderingMealsService.getMerchantType(id);
 		log.debug("访问地址: {},传入值: {},返回值: {}", "/test/loc",id , result);

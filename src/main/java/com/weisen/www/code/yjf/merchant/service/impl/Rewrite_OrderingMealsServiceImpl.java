@@ -118,14 +118,14 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		return Result.suc("查询成功", list, caishu);
 	}
 
-	// 根据商家id查找店铺菜单类型
+	// 根据商家id查找店铺菜单类型('该接口没有被用到')
 	@Override
 	public Result getMerchantType(String id) {
 		List<Dishestype> dishestypeList = rewrite_dishestypeRepository.findAllByMerchantid(id);
 		if (!dishestypeList.isEmpty()) {
 			ArrayList<DishesAndTypeDTO> dishesAndTypeDTOList = new ArrayList<>();
 			for (Dishestype dishestype : dishestypeList) {
-				if (dishestype.getState().equals("1") || dishestype.getState().equals("1")) {
+				if (dishestype.getState().equals("1") || dishestype.getState() == "1") {
 					Long typeId = dishestype.getId();
 					List<Dishes> dishesList = dishesRepository.findByMerchantidAndDishestypeid2(id, "" + typeId);
 					if (!dishesList.isEmpty()) {
