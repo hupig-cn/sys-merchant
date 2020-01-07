@@ -19,7 +19,18 @@ public class Rewrite_orderdishtDTO implements Serializable {
 
     private String zongsum;
 
-    public String getmName() {
+    private String merchantphoto;
+
+
+	public String getMerchantphoto() {
+		return merchantphoto;
+	}
+
+	public void setMerchantphoto(String merchantphoto) {
+		this.merchantphoto = merchantphoto;
+	}
+
+	public String getmName() {
         return mName;
     }
 

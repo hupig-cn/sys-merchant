@@ -331,12 +331,14 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		List<Rewrite_orderShop2DTO> list = new ArrayList<>();
 		String merxxid = "";
 		String iocid = "";
+		String merchantphoto = "";
 		Double sum = 0.00;
 		for (int i = 0; i < db.size(); i++) {
 			Dishesorder dishesorder = db.get(i);
 			if (i == 0) {
 				String merchantid = dishesorder.getMerchantid();
 				Merchant merchantById = merchantRepository.findMerchantById(Long.valueOf(merchantid));
+				merchantphoto = "http://app.yuanscore.com:8083/services/basic/api/public/getFiles/" + merchantById.getMerchantphoto();
 				merxxid = merchantById.getName();
 				iocid = dishesorder.getLocation();
 			}
@@ -357,6 +359,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		ro.setmName(merxxid);
 		ro.setIocid(iocid);
 		ro.setList(list);
+		ro.setMerchantphoto(merchantphoto);
 		ro.setZongsum(sum + "");
 		return Result.suc("查询成功", ro);
 	}
