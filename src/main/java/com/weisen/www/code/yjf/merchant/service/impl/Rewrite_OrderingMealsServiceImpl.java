@@ -379,7 +379,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 			if (ordercodeStatus.getOrderstatus() == "2" || ordercodeStatus.getOrderstatus().equals("2")) {
 				String userId = "";
 				if (ordercodeStatus.getPayee() != "" || !ordercodeStatus.getPayee().equals("")) {
-					userId = ordercodeStatus.getPayee();					
+					userId = ordercodeStatus.getUserid();					
 				}
 				// 如果小订单不为空,将小订单状态改为已支付
 				List<Dishesorder> dishesOrderList = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
