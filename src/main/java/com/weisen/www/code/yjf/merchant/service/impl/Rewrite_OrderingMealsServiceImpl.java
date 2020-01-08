@@ -310,16 +310,20 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 	// 付钱成功
 	@Override
 	public Result createCaiOrder(String userid, String orderid) {
-		List<Dishesorder> ds2 = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
-		for (int i = 0; i < ds2.size(); i++) {
-			Dishesorder ds = ds2.get(i);
-			ds.setId(ds.getId());
-			ds.setState("2");  // 1-未付款 2-已付款  3-已上菜
-			ds.setCreator(userid);
-			rewrite_dishesorderRepository.save(ds);
+		if (userid == "0" || userid.equals("0") ) {
+			return Result.suc("不是微信订单 !");
+		} else {
+			List<Dishesorder> ds2 = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
+			for (int i = 0; i < ds2.size(); i++) {
+				Dishesorder ds = ds2.get(i);
+				ds.setId(ds.getId());
+				ds.setState("2");  // 1-未付款 2-已付款  3-已上菜
+				ds.setCreator(userid);
+				ds.setModifierdate(TimeUtil.getDate());// 修改时间
+				rewrite_dishesorderRepository.save(ds);
+			}
 		}
-
-		return Result.suc("");
+		return Result.suc("保存成功 !");
 	}
 
 	// 详情
@@ -373,11 +377,16 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		if (ordercodeStatus!=null) {
 			// 状态为已付款
 			if (ordercodeStatus.getOrderstatus() == "2" || ordercodeStatus.getOrderstatus().equals("2")) {
+				String userId = "";
+				if (ordercodeStatus.getPayee() != "" || !ordercodeStatus.getPayee().equals("")) {
+					userId = ordercodeStatus.getPayee();					
+				}
 				// 如果小订单不为空,将小订单状态改为已支付
 				List<Dishesorder> dishesOrderList = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
 				if (!dishesOrderList.isEmpty()) {
 					for (Dishesorder dishesorder : dishesOrderList) {
 						dishesorder.setId(dishesorder.getId());
+						dishesorder.setCreator(userId);
 						dishesorder.setState("2");    // 1-未付款 2-已付款  3-已上菜
 						dishesorder.setModifierdate(TimeUtil.getDate());// 修改时间
 						rewrite_dishesorderRepository.save(dishesorder);
@@ -394,6 +403,16 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 			return Result.fail("没有生成订单！");
 		}
 		return Result.suc("订单已支付！");
+	}
+
+	@Override
+	public Result chackIsLittleOrder(String orderid) {
+		List<Dishesorder> dishesOrderList = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
+		if (!dishesOrderList.isEmpty()) {
+			return Result.suc("点餐");
+		} else {
+			return Result.suc("不是点餐");
+		}
 	}
 
 }

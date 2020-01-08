@@ -80,5 +80,18 @@ public class Rewrite_OrderingMealsResource {
 		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/changeOrderState", orderid, result);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
 	}
-
+	
+	/**
+	 *  app端支付时判断是否是菜品订单
+	 * @author sxx
+	 * @date 2019-1-8 11:43:31
+	 */
+	@CrossOrigin
+	@PostMapping("/public/post/chackIsLittleOrder")
+	@ApiOperation("app端支付时判断是否是菜品订单")
+	public ResponseEntity<Result> chackIsLittleOrder(@RequestParam String orderid) {
+		Result result = orderingMealsService.chackIsLittleOrder(orderid);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/chackIsLittleOrder", orderid, result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
 }
