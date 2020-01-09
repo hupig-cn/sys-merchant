@@ -42,6 +42,7 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 	public Result newClassification(String merchantId, String name, String other) {
 		Merchant merchant = rewrite_MerchantRepository.findByUseridAndBusinessid(merchantId, "餐饮");
 		List<Dishestype> dishesTypeList = rewrite_DishestypeRepository.findByMerchantidOrderByTypeorderAsc(merchantId);
+		// 判断该商家是否是餐饮系列的
 		if (merchant == null) {
 			return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
 		}
@@ -50,11 +51,13 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 			Integer bigTypeNum = 1;
 			for (Dishestype dishestype : dishesTypeList) {
 				Integer typeNum = dishestype.getTypeorder();
+				// 商品分类排序递增
 				if (typeNum > bigTypeNum) {
 					bigTypeNum = typeNum;
 				}
 			}
 			Dishestype dishesType = rewrite_DishestypeRepository.findByMerchantidAndName(merchantId, name);
+			// 判断该分类名称是否已存在
 			if (dishesType != null) {
 				return Result.fail("该分类名称已存在哦!请重新定义!");
 			}
@@ -94,12 +97,13 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 		for (Rewrite_NewClassificationDTO rewrite_NewClassificationDTO : rewrite_NewClassificationDTOList) {
 			Merchant merchant = rewrite_MerchantRepository
 					.findByUseridAndBusinessid(rewrite_NewClassificationDTO.getMerchantId(), "餐饮");
+			// 判断该商家是否是餐饮系列的
 			if (merchant == null) {
 				return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
 			}
-			// 判断该分类名称是否重复
 			Dishestype dishesTypeName = rewrite_DishestypeRepository.findByMerchantidAndName(
 					rewrite_NewClassificationDTO.getMerchantId(), rewrite_NewClassificationDTO.getName());
+			// 判断该分类名称是否重复
 			if (dishesTypeName != null) {
 				return Result.fail("该分类名称已存在哦!请重新定义!");
 			}
@@ -108,7 +112,7 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 
 		// 获取到该商家的所有菜品分类
 		List<Dishestype> dishestypesList = rewrite_DishestypeRepository.findByMerchantidOrderByTypeorderAsc(merchantId);
-
+		// 判断商家是否有该菜品分类
 		if (dishestypesList.isEmpty()) {
 			return Result.fail("您还没有菜品分类哦!赶紧去添加吧!");
 		} else {
@@ -139,15 +143,18 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 	@Override
 	public Result deleteClassification(Long id, String merchantId) {
 		Merchant merchant = rewrite_MerchantRepository.findByUseridAndBusinessid(merchantId, "餐饮");
+		// 判断该商家是否是餐饮系列的
 		if (merchant == null) {
 			return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
 		} else {
 			Dishestype dishesType = rewrite_DishestypeRepository.findByIdAndMerchantid(id, merchantId);
+			// 判断商家是否有该菜品分类
 			if (dishesType == null) {
 				return Result.fail("您没有该菜品分类哦!");
 			}
 			List<Dishes> dishesList = rewrite_DishesRepository.findByMerchantidAndDishestypeid(merchantId,
 					id.toString());
+			// 判断该商品分类下是否还有菜品
 			if (!dishesList.isEmpty()) {
 				return Result.fail("该菜品分类下还有菜品!你不能对其删除哦!");
 			} else {
