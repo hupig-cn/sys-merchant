@@ -114,23 +114,17 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 		} else {
 			// 获取前端传过来的数组信息
 			for (Rewrite_NewClassificationDTO rewrite_NewClassificationDTO : rewrite_NewClassificationDTOList) {
-
-				Long newId = rewrite_NewClassificationDTO.getId();
-				String newName = rewrite_NewClassificationDTO.getName();
-				String newOther = rewrite_NewClassificationDTO.getOther();
-				String newState = rewrite_NewClassificationDTO.getState();
-				Integer newTypeOrder = rewrite_NewClassificationDTO.getTypeOrder();
 				for (Dishestype dishestype : dishestypesList) {
-					if (dishestype.getId() == newId) {
-						dishestype.setId(newId);
-						dishestype.setName(newName);
+					if (dishestype.getId() == rewrite_NewClassificationDTO.getId()) {
+						dishestype.setId(rewrite_NewClassificationDTO.getId());
+						dishestype.setName(rewrite_NewClassificationDTO.getName());
 						dishestype.setMerchantid(merchantId);
 						dishestype.setModifier(merchantId);
 						dishestype.setModifierdate(TimeUtil.getDate());
 						dishestype.setModifiernum(dishestype.getModifiernum() + 1L);
-						dishestype.setState(newState);
-						dishestype.setOther(newOther);
-						dishestype.setTypeorder(newTypeOrder);
+						dishestype.setState(rewrite_NewClassificationDTO.getState());
+						dishestype.setOther(rewrite_NewClassificationDTO.getOther());
+						dishestype.setTypeorder(rewrite_NewClassificationDTO.getTypeOrder());
 						rewrite_DishestypeRepository.saveAndFlush(dishestype);
 					}
 				}
@@ -156,9 +150,10 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 					id.toString());
 			if (!dishesList.isEmpty()) {
 				return Result.fail("该菜品分类下还有菜品!你不能对其删除哦!");
+			} else {
+				rewrite_DishestypeRepository.delete(dishesType);
+				return Result.suc("删除成功!");
 			}
-			rewrite_DishestypeRepository.delete(dishesType);
-			return Result.suc("删除成功!");
 		}
 	}
 
@@ -169,72 +164,78 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 	public Result newDishes(Rewrite_NewDishesDTO rewrite_NewDishesDTO) {
 		Merchant merchant = rewrite_MerchantRepository.findByUseridAndBusinessid(rewrite_NewDishesDTO.getMerchantId(),
 				"餐饮");
-		List<Dishes> dishesList = rewrite_DishesRepository.findByMerchantidAndNameAndState(
-				rewrite_NewDishesDTO.getMerchantId(), rewrite_NewDishesDTO.getName(), "1");
+		// 判断该商家是否是餐饮系列的
 		if (merchant == null) {
 			return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
 		}
+		List<Dishes> dishesList = rewrite_DishesRepository.findByMerchantidAndNameAndState(
+				rewrite_NewDishesDTO.getMerchantId(), rewrite_NewDishesDTO.getName(), "1");
 		// 判断该商家是否已经有数据
 		if (!dishesList.isEmpty()) {
 			Dishes dishesName = rewrite_DishesRepository.findByMerchantidAndName(rewrite_NewDishesDTO.getMerchantId(),
 					rewrite_NewDishesDTO.getName());
+			// 判断该菜品是否已存在
 			if (dishesName != null) {
 				return Result.fail("该菜品名称已存在哦!请重新定义!");
 			}
-			Dishes dishes = new Dishes();
-			// 商户ID
-			dishes.setMerchantid(rewrite_NewDishesDTO.getMerchantId());
-			// 菜品名称
-			dishes.setName(rewrite_NewDishesDTO.getName());
 			Dishestype dishesType = rewrite_DishestypeRepository.findByIdAndMerchantid(rewrite_NewDishesDTO.getId(),
 					rewrite_NewDishesDTO.getMerchantId());
+			// 判断该商家是否有该菜品分类
 			if (dishesType == null) {
 				return Result.fail("您没有该菜品分类哦!");
+			} else {
+				Dishes dishes = new Dishes();
+				// 商户ID
+				dishes.setMerchantid(rewrite_NewDishesDTO.getMerchantId());
+				// 菜品名称
+				dishes.setName(rewrite_NewDishesDTO.getName());
+				// 菜品类型ID
+				dishes.setDishestypeid(dishesType.getId().toString());
+				// 菜品价格
+				dishes.setPrice(rewrite_NewDishesDTO.getPrice());
+				// 创建时间
+				dishes.setCreatedate(TimeUtil.getDate());
+				// 创建者
+				dishes.setCreator(rewrite_NewDishesDTO.getMerchantId());
+				// 逻辑删除
+				dishes.setLogicdelete(false);
+				// 菜品库存
+				dishes.setNum(rewrite_NewDishesDTO.getName());
+				// 菜品状态
+				dishes.setState(rewrite_NewDishesDTO.getState());
+				// 备注
+				dishes.setOther(rewrite_NewDishesDTO.getOther());
+				// 图片ID
+				dishes.setImage(rewrite_NewDishesDTO.getImage());
+				// 修改次数
+				dishes.setModifiernum(1L);
+				rewrite_DishesRepository.save(dishes);
+				return Result.suc("新增成功!");
 			}
-			// 菜品类型ID
-			dishes.setDishestypeid(dishesType.getId().toString());
-			// 菜品价格
-			dishes.setPrice(rewrite_NewDishesDTO.getPrice());
-			// 创建时间
-			dishes.setCreatedate(TimeUtil.getDate());
-			// 创建者
-			dishes.setCreator(rewrite_NewDishesDTO.getMerchantId());
-			// 逻辑删除
-			dishes.setLogicdelete(false);
-			// 菜品库存
-			dishes.setNum(rewrite_NewDishesDTO.getName());
-			// 菜品状态
-			dishes.setState(rewrite_NewDishesDTO.getState());
-			// 备注
-			dishes.setOther(rewrite_NewDishesDTO.getOther());
-			// 图片ID
-			dishes.setImage(rewrite_NewDishesDTO.getImage());
-			// 修改次数
-			dishes.setModifiernum(1L);
-			rewrite_DishesRepository.save(dishes);
-			return Result.suc("新增成功!");
 		} else {
-			// 第一次新增直接加入数据
-			Dishes dishes = new Dishes();
-			dishes.setMerchantid(rewrite_NewDishesDTO.getMerchantId());
-			dishes.setName(rewrite_NewDishesDTO.getName());
 			Dishestype dishesType = rewrite_DishestypeRepository.findByIdAndMerchantid(rewrite_NewDishesDTO.getId(),
 					rewrite_NewDishesDTO.getMerchantId());
+			// 判断该商家是否有该菜品分类
 			if (dishesType == null) {
 				return Result.fail("您没有该菜品分类哦!");
+			} else {
+				// 第一次新增直接加入数据
+				Dishes dishes = new Dishes();
+				dishes.setMerchantid(rewrite_NewDishesDTO.getMerchantId());
+				dishes.setName(rewrite_NewDishesDTO.getName());
+				dishes.setDishestypeid(dishesType.getId().toString());
+				dishes.setPrice(rewrite_NewDishesDTO.getPrice());
+				dishes.setCreatedate(TimeUtil.getDate());
+				dishes.setCreator(rewrite_NewDishesDTO.getMerchantId());
+				dishes.setLogicdelete(false);
+				dishes.setNum(rewrite_NewDishesDTO.getNum());
+				dishes.setState(rewrite_NewDishesDTO.getState());
+				dishes.setOther(rewrite_NewDishesDTO.getOther());
+				dishes.setImage(rewrite_NewDishesDTO.getImage());
+				dishes.setModifiernum(1L);
+				rewrite_DishesRepository.save(dishes);
+				return Result.suc("新增成功!");
 			}
-			dishes.setDishestypeid(dishesType.getId().toString());
-			dishes.setPrice(rewrite_NewDishesDTO.getPrice());
-			dishes.setCreatedate(TimeUtil.getDate());
-			dishes.setCreator(rewrite_NewDishesDTO.getMerchantId());
-			dishes.setLogicdelete(false);
-			dishes.setNum(rewrite_NewDishesDTO.getNum());
-			dishes.setState(rewrite_NewDishesDTO.getState());
-			dishes.setOther(rewrite_NewDishesDTO.getOther());
-			dishes.setImage(rewrite_NewDishesDTO.getImage());
-			dishes.setModifiernum(1L);
-			rewrite_DishesRepository.save(dishes);
-			return Result.suc("新增成功!");
 		}
 	}
 
@@ -248,6 +249,7 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 		for (Rewrite_NewDishesDTO rewrite_NewDishesDTO : rewrite_NewDishesDTOList) {
 			Merchant merchant = rewrite_MerchantRepository
 					.findByUseridAndBusinessid(rewrite_NewDishesDTO.getMerchantId(), "餐饮");
+			// 判断该商家是否是餐饮系列的
 			if (merchant == null) {
 				return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
 			}
@@ -260,6 +262,7 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 			merchantId = rewrite_NewDishesDTO.getMerchantId();
 			dishesId = rewrite_NewDishesDTO.getId();
 			Dishes dishesOne = rewrite_DishesRepository.findDishesByIdAndMerchantid(dishesId, merchantId);
+			// 判断该商家是否有该菜品
 			if (dishesOne == null) {
 				return Result.fail("您还没有该菜品哦!赶紧去添加吧!");
 			}
@@ -273,32 +276,25 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 		} else {
 			// 获取前端传过来的数组信息
 			for (Rewrite_NewDishesDTO rewrite_NewDishesDTO : rewrite_NewDishesDTOList) {
-				Long newId = rewrite_NewDishesDTO.getId();
-				String newName = rewrite_NewDishesDTO.getName();
-				String newOther = rewrite_NewDishesDTO.getOther();
-				String newState = rewrite_NewDishesDTO.getState();
-				String image = rewrite_NewDishesDTO.getImage();
-				String num = rewrite_NewDishesDTO.getNum();
-				String price = rewrite_NewDishesDTO.getPrice();
-				String dishestypeId = rewrite_NewDishesDTO.getDishestypeId();
 				Dishestype dishesType = rewrite_DishestypeRepository.findByIdAndMerchantid(
 						Long.parseLong(rewrite_NewDishesDTO.getDishestypeId()), rewrite_NewDishesDTO.getMerchantId());
+				// 判断该商家是否有该菜品分类
 				if (dishesType == null) {
 					return Result.fail("您没有该菜品分类哦!");
 				}
 				for (Dishes dishes : dishesList) {
-					if (dishes.getId() == newId) {
-						dishes.setName(newName);
+					if (dishes.getId() == rewrite_NewDishesDTO.getId()) {
+						dishes.setName(rewrite_NewDishesDTO.getName());
 						dishes.setMerchantid(merchantId);
 						dishes.setModifier(merchantId);
 						dishes.setModifierdate(TimeUtil.getDate());
 						dishes.setModifiernum(dishes.getModifiernum() + 1L);
-						dishes.setState(newState);
-						dishes.setOther(newOther);
-						dishes.setDishestypeid(dishestypeId);
-						dishes.setImage(image);
-						dishes.setNum(num);
-						dishes.setPrice(price);
+						dishes.setState(rewrite_NewDishesDTO.getState());
+						dishes.setOther(rewrite_NewDishesDTO.getOther());
+						dishes.setDishestypeid(rewrite_NewDishesDTO.getDishestypeId());
+						dishes.setImage(rewrite_NewDishesDTO.getImage());
+						dishes.setNum(rewrite_NewDishesDTO.getNum());
+						dishes.setPrice(rewrite_NewDishesDTO.getPrice());
 						rewrite_DishesRepository.saveAndFlush(dishes);
 					}
 				}
@@ -313,16 +309,18 @@ public class Rewrite_DishesOnAndOffShelvesServiceImpl implements Rewrite_DishesO
 	@Override
 	public Result deleteDishes(String merchantId, String name) {
 		Merchant merchant = rewrite_MerchantRepository.findByUseridAndBusinessid(merchantId, "餐饮");
+		// 判断该商家是否是餐饮系列的
 		if (merchant == null) {
 			return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
 		} else {
 			Dishes dishes = rewrite_DishesRepository.findByMerchantidAndName(merchantId, name);
+			// 判断该商家是否有该菜品
 			if (dishes == null) {
 				return Result.fail("您没有该菜品哦!");
+			} else {
+				rewrite_DishesRepository.delete(dishes);
+				return Result.suc("删除成功!");
 			}
-			rewrite_DishesRepository.delete(dishes);
-			return Result.suc("删除成功!");
 		}
 	}
-
 }
