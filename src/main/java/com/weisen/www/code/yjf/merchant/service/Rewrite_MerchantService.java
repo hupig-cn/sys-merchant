@@ -43,4 +43,6 @@ public interface Rewrite_MerchantService {
 	
 	// 查询我的店铺 添加用户信息
 	Result findMyShopAndUserdeail(String userid);
+
+	Result findMyShopAndUserdeail3(String userid);
 }

@@ -163,7 +163,7 @@ public class Rewrite_MerchantResource {
 	@ApiOperation("根据用户ID查询用户的商户信息和用户信息")
 	public ResponseEntity<Result> getMerchantUserId3(@RequestParam(value = "userid") String userid) {
 		log.debug("REST request to get Merchant : {}", userid);
-		Result merchantDTO = rewrite_MerchantService.findMyShopAndUserdeail(userid);
+		Result merchantDTO = rewrite_MerchantService.findMyShopAndUserdeail3(userid);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(merchantDTO));
 	}
 }
