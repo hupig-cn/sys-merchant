@@ -7,12 +7,12 @@ import com.weisen.www.code.yjf.merchant.service.dto.DishesAndTypeDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.*;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import com.weisen.www.code.yjf.merchant.service.util.TimeUtil;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -32,9 +32,9 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 	private final DishesShopRepository dishesShopRepository;
 
 	public Rewrite_OrderingMealsServiceImpl(Rewrite_MerchantRepository merchantRepository,
-			UserorderRepository userorderRepository,
-			Rewrite_DishestypeRepository rewrite_dishestypeRepository, Rewrite_DishesRepository dishesRepository,
-			Rewrite_DishesorderRepository rewrite_dishesorderRepository, DishesShopRepository dishesShopRepository) {
+			UserorderRepository userorderRepository, Rewrite_DishestypeRepository rewrite_dishestypeRepository,
+			Rewrite_DishesRepository dishesRepository, Rewrite_DishesorderRepository rewrite_dishesorderRepository,
+			DishesShopRepository dishesShopRepository) {
 		this.merchantRepository = merchantRepository;
 		this.rewrite_dishestypeRepository = rewrite_dishestypeRepository;
 		this.userorderRepository = userorderRepository;
@@ -296,7 +296,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 			dishesorder.setMerchantid(mid);
 			dishesorder.setLocation(ioc);
 			dishesorder.setName(cainame);
-			dishesorder.setState("1");// 1-未付款 2-已付款  3-已上菜
+			dishesorder.setState("1");// 1-未付款 2-已付款 3-已上菜
 			dishesorder.setCreatedate(TimeUtil.getDate());// 现在创建的
 			dishesorder.setNum(Integer.valueOf(cainum));
 			dishesorder.setPrice(caiprice);
@@ -310,14 +310,14 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 	// 付钱成功
 	@Override
 	public Result createCaiOrder(String userid, String orderid) {
-		if (userid == "0" || userid.equals("0") ) {
+		if (userid == "0" || userid.equals("0")) {
 			return Result.suc("不是微信订单 !");
 		} else {
 			List<Dishesorder> ds2 = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
 			for (int i = 0; i < ds2.size(); i++) {
 				Dishesorder ds = ds2.get(i);
 				ds.setId(ds.getId());
-				ds.setState("2");  // 1-未付款 2-已付款  3-已上菜
+				ds.setState("2"); // 1-未付款 2-已付款 3-已上菜
 				ds.setCreator(userid);
 				ds.setModifierdate(TimeUtil.getDate());// 修改时间
 				rewrite_dishesorderRepository.save(ds);
@@ -342,7 +342,8 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 			if (i == 0) {
 				String merchantid = dishesorder.getMerchantid();
 				Merchant merchantById = merchantRepository.findMerchantById(Long.valueOf(merchantid));
-				merchantphoto = "http://app.yuanscore.com:8083/services/basic/api/public/getFiles/" + merchantById.getMerchantphoto();
+				merchantphoto = "http://app.yuanscore.com:8083/services/basic/api/public/getFiles/"
+						+ merchantById.getMerchantphoto();
 				merxxid = merchantById.getName();
 				iocid = dishesorder.getLocation();
 			}
@@ -367,19 +368,19 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		ro.setZongsum(sum + "");
 		return Result.suc("查询成功", ro);
 	}
-	
+
 	// 完成支付后更改订单状态
 	@Override
 	public Result changeOrderState(String orderid) {
 		// 查找大订单
 		Userorder ordercodeStatus = userorderRepository.findUserorderByOrdercode(orderid);
 		// 如果有订单
-		if (ordercodeStatus!=null) {
+		if (ordercodeStatus != null) {
 			// 状态为已付款
 			if (ordercodeStatus.getOrderstatus() == "2" || ordercodeStatus.getOrderstatus().equals("2")) {
 				String userId = "";
 				if (ordercodeStatus.getPayee() != "" || !ordercodeStatus.getPayee().equals("")) {
-					userId = ordercodeStatus.getUserid();					
+					userId = ordercodeStatus.getUserid();
 				}
 				// 如果小订单不为空,将小订单状态改为已支付
 				List<Dishesorder> dishesOrderList = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
@@ -387,19 +388,19 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 					for (Dishesorder dishesorder : dishesOrderList) {
 						dishesorder.setId(dishesorder.getId());
 						dishesorder.setCreator(userId);
-						dishesorder.setState("2");    // 1-未付款 2-已付款  3-已上菜
+						dishesorder.setState("2"); // 1-未付款 2-已付款 3-已上菜
 						dishesorder.setModifierdate(TimeUtil.getDate());// 修改时间
 						rewrite_dishesorderRepository.save(dishesorder);
 					}
-					
-				}else {
+
+				} else {
 					return Result.fail("没有点餐！");
 				}
 			} else {
 				return Result.fail("订单未支付！");
 			}
-			
-		}else {
+
+		} else {
 			return Result.fail("没有生成订单！");
 		}
 		return Result.suc("订单已支付！");
@@ -412,6 +413,86 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 			return Result.suc("点餐");
 		} else {
 			return Result.suc("不是点餐");
+		}
+	}
+
+	/**
+	 * 查询商家所有订单
+	 */
+	@Override
+	public Result getMerchantAllOrder(String merchantId) {
+		Merchant merchant = merchantRepository.findByUseridAndBusinessid(merchantId, "餐饮");
+		// 判断该商家是否是餐饮系列的
+		if (merchant == null) {
+			return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
+		} else {
+
+			// 拿到商家状态为2的数据
+			List<Dishesorder> dishesorderList = rewrite_dishesorderRepository
+					.findByMerchantidAndStateOrderByCreatedateDesc(merchantId, "2");
+			if (!dishesorderList.isEmpty()) {
+				HashSet<String> hashSet = new HashSet<>();
+
+				List<Rewrite_OrderDTO> orderDTOList = new ArrayList<Rewrite_OrderDTO>();
+
+				// 使用HashSet去重
+				for (Dishesorder dishesorder : dishesorderList) {
+					String bigorder = dishesorder.getBigorder();
+					hashSet.add(bigorder);
+				}
+
+				// 拿到唯一的数据
+				for (String set : hashSet) {
+					List<Dishesorder> dishesorderLists = rewrite_dishesorderRepository.findDishesorderByBigorder(set);
+					BigDecimal allNumprice = new BigDecimal(0);
+					String location = null;
+					String modifierdate = null;
+					for (Dishesorder dishesorder : dishesorderLists) {
+						location = dishesorder.getLocation();
+						modifierdate = dishesorder.getModifierdate();
+						// 把订单号一致的订单金额加起来
+						BigDecimal Numprice = new BigDecimal(dishesorder.getNumprice());
+						allNumprice = allNumprice.add(Numprice);
+					}
+					Rewrite_OrderDTO orderDTO = new Rewrite_OrderDTO();
+					orderDTO.setBigorder(set);
+					orderDTO.setLocation(location);
+					orderDTO.setModifierdate(modifierdate);
+					orderDTO.setNumprice("" + allNumprice);
+					orderDTOList.add(orderDTO);
+				}
+				return Result.suc("查询成功!", orderDTOList, orderDTOList.size());
+			}
+		}
+		return Result.suc("暂无数据!");
+	}
+
+	/**
+	 * 根据大订单查找订单详情
+	 */
+	@Override
+	public Result getMerchantOrder(String bigorder) {
+		List<Dishesorder> dishesorderList = rewrite_dishesorderRepository.findDishesorderByBigorder(bigorder);
+		if (dishesorderList.isEmpty()) {
+			return Result.fail("订单不存在!");
+		}
+		return Result.suc("查找成功!", dishesorderList, dishesorderList.size());
+	}
+
+	/**
+	 * 根据大订单修改订单状态
+	 */
+	@Override
+	public Result updateBigorderState(String bigorder) {
+		List<Dishesorder> dishesorderList = rewrite_dishesorderRepository.findDishesorderByBigorder(bigorder);
+		if (dishesorderList.isEmpty()) {
+			return Result.fail("订单不存在!");
+		} else {
+			for (Dishesorder dishesorder : dishesorderList) {
+				dishesorder.setState("3");
+				rewrite_dishesorderRepository.saveAndFlush(dishesorder);
+			}
+			return Result.suc("修改成功!");
 		}
 	}
 

@@ -18,7 +18,6 @@ import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-
 /**
  * REST controller for managing
  * {@link com.weisen.www.code.yjf.basic.domain.Withdrawal}.
@@ -36,8 +35,6 @@ public class Rewrite_OrderingMealsResource {
 		this.orderingMealsService = orderingMealsService;
 	}
 
-
-
 	/**
 	 * 根据用户id查找店铺图片和商家名称
 	 *
@@ -49,12 +46,13 @@ public class Rewrite_OrderingMealsResource {
 	@ApiOperation("根据用户id查找店铺图片和商家名称")
 	public ResponseEntity<Result> getMerchantNameAndData(@RequestParam String id) {
 		Result result = orderingMealsService.getMerchantNameAndData(id);
-		log.debug("访问地址: {},传入值: {},返回值: {}", "/test/loc",id , result);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/test/loc", id, result);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
 	}
-	
+
 	/**
 	 * 根据用户id查找店铺菜单类型('该接口没有被用到')
+	 * 
 	 * @author sxx
 	 * @date 2019-12-17 17:43:31
 	 */
@@ -63,12 +61,13 @@ public class Rewrite_OrderingMealsResource {
 	@ApiOperation("根据用户id查找店铺菜单类型('该接口没有被用到')")
 	public ResponseEntity<Result> getMerchantType(@RequestParam String id) {
 		Result result = orderingMealsService.getMerchantType(id);
-		log.debug("访问地址: {},传入值: {},返回值: {}", "/test/loc",id , result);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/test/loc", id, result);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
 	}
-	
+
 	/**
 	 * 完成支付后更改订单状态
+	 * 
 	 * @author sxx
 	 * @date 2019-1-2 21:43:31
 	 */
@@ -80,9 +79,10 @@ public class Rewrite_OrderingMealsResource {
 		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/changeOrderState", orderid, result);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
 	}
-	
+
 	/**
-	 *  app端支付时判断是否是菜品订单
+	 * app端支付时判断是否是菜品订单
+	 * 
 	 * @author sxx
 	 * @date 2019-1-8 11:43:31
 	 */
@@ -92,6 +92,51 @@ public class Rewrite_OrderingMealsResource {
 	public ResponseEntity<Result> chackIsLittleOrder(@RequestParam String orderid) {
 		Result result = orderingMealsService.chackIsLittleOrder(orderid);
 		log.debug("访问地址: {},传入值: {},返回值: {}", "/public/post/chackIsLittleOrder", orderid, result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
+
+	/**
+	 * 查询商家所有订单
+	 * 
+	 * @author LuoJinShui
+	 * @date 2019-01-10 13:43:31
+	 */
+	@CrossOrigin
+	@PostMapping("/post/getMerchantAllOrder")
+	@ApiOperation("查询商家所有订单")
+	public ResponseEntity<Result> getMerchantAllOrder(@RequestParam(value = "merchantId") String merchantId) {
+		Result result = orderingMealsService.getMerchantAllOrder(merchantId);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/post/getMerchantAllOrder", merchantId, result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
+
+	/**
+	 * 查找大订单
+	 * 
+	 * @author LuoJinShui
+	 * @date 2019-01-10 13:43:31
+	 */
+	@CrossOrigin
+	@PostMapping("/public/post/getMerchantOrder")
+	@ApiOperation("查找大订单")
+	public ResponseEntity<Result> getMerchantOrder(@RequestParam(value = "bigorder") String bigorder) {
+		Result result = orderingMealsService.getMerchantOrder(bigorder);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/post/getMerchantOrder", bigorder, result);
+		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
+	}
+
+	/**
+	 * 根据大订单修改订单状态
+	 * 
+	 * @author LuoJinShui
+	 * @date 2019-01-10 13:43:31
+	 */
+	@CrossOrigin
+	@PostMapping("/post/updateBigorderState")
+	@ApiOperation("根据大订单修改订单状态")
+	public ResponseEntity<Result> updateBigorderState(@RequestParam(value = "bigorder") String bigorder) {
+		Result result = orderingMealsService.updateBigorderState(bigorder);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/post/updateBigorderState", bigorder, result);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
 	}
 }

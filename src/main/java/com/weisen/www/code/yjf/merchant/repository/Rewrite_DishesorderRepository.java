@@ -9,6 +9,11 @@ import java.util.List;
 @Repository
 public interface Rewrite_DishesorderRepository extends JpaRepository<Dishesorder, Long> {
 
-    List<Dishesorder> findDishesorderByBigorder(String bigorderid);
-    
+	// 查询订单详情
+	List<Dishesorder> findDishesorderByBigorder(String bigorderid);
+
+	// 查询商家所有订单
+	List<Dishesorder> findByMerchantidAndStateOrderByCreatedateDesc(String merchantId, String state);
+
+	Dishesorder findByBigorder(String bigorder);
 }
