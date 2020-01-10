@@ -15,5 +15,5 @@ public interface Rewrite_DishesorderRepository extends JpaRepository<Dishesorder
 	// 查询商家所有订单
 	List<Dishesorder> findByMerchantidAndStateOrderByCreatedateDesc(String merchantId, String state);
 
-	Dishesorder findByBigorder(String bigorder);
+	List<Dishesorder> findByMerchantidAndBigorder(String merchantId, String bigorder);
 }

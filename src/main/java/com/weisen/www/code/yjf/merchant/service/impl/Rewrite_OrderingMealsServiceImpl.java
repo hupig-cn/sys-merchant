@@ -489,7 +489,8 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		if (merchant == null) {
 			return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
 		}
-		List<Dishesorder> dishesorderList = rewrite_dishesorderRepository.findDishesorderByBigorder(bigorder);
+		List<Dishesorder> dishesorderList = rewrite_dishesorderRepository.findByMerchantidAndBigorder(merchantId,
+				bigorder);
 		if (dishesorderList.isEmpty()) {
 			return Result.fail("订单不存在!");
 		} else {
