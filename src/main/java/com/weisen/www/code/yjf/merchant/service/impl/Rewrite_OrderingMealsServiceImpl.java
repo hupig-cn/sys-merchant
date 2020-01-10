@@ -483,7 +483,12 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 	 * 根据大订单修改订单状态
 	 */
 	@Override
-	public Result updateBigorderState(String bigorder) {
+	public Result updateBigorderState(String merchantId, String bigorder) {
+		Merchant merchant = merchantRepository.findByUseridAndBusinessid(merchantId, "餐饮");
+		// 判断该商家是否是餐饮系列的
+		if (merchant == null) {
+			return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
+		}
 		List<Dishesorder> dishesorderList = rewrite_dishesorderRepository.findDishesorderByBigorder(bigorder);
 		if (dishesorderList.isEmpty()) {
 			return Result.fail("订单不存在!");

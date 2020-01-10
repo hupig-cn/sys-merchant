@@ -37,6 +37,6 @@ public interface Rewrite_OrderingMealsService {
 	Result getMerchantOrder(String bigorder);
 
 	// 根据大订单修改订单状态
-	Result updateBigorderState(String bigorder);
+	Result updateBigorderState(String merchantId, String bigorder);
 
 }

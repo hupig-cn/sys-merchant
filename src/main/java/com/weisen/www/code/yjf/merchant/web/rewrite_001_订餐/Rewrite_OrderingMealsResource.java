@@ -134,9 +134,10 @@ public class Rewrite_OrderingMealsResource {
 	@CrossOrigin
 	@PostMapping("/post/updateBigorderState")
 	@ApiOperation("根据大订单修改订单状态")
-	public ResponseEntity<Result> updateBigorderState(@RequestParam(value = "bigorder") String bigorder) {
-		Result result = orderingMealsService.updateBigorderState(bigorder);
-		log.debug("访问地址: {},传入值: {},返回值: {}", "/post/updateBigorderState", bigorder, result);
+	public ResponseEntity<Result> updateBigorderState(@RequestParam(value = "merchantId") String merchantId,
+			@RequestParam(value = "bigorder") String bigorder) {
+		Result result = orderingMealsService.updateBigorderState(merchantId, bigorder);
+		log.debug("访问地址: {},传入值: {},返回值: {}", "/post/updateBigorderState", merchantId + "," + bigorder, result);
 		return ResponseUtil.wrapOrNotFound(Optional.ofNullable(result));
 	}
 }
