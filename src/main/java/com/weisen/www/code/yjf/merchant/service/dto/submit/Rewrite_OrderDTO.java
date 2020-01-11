@@ -17,9 +17,20 @@ public class Rewrite_OrderDTO implements Serializable {
 
 	@ApiModelProperty(value = "支付时间")
 	private String modifierdate;
+	
+	@ApiModelProperty(value = "支付状态")
+	private String status;
 
 	@ApiModelProperty(value = "订单总价格")
 	private String numprice;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getBigorder() {
 		return bigorder;

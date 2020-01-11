@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Service
@@ -426,13 +427,12 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		if (merchant == null) {
 			return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
 		} else {
-
-			// 拿到商家状态为2的数据
+			Long id = merchant.getId();
+			// 拿到商家状态为2和3的数据
 			List<Dishesorder> dishesorderList = rewrite_dishesorderRepository
-					.findByMerchantidAndStateOrderByCreatedateDesc(merchantId, "2");
+					.findByMerchantidAndStateOrderByCreatedateDesc( "" + id );
 			if (!dishesorderList.isEmpty()) {
-				HashSet<String> hashSet = new HashSet<>();
-
+				LinkedHashSet<String> hashSet = new LinkedHashSet<>();
 				List<Rewrite_OrderDTO> orderDTOList = new ArrayList<Rewrite_OrderDTO>();
 
 				// 使用HashSet去重
@@ -443,11 +443,13 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 
 				// 拿到唯一的数据
 				for (String set : hashSet) {
-					List<Dishesorder> dishesorderLists = rewrite_dishesorderRepository.findDishesorderByBigorder(set);
+					List<Dishesorder> dishesorderLists = rewrite_dishesorderRepository.findDishesorderByBigorderOrderByCreatedateDesc(set);
 					BigDecimal allNumprice = new BigDecimal(0);
 					String location = null;
 					String modifierdate = null;
+					String status = null;
 					for (Dishesorder dishesorder : dishesorderLists) {
+						status = dishesorder.getState();
 						location = dishesorder.getLocation();
 						modifierdate = dishesorder.getModifierdate();
 						// 把订单号一致的订单金额加起来
@@ -456,6 +458,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 					}
 					Rewrite_OrderDTO orderDTO = new Rewrite_OrderDTO();
 					orderDTO.setBigorder(set);
+					orderDTO.setStatus(status);
 					orderDTO.setLocation(location);
 					orderDTO.setModifierdate(modifierdate);
 					orderDTO.setNumprice("" + allNumprice);
@@ -495,6 +498,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		} else {
 			for (Dishesorder dishesorder : dishesorderList) {
 				dishesorder.setState("3");
+				dishesorder.setModifier(merchantId);
 				rewrite_dishesorderRepository.saveAndFlush(dishesorder);
 			}
 			return Result.suc("修改成功!");
