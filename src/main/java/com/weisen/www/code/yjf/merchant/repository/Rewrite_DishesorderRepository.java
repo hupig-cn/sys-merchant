@@ -13,7 +13,7 @@ public interface Rewrite_DishesorderRepository extends JpaRepository<Dishesorder
 	// 查询订单详情
 	List<Dishesorder> findDishesorderByBigorder(String bigorderid);
 
-	// 查询商家所有订单
+	// 查询商家状态为2和3的所有订单
 	@Query(value = "select * from dishesorder where merchantid = ?1 and state in ( 2 , 3 ) order by createdate desc",nativeQuery = true)
 	List<Dishesorder> findByMerchantidAndStateOrderByCreatedateDesc(String merchantId);
 
@@ -21,4 +21,6 @@ public interface Rewrite_DishesorderRepository extends JpaRepository<Dishesorder
 	
 	// 查询订单详情并按时间排序
 	List<Dishesorder> findDishesorderByBigorderOrderByCreatedateDesc(String bigorderid);
+
+	List<Dishesorder> findByMerchantidAndBigorder(String merchantId, String bigorder);
 }
