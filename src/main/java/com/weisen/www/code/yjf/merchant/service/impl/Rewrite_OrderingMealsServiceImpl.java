@@ -5,20 +5,32 @@ import com.weisen.www.code.yjf.merchant.repository.*;
 import com.weisen.www.code.yjf.merchant.service.Rewrite_OrderingMealsService;
 import com.weisen.www.code.yjf.merchant.service.dto.DishesAndTypeDTO;
 import com.weisen.www.code.yjf.merchant.service.dto.submit.*;
+import com.weisen.www.code.yjf.merchant.service.util.PushUtil;
 import com.weisen.www.code.yjf.merchant.service.util.Result;
 import com.weisen.www.code.yjf.merchant.service.util.TimeUtil;
+
+import cn.jiguang.common.ClientConfig;
+import cn.jiguang.common.resp.APIConnectionException;
+import cn.jiguang.common.resp.APIRequestException;
+import cn.jpush.api.JPushClient;
+import cn.jpush.api.push.PushResult;
+import cn.jpush.api.push.model.PushPayload;
+
 import org.apache.commons.lang3.RandomStringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 
 @Service
 @Transactional
 public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsService {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(Rewrite_OrderingMealsServiceImpl.class);
 
 	private final Rewrite_MerchantRepository merchantRepository;
 
@@ -315,14 +327,38 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 			return Result.suc("不是微信订单 !");
 		} else {
 			List<Dishesorder> ds2 = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
+			String merchantIdString = null;
 			for (int i = 0; i < ds2.size(); i++) {
 				Dishesorder ds = ds2.get(i);
+				merchantIdString = ds.getMerchantid();
 				ds.setId(ds.getId());
 				ds.setState("2"); // 1-未付款 2-已付款 3-已上菜
 				ds.setCreator(userid);
 				ds.setModifierdate(TimeUtil.getDate());// 修改时间
 				rewrite_dishesorderRepository.save(ds);
 			}
+			Merchant merchantData = merchantRepository.findMerchantById(Long.parseLong(merchantIdString));
+			String merchantId = merchantData.getUserid();
+			// 极光推送
+			JPushClient jpushClient = new JPushClient(PushUtil.MASTER_SECRET, PushUtil.APP_KEY, null,
+						ClientConfig.getInstance());
+				// For push, all you need do is to build PushPayload object.
+				
+				PushPayload payload = PushUtil.buildPushObject_all_alias_alert(merchantId + "","来新订单啦 ! 请尽快处理吧!");
+//				 + rewrite_submitInformationDTO.getTotal() + "元"
+				try {
+					PushResult result = jpushClient.sendPush(payload);
+					LOG.info("Got result - " + result);
+				} catch (APIConnectionException e) {
+					// Connection error, should retry later
+					LOG.error("Connection error, should retry later", e);
+				} catch (APIRequestException e) {
+					// Should review the error, and fix the request
+					LOG.error("Should review the error, and fix the request", e);
+					LOG.info("HTTP Status: " + e.getStatus());
+					LOG.info("Error Code: " + e.getErrorCode());
+					LOG.info("Error Message: " + e.getErrorMessage());
+				}
 		}
 		return Result.suc("保存成功 !");
 	}
@@ -386,13 +422,37 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 				// 如果小订单不为空,将小订单状态改为已支付
 				List<Dishesorder> dishesOrderList = rewrite_dishesorderRepository.findDishesorderByBigorder(orderid);
 				if (!dishesOrderList.isEmpty()) {
+					String merchantIdString = null;
 					for (Dishesorder dishesorder : dishesOrderList) {
+						merchantIdString = dishesorder.getMerchantid();
 						dishesorder.setId(dishesorder.getId());
 						dishesorder.setCreator(userId);
 						dishesorder.setState("2"); // 1-未付款 2-已付款 3-已上菜
 						dishesorder.setModifierdate(TimeUtil.getDate());// 修改时间
 						rewrite_dishesorderRepository.save(dishesorder);
 					}
+					Merchant merchantData = merchantRepository.findMerchantById(Long.parseLong(merchantIdString));
+					String merchantId = merchantData.getUserid();
+					// 极光推送
+					JPushClient jpushClient = new JPushClient(PushUtil.MASTER_SECRET, PushUtil.APP_KEY, null,
+								ClientConfig.getInstance());
+						// For push, all you need do is to build PushPayload object.
+						
+						PushPayload payload = PushUtil.buildPushObject_all_alias_alert(merchantId + "","来新订单啦 ! 请尽快处理吧!");
+//						 + rewrite_submitInformationDTO.getTotal() + "元"
+						try {
+							PushResult result = jpushClient.sendPush(payload);
+							LOG.info("Got result - " + result);
+						} catch (APIConnectionException e) {
+							// Connection error, should retry later
+							LOG.error("Connection error, should retry later", e);
+						} catch (APIRequestException e) {
+							// Should review the error, and fix the request
+							LOG.error("Should review the error, and fix the request", e);
+							LOG.info("HTTP Status: " + e.getStatus());
+							LOG.info("Error Code: " + e.getErrorCode());
+							LOG.info("Error Message: " + e.getErrorMessage());
+						}
 
 				} else {
 					return Result.fail("没有点餐！");
@@ -492,7 +552,7 @@ public class Rewrite_OrderingMealsServiceImpl implements Rewrite_OrderingMealsSe
 		if (merchant == null) {
 			return Result.fail("您不是餐饮商家!不能对此功能进行操作!");
 		}
-		List<Dishesorder> dishesorderList = rewrite_dishesorderRepository.findByMerchantidAndBigorder(merchantId,
+		List<Dishesorder> dishesorderList = rewrite_dishesorderRepository.findByMerchantidAndBigorder(""+merchant.getId(),
 				bigorder);
 		if (dishesorderList.isEmpty()) {
 			return Result.fail("订单不存在!");
