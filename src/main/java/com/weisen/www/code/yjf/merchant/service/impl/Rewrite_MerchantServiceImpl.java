@@ -314,7 +314,7 @@ public class Rewrite_MerchantServiceImpl implements Rewrite_MerchantService {
 	public Result findMyShopAndUserdeail3(String userid) {
 		Map<String, Object> merchant = rewrite_MerchantRepository.findFirstByUseridAndUserdeails(userid);
 		if (merchant.isEmpty()) {
-			return Result.fail("该商家不存在!请重新输入查找!");
+			return Result.fail("温馨提示：您还不是商家哦！");
 		}
 		return Result.suc("成功", merchant);
 	}
